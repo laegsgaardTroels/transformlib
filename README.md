@@ -2,7 +2,7 @@
 
 # ⚒  Powertools ⚒
 
-Used to organize transformations of data with PySpark. The transformations can be organized as a package with `powertools` as a dependency.
+Enables the user to organize transformations of data with PySpark as a regular Python package.
 
 Sample package structure:
 
