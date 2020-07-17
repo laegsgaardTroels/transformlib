@@ -1,6 +1,5 @@
-![CI Checks](https://github.com/laegsgaardTroels/Powertools/workflows/CI%20Checks/badge.svg?branch=master)
-
 # ⚒  Powertools ⚒
+![CI Checks](https://github.com/laegsgaardTroels/Powertools/workflows/CI%20Checks/badge.svg?branch=master)
 
 Enables the user to organize transformations of data with PySpark as a regular Python package.
 
