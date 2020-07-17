@@ -6,16 +6,15 @@ Enables the user to organize transformations of data with PySpark as a regular P
 Sample package structure:
 
 ```bash
-.
-├── tests
+squares
 ├── setup.py
-└── my_package
-    ├── __init__.py
-    ├── pipelines.py
-    └── transforms
-        ├── __init__.py
-        ├── range.py
-        └── square.py
+└── squares
+    ├── __init__.py
+    ├── pipelines.py
+    └── transforms
+        ├── __init__.py
+        ├── range.py
+        └── squares.py
 ```
 
 ## Transform
@@ -26,9 +25,10 @@ Sample transform:
 
 ```python
 # range.py
-from powertools import transform_df, Output, Input
+from powertools import transform_df, Output
 
 from pyspark.sql import SparkSession
+
 
 @transform_df(Output('range.parquet'))
 def range():
@@ -39,15 +39,24 @@ def range():
 One transform can be another transforms input.
 
 ```python
-# square.py
+# squares.py
 from powertools import transform_df, Output, Input
+
+from pyspark.sql import functions as F
+
 
 @transform_df(
     Output('squares.parquet'),
-    range=Input('range.parquet'),
+    range_=Input('range.parquet'),
 )
-def square(range):
-    return range.withColumn('squares', F.pow(F.col('id'), F.lit(2)))
+def squares(range_):
+    return (
+        range_
+        .withColumn(
+            'squares',
+            F.pow(F.col('id'), F.lit(2))
+        )
+    )
 ```
 
 ## Pipelines
@@ -57,7 +66,7 @@ Sample pipeline:
 ```python
 # pipelines.py
 from powertools import discover_pipeline
-import transforms
+from squares import transforms
 
 pipeline = discover_pipeline(transforms)
 ```
