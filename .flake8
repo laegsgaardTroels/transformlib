@@ -1,0 +1,14 @@
+[flake8]
+ignore = 
+    # Nested definitions does not work well in transforms with decorators.
+    # Reference: https://www.flake8rules.com/rules/E306.html
+    E306,
+    # Despite being an antipattern W503 will be considered best practice in the future, hence it
+    # should be ignored for now.
+    # Reference: https://www.flake8rules.com/rules/W503.html
+    W503,
+exclude =
+    __pycache__
+    data
+max-line-length = 100
+max-complexity = 10
