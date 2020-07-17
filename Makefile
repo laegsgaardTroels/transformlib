@@ -4,21 +4,23 @@ include .python-environment
 # DEVELOPMENT                                                                   #
 #################################################################################
 
-## Run all tests. Used to set up a new user. When running: `make` this target will run
+## Run all tests. Used to set up a new user. When running: `make` this target will run.
 .DEFAULT_GOAL := tests
 .PHONY: tests
 tests: .venv/bin/activate clean lint
 	. .venv/bin/activate; \
+		pip install -e tests/sample_packages/squares; \
+		pip install -e tests/sample_packages/squares_with_dag; \
 		export ENVIRONMENT=TESTING; \
 		${PYTHON_INTERPRETER} -m pytest tests --log-cli-level=DEBUG
 
-## Clean every cached file
+## Clean every cached file.
 .PHONY: clean
 clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
-## Lint using flake8
+## Lint using flake8.
 .PHONY: lint
 lint: 
 	. .venv/bin/activate; \

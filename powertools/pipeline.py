@@ -1,6 +1,9 @@
 from powertools import Transform
 from powertools import config
 
+from powertools.exceptions import PowertoolsCycleException
+from powertools.exceptions import PowertoolsDuplicateTransformException
+
 from typing import List
 from typing import Dict
 
@@ -26,19 +29,18 @@ class Pipeline:
         self.transforms = transforms
 
     @property
-    def transforms(self):
-        return self._transform
-
-    @transforms.setter
-    def transforms(self, value: List[Transform]):
+    def tasks(self):
         if config.ENVIRONMENT == 'TESTING':
-            if len(set(value)) != len(value):
-                raise ValueError(f"Duplicate {value}")
-        self._transform = _get_tasks(value)  # Topologically sort the transforms.
+            if len(set(self.transforms)) != len(self.transforms):
+                raise PowertoolsDuplicateTransformException(f"Duplicate {self.transforms}")
+        return _get_tasks(self.transforms)  # Topologically sort the transforms.
 
     def __repr__(self):
-        newline = '\n   -> '
-        return f"Pipeline({newline}{newline.join(map(repr, self.transforms))})"
+        return (
+            'Pipeline(\n    -> '
+            + '\n    -> '.join(map(str, self.transforms))
+            + '\n)'
+        )
 
     def run(self):
         """Used to run all the transforms in the pipeline.
@@ -50,7 +52,7 @@ class Pipeline:
         pipeline_run_data = []
         logger.info(repr(self))
         logger.info(f'BEGINNING RUNNING OF {self}.')
-        for transform in self.transforms:
+        for transform in self.tasks:
             run_data = {}
             run_data['transform'] = repr(transform)
 
@@ -193,4 +195,4 @@ def _tsort(graph: Graph) -> List[Transform]:
     if len(L) == len(graph):
         return L
     else:                    # if there is a cycle,
-        raise ValueError("The graphs contains a DAG.")
+        raise PowertoolsCycleException("Cycle detected in the DAG.")
