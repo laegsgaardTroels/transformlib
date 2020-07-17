@@ -32,7 +32,7 @@ lint:
 #################################################################################
 
 ## Create a virtualironment for DEVELOPMENT.
-./bin/activate: .python-environment requirements.txt
+.venv/bin/activate: .python-environment requirements.txt
 	rm -rf .
 	${PYTHON_INTERPRETER} -c \
 		'import sys; assert sys.version_info.major == ${PYTHON_MAJOR_VERSION} and sys.version_info.minor >= ${PYTHON_MINOR_VERSION}'
