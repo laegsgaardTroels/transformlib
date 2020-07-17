@@ -4,6 +4,11 @@ from powertools import ReusedPySparkTestCase
 from powertools import Transform
 from powertools import Pipeline
 from powertools.pipeline import _tsort
+from powertools import transform_df
+from powertools import Output
+from powertools import Input
+
+from pyspark.sql import functions as F
 
 
 class TestPipeline(ReusedPySparkTestCase):
@@ -86,6 +91,28 @@ class TestPipeline(ReusedPySparkTestCase):
         assert len(metadata) == 1, (
             f"Should have a row for each transform {metadata}."
         )
+
+    def test_sample_square(self):
+        """A sample usecase of the pipeline from the README."""
+
+        @transform_df(Output('range.parquet'))
+        def range():
+            return self.spark.range(100)
+
+        @transform_df(
+            Output('squares.parquet'),
+            range=Input('range.parquet'),
+        )
+        def square(range):
+            return (
+                range
+                .withColumn(
+                    'squares',
+                    F.pow(F.col('id'), F.lit(2))
+                )
+            )
+        pipeline = Pipeline([range, square])
+        pipeline.run()
 
 
 def test_tsort():

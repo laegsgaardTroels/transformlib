@@ -10,16 +10,13 @@ Sample package structure:
 .
 ├── tests
 ├── setup.py
-└── my_pyspark_package
+└── my_package
+    ├── __init__.py
     ├── pipelines.py
     └── transforms
         ├── __init__.py
-        ├── transform_one.py
-        ├── transform_two.py
-        ├── . 
-        ├── . 
-        ├── . 
-        └── transform_n.py
+        ├── range.py
+        └── square.py
 ```
 
 ## Transform
@@ -29,13 +26,13 @@ A transformation is a node with inputs and outputs.
 Sample transform:
 
 ```python
-# transform_one.py
+# range.py
 from powertools import transform_df, Output, Input
 
 from pyspark.sql import SparkSession
 
 @transform_df(Output('range.parquet'))
-def transform_one():
+def range():
     spark = SparkSession.builder.getOrCreate()
     return spark.range(100)
 ```
@@ -43,14 +40,14 @@ def transform_one():
 One transform can be another transforms input.
 
 ```python
-# transform_two.py
+# square.py
 from powertools import transform_df, Output, Input
 
 @transform_df(
     Output('squares.parquet'),
     range=Input('range.parquet'),
 )
-def transform_two(range):
+def square(range):
     return range.withColumn('squares', F.pow(F.col('id'), F.lit(2)))
 ```
 
