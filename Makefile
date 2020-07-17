@@ -38,8 +38,8 @@ lint:
 	${PYTHON_INTERPRETER} -m pip install --upgrade pip
 	${PYTHON_INTERPRETER} -m pip install --upgrade setuptools
 	${PYTHON_INTERPRETER} -m pip install --upgrade wheel
-	${PYTHON_INTERPRETER} -m pip install --upgrade virtua
-	virtua --python ${PYTHON_INTERPRETER} .venv
+	${PYTHON_INTERPRETER} -m pip install --upgrade virtualenv
+	virtualenv --python ${PYTHON_INTERPRETER} .venv
 	. ./bin/activate; \
 		${PYTHON_INTERPRETER} -m pip install -r requirements.txt; \
 		${PYTHON_INTERPRETER} -m pip install -e .; \
