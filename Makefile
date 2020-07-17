@@ -17,14 +17,13 @@ tests: ./bin/activate clean lint
 clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
-	rm -rf tests/mnt/write
 
 ## Lint using flake8
 .PHONY: lint
 lint: 
-	. ./bin/activate; \
+	. .venv/bin/activate; \
 		${PYTHON_INTERPRETER} -m flake8 ${PACKAGE_NAME}
-	. ./bin/activate; \
+	. .venv/bin/activate; \
 		${PYTHON_INTERPRETER} -m flake8 tests
 
 #################################################################################
@@ -33,7 +32,7 @@ lint:
 
 ## Create a virtualironment for DEVELOPMENT.
 .venv/bin/activate: .python-environment requirements.txt
-	rm -rf .
+	rm -rf .venv
 	${PYTHON_INTERPRETER} -c \
 		'import sys; assert sys.version_info.major == ${PYTHON_MAJOR_VERSION} and sys.version_info.minor >= ${PYTHON_MINOR_VERSION}'
 	${PYTHON_INTERPRETER} -m pip install --upgrade pip
