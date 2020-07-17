@@ -6,5 +6,4 @@ setup(
     version='0.1',
     description='Python data transformation project',
     packages=['powertools'],
-    install_requires=[],
 )

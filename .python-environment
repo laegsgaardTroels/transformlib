@@ -1,7 +1,11 @@
+#################################################################################
+# PYTHON ENVIRONMENT                                                            #
+#################################################################################
+
 # Expected python version.
 export PYTHON_INTERPRETER=python3
 export PYTHON_MAJOR_VERSION=3
 export PYTHON_MINOR_VERSION=7
 
-# Metadata about the package.
+# Expected python package name.
 export PACKAGE_NAME=powertools
