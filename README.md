@@ -26,7 +26,7 @@ Sample package structure:
 
 A transformation is a node with inputs and outputs. 
 
-Sample transforms:
+Sample transform:
 
 ```python
 # transform_one.py
