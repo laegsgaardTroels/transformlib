@@ -36,7 +36,7 @@ def range():
     return spark.range(100)
 ```
 
-One transform can be another transforms input.
+The output of one transform can be the input to another transforms.
 
 ```python
 # squares.py
