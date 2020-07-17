@@ -34,7 +34,8 @@ lint: .env
 ## Create a virtual environment for DEVELOPMENT.
 .venv/bin/activate: .env requirements.txt
 	rm -rf .venv
-	${PYTHON_INTERPRETER} -c 'import sys; assert sys.version_info.major == ${PYTHON_MAJOR_VERSION} and sys.version_info.minor == ${PYTHON_MINOR_VERSION}'
+	${PYTHON_INTERPRETER} -c \
+		'import sys; assert sys.version_info.major == ${PYTHON_MAJOR_VERSION} and sys.version_info.minor >= ${PYTHON_MINOR_VERSION}'
 	${PYTHON_INTERPRETER} -m pip install --upgrade pip
 	${PYTHON_INTERPRETER} -m pip install --upgrade setuptools
 	${PYTHON_INTERPRETER} -m pip install --upgrade wheel
