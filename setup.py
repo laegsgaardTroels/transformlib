@@ -9,4 +9,9 @@ setup(
         "package."
     ),
     packages=['powertools'],
+    install_requires=[
+        'pandas==0.23.4',
+        'pyarrow==0.15.1',
+        'pyspark==2.4.4',
+    ]
 )
