@@ -7,8 +7,8 @@ include .python-environment
 ## Run all tests. Used to set up a new user. When running: `make` this target will run
 .DEFAULT_GOAL := tests
 .PHONY: tests
-tests: ./bin/activate clean lint
-	. ./bin/activate; \
+tests: .venv/bin/activate clean lint
+	. .venv/bin/activate; \
 		export ENVIRONMENT=TESTING; \
 		${PYTHON_INTERPRETER} -m pytest tests --log-cli-level=DEBUG
 
