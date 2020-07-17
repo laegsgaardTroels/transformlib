@@ -3,12 +3,8 @@ from unittest.mock import patch
 from powertools import ReusedPySparkTestCase
 from powertools import Transform
 from powertools import Pipeline
+from powertools.exceptions import PowertoolsDuplicateTransformException
 from powertools.pipeline import _tsort
-from powertools import transform_df
-from powertools import Output
-from powertools import Input
-
-from pyspark.sql import functions as F
 
 
 class TestPipeline(ReusedPySparkTestCase):
@@ -18,14 +14,15 @@ class TestPipeline(ReusedPySparkTestCase):
         """Should raise error if duplicate transform in TESTING.
 
         It is assumed that the environment is TESTING when running
-        the unittest.
+        the unittest. When TESTING an exception should be raised
+        when a Pipeline is run.
         """
         transform = Transform(
             output_kwargs={},
             func=lambda: None,
             input_kwargs={},
         )
-        with self.assertRaises(ValueError):
+        with self.assertRaises(PowertoolsDuplicateTransformException):
             pipeline = Pipeline([transform, transform])
             pipeline.run()
 
@@ -33,11 +30,14 @@ class TestPipeline(ReusedPySparkTestCase):
         """Should raise an exception in TESTING.
 
         It is assumed that the environment is TESTING when running
-        the unittest.
+        the unittest. When TESTING an exception should be raised
+        when a Pipeline is run.
         """
+        class PowertoolsTestRunTasksException(Exception):
+            """Raised in this test case."""
 
         def raise_transform_exception():
-            raise Exception('Transform test.')
+            raise PowertoolsTestRunTasksException('Transform test.')
 
         transform = Transform(
             output_kwargs={},
@@ -45,7 +45,7 @@ class TestPipeline(ReusedPySparkTestCase):
             input_kwargs={},
         )
 
-        with self.assertRaises(Exception):
+        with self.assertRaises(PowertoolsTestRunTasksException):
             pipeline = Pipeline([transform])
             pipeline.run()
 
@@ -53,7 +53,7 @@ class TestPipeline(ReusedPySparkTestCase):
     def test_run_tasks_duplicate_production(self):
         """Should NOT raise error if duplicate transform in PRODUCTION.
 
-        If there is duplicate Transforms in the Pipeline then the Transform will
+        If there is duplicate Transforms in the Pipeline then the Transform should
         only be run once in PRODUCTION.
         """
         transform = Transform(
@@ -72,10 +72,16 @@ class TestPipeline(ReusedPySparkTestCase):
 
     @patch('powertools.config.ENVIRONMENT', 'PRODUCTION')
     def test_run_tasks_exception_production(self):
-        """Should NOT raise an exception in PRODUCTION."""
+        """Should NOT raise an exception in PRODUCTION.
+
+        When running the tasks in production a single failed transform
+        should not make an entire pipeline fail.
+        """
+        class PowertoolsTestRunTasksProdException(Exception):
+            """Raised in this test case."""
 
         def raise_transform_exception():
-            raise Exception('Transform test.')
+            raise PowertoolsTestRunTasksProdException('Transform test.')
 
         transform = Transform(
             output_kwargs={},
@@ -91,28 +97,6 @@ class TestPipeline(ReusedPySparkTestCase):
         assert len(metadata) == 1, (
             f"Should have a row for each transform {metadata}."
         )
-
-    def test_sample_square(self):
-        """A sample usecase of the pipeline from the README."""
-
-        @transform_df(Output('range.parquet'))
-        def range():
-            return self.spark.range(100)
-
-        @transform_df(
-            Output('squares.parquet'),
-            range=Input('range.parquet'),
-        )
-        def square(range):
-            return (
-                range
-                .withColumn(
-                    'squares',
-                    F.pow(F.col('id'), F.lit(2))
-                )
-            )
-        pipeline = Pipeline([range, square])
-        pipeline.run()
 
 
 def test_tsort():
