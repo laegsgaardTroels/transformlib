@@ -1,6 +1,6 @@
 """Configurations and constants.
 
-This scripts should not have any dependency on ANY part in the project.
+This scripts should not have a dependency on ANY part of the project.
 """
 import os
 

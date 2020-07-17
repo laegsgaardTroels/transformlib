@@ -29,7 +29,7 @@ class Node:
         return self.path == other.path
 
     def __hash__(self):
-        return hash(self.path)  # TODO: Change to md5.
+        return hash(self.path)
 
 
 class Output(Node):
