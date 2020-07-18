@@ -4,29 +4,16 @@ This scripts should not have a dependency on ANY part of the project.
 """
 import os
 
-# The default value for ENVIRONMENT.
-DEFAULT_ENVIRONMENT = 'PRODUCTION'
-
 # The environment where the project is run. Defaults to PRODUCTION.
-# Values are: TESTING, PRODUCTION
-ENVIRONMENT = os.getenv('ENVIRONMENT', DEFAULT_ENVIRONMENT)
+# Values are: TESTING, PRODUCTION. The default value for ENVIRONMENT.
+ENVIRONMENT = os.getenv('ENVIRONMENT', 'PRODUCTION')
 
 # Possible ENVIRONMENT values.
-POSSIBLE_ENVIRONMENTS = ['TESTING', 'PRODUCTION', DEFAULT_ENVIRONMENT]
+POSSIBLE_ENVIRONMENTS = ['TESTING', 'PRODUCTION']
 
-# The default value for BASE_PATH.
-DEFAULT_BASE_PATH = '/tmp'
-
-# Get the base paths, where data should be stored.
-BASE_PATH = os.getenv('BASE_PATH', DEFAULT_BASE_PATH)
+# Get the ROOT_PATH to where data should be stored.
+# The default value for ROOT_PATH is /tmp/.
+ROOT_PATH = os.getenv('ROOT_PATH', '/tmp/')
 
 if ENVIRONMENT not in POSSIBLE_ENVIRONMENTS:
-    raise ValueError(f'--- INVALID ENVIRONMENT: {ENVIRONMENT} ---')
-
-# Change the root folder if testing.
-if ENVIRONMENT == 'PRODUCTION':
-    ROOT_PATH = '/'
-elif ENVIRONMENT == 'TESTING':
-    ROOT_PATH = '/tmp/powertools/'
-else:
     raise ValueError(f'--- INVALID ENVIRONMENT: {ENVIRONMENT} ---')

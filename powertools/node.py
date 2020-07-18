@@ -15,10 +15,9 @@ class Node:
     def __init__(
         self,
         path: str,
-        base_path: str = config.BASE_PATH,
         root_path: str = config.ROOT_PATH,
     ):
-        self.path = f'{root_path}{base_path}{path}'
+        self.path = f'{root_path}{path}'
 
     def __repr__(self):
         return f'{self.__class__}(path={self.path})'
