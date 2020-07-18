@@ -38,11 +38,10 @@ class Output(Node):
     def __init__(
         self,
         path: str,
-        base_path: str = config.BASE_PATH,
         root_path: str = config.ROOT_PATH,
         **write_kwargs
     ):
-        super().__init__(path, base_path, root_path)
+        super().__init__(path, root_path)
         self.write_kwargs = write_kwargs
 
     def save(self, df: pyspark.sql.DataFrame, **write_kwargs) -> None:
@@ -69,11 +68,10 @@ class Input(Node):
     def __init__(
         self,
         path: str,
-        base_path: str = config.BASE_PATH,
         root_path: str = config.ROOT_PATH,
         **read_kwargs
     ):
-        super().__init__(path, base_path, root_path)
+        super().__init__(path, root_path)
         self.read_kwargs = read_kwargs
 
     def load(self, **read_kwargs) -> pyspark.sql.DataFrame:
