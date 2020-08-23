@@ -51,24 +51,18 @@ class TestPipeline(ReusedPySparkTestCase):
 
     @patch('powertools.config.ENVIRONMENT', 'PRODUCTION')
     def test_run_tasks_duplicate_production(self):
-        """Should NOT raise error if duplicate transform in PRODUCTION.
+        """Should raise error if duplicate transform in PRODUCTION.
 
-        If there is duplicate Transforms in the Pipeline then the Transform should
-        only be run once in PRODUCTION.
+        When PRODUCTION an exception should be raised when a Pipeline is run.
         """
         transform = Transform(
             output_kwargs={},
             func=lambda: None,
             input_kwargs={},
         )
-        try:
+        with self.assertRaises(PowertoolsDuplicateTransformException):
             pipeline = Pipeline([transform, transform])
-            metadata = pipeline.run()
-        except Exception:
-            self.fail("Should not raise an exception in production.")
-        assert len(metadata) == 1, (
-            f"Should have a row for each transform {metadata}."
-        )
+            pipeline.run()
 
     @patch('powertools.config.ENVIRONMENT', 'PRODUCTION')
     def test_run_tasks_exception_production(self):

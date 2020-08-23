@@ -10,7 +10,7 @@ include .python-environment
 tests: .venv/bin/activate clean lint
 	. .venv/bin/activate; \
 		pip install -e tests/sample_packages/squares; \
-		pip install -e tests/sample_packages/squares_with_dag; \
+		pip install -e tests/sample_packages/squares_with_cycle; \
 		export ENVIRONMENT=TESTING; \
 		${PYTHON_INTERPRETER} -m pytest tests --log-cli-level=DEBUG
 

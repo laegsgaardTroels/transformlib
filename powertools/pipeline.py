@@ -30,9 +30,8 @@ class Pipeline:
 
     @property
     def tasks(self):
-        if config.ENVIRONMENT == 'TESTING':
-            if len(set(self.transforms)) != len(self.transforms):
-                raise PowertoolsDuplicateTransformException(f"Duplicate {self.transforms}")
+        if len(set(self.transforms)) != len(self.transforms):
+            raise PowertoolsDuplicateTransformException(f"Duplicate {self.transforms}")
         return _get_tasks(self.transforms)  # Topologically sort the transforms.
 
     def __repr__(self):
@@ -80,42 +79,42 @@ class Pipeline:
         logger.info(f'COMPLETED RUNNING OF {self}.')
         return pipeline_run_data
 
+    @classmethod
+    def discover_transforms(cls, *plugins):
+        """Find and import all transforms in plugins.
 
-def discover_pipeline(*plugins) -> Pipeline:
-    """Find and import all transforms in plugins.
+        This function will automatically disover transforms from plugins
+        using namespace packages e.g. fixed namespace(s), as defined by
+        the input plugins args to the function, where plugins are saved.
 
-    This function will automatically disover transforms from plugins
-    using namespace packages e.g. fixed namespace(s), as defined by
-    the input plugins args to the function, where plugins are saved.
+        Args:
+            *plugins (module): Module(s) that contains transforms.
 
-    Args:
-        *plugins (module): Module(s) that contains transforms.
+        Returns:
+            Pipeline: A pipeline of the discovered transforms.
 
-    Returns:
-        Pipeline: A pipeline of the discovered transforms.
+        References:
+            [1] https://packaging.python.org/guides/creating-and-discovering-plugins/
+        """
+        transforms = []
+        for plugin in plugins:
 
-    References:
-        [1] https://packaging.python.org/guides/creating-and-discovering-plugins/
-    """
-    transforms = []
-    for plugin in plugins:
+            if isinstance(plugin, Transform):
+                logger.info(f"DISCOVERED {plugin} as plugin input.")
+                transforms.append(plugin)
+                continue
 
-        if isinstance(plugin, Transform):
-            logger.info(f"DISCOVERED {plugin} as plugin input.")
-            transforms.append(plugin)
-            continue
-
-        for _, name, ispkg in pkgutil.walk_packages(
-            path=plugin.__path__,
-            prefix=plugin.__name__ + ".",
-        ):
-            plugin_module = importlib.import_module(name)
-            for attrname in dir(plugin_module):
-                new_attr = getattr(plugin_module, attrname)
-                if isinstance(new_attr, Transform):
-                    logger.info(f"DISCOVERED {new_attr} in {name}.")
-                    transforms.append(new_attr)
-    return Pipeline(transforms)
+            for _, name, ispkg in pkgutil.walk_packages(
+                path=plugin.__path__,
+                prefix=plugin.__name__ + ".",
+            ):
+                plugin_module = importlib.import_module(name)
+                for attrname in dir(plugin_module):
+                    new_attr = getattr(plugin_module, attrname)
+                    if isinstance(new_attr, Transform):
+                        logger.info(f"DISCOVERED {new_attr} in {name}.")
+                        transforms.append(new_attr)
+        return cls(transforms)
 
 
 def _get_tasks(transforms: List[Transform]) -> List[Transform]:

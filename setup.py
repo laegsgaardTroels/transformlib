@@ -12,6 +12,6 @@ setup(
     install_requires=[
         'pandas==1.0.4',
         'pyarrow==0.15.1',
-        'pyspark==2.4.4',
+        'pyspark==3.0.0',
     ]
 )

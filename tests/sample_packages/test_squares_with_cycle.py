@@ -1,7 +1,7 @@
 from powertools import ReusedPySparkTestCase
 from powertools.exceptions import PowertoolsCycleException
 
-from squares_with_dag.pipelines import pipeline
+from squares_with_cycle.pipelines import pipeline
 
 
 class TestSquaresWithDag(ReusedPySparkTestCase):

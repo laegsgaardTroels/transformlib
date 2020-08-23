@@ -51,7 +51,6 @@ from .transform import transform
 from .transform import transform_df
 
 from .pipeline import Pipeline
-from .pipeline import discover_pipeline
 
 from .testing import ReusedPySparkTestCase
 

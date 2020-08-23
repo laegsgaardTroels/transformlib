@@ -23,13 +23,6 @@ class ReusedPySparkTestCase(unittest.TestCase):
             SparkSession.builder
             .master('local')
             .appName(cls.__name__)
-            # avro "... :2.4.4" must match version of pyspark
-            .config(
-                'spark.jars.packages',
-                'org.apache.spark:spark-avro_2.11:2.4.4,'
-                'io.delta:delta-core_2.11:0.4.0'
-            )
-            .config("spark.sql.shuffle.partitions", "1")
             .getOrCreate()
         )
 
