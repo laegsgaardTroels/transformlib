@@ -24,7 +24,7 @@ clean:
 .PHONY: lint
 lint: 
 	. .venv/bin/activate; \
-		${PYTHON_INTERPRETER} -m flake8 ${PACKAGE_NAME}
+		${PYTHON_INTERPRETER} -m flake8 powertools
 	. .venv/bin/activate; \
 		${PYTHON_INTERPRETER} -m flake8 tests
 
