@@ -25,7 +25,7 @@ Graph = Dict[Transform, List[Transform]]
 class Pipeline:
     """A pipeline is a topologically ordered list of transforms."""
 
-    def __init__(self, transforms: List[Transform]):
+    def __init__(self, transforms: List[Transform] = []):
         self.transforms = transforms
 
     @property
