@@ -1,4 +1,4 @@
-from powertools import ReusedPySparkTestCase
+from powertools.testing import ReusedPySparkTestCase
 
 from squares.pipelines import pipeline
 

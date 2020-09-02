@@ -52,9 +52,7 @@ from .transform import transform_df
 
 from .pipeline import Pipeline
 
-from .testing import ReusedPySparkTestCase
-
 __all__ = [
     'Node', 'Output', 'Input', 'Transform', 'DataFrameTransform', 'transform',
-    'transform_df', 'Pipeline', 'discover_pipeline', 'ReusedPySparkTestCase',
+    'transform_df', 'Pipeline',
 ]
