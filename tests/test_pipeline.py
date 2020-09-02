@@ -1,4 +1,4 @@
-from powertools import ReusedPySparkTestCase
+from powertools.testing import ReusedPySparkTestCase
 from powertools import Transform
 from powertools import Pipeline
 from powertools.exceptions import PowertoolsDuplicateTransformException

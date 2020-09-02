@@ -46,22 +46,10 @@ class Pipeline:
         Returns:
             Dict[str, Any]: Metadata about the run of the pipeline.
         """
-        completed = set()
         logger.info(f'BEGINNING RUNNING OF {self}.')
         start = time.time()
         for transform in self.tasks:
-            run_data = {}
-            run_data['transform'] = repr(transform)
-
-            # Run the transform.
-            if transform not in completed:
-                transform.run()
-            else:
-                raise ValueError(f'Duplicate {self.transforms}')
-
-            # Save data about the transform run.
-            completed.add(transform)
-
+            transform.run()
         logger.info(f'COMPLETED RUNNING OF {self} TOOK {time.time() - start}.')
 
     @classmethod

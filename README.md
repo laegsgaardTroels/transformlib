@@ -65,8 +65,8 @@ Sample pipeline:
 
 ```python
 # pipelines.py
-from powertools import discover_pipeline
+from powertools import Pipeline
 from squares import transforms
 
-pipeline = discover_pipeline(transforms)
+pipeline = Pipeline.discover_transforms(transforms)
 ```

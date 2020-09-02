@@ -1,4 +1,4 @@
-from powertools import ReusedPySparkTestCase
+from powertools.testing import ReusedPySparkTestCase
 from powertools.exceptions import PowertoolsCycleException
 
 from squares_with_cycle.pipelines import pipeline
