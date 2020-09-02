@@ -15,7 +15,7 @@ class Node:
     def __init__(
         self,
         path: str,
-        root_path: str = config.ROOT_PATH,
+        root_path: str = config.ROOT_DIR,
     ):
         self.path = f'{root_path}{path}'
 
@@ -38,7 +38,7 @@ class Output(Node):
     def __init__(
         self,
         path: str,
-        root_path: str = config.ROOT_PATH,
+        root_path: str = config.ROOT_DIR,
         **write_kwargs
     ):
         super().__init__(path, root_path)
@@ -68,7 +68,7 @@ class Input(Node):
     def __init__(
         self,
         path: str,
-        root_path: str = config.ROOT_PATH,
+        root_path: str = config.ROOT_DIR,
         **read_kwargs
     ):
         super().__init__(path, root_path)

@@ -11,7 +11,6 @@ tests: .venv/bin/activate clean lint
 	. .venv/bin/activate; \
 		pip install -e tests/sample_packages/squares; \
 		pip install -e tests/sample_packages/squares_with_cycle; \
-		export ENVIRONMENT=TESTING; \
 		${PYTHON_INTERPRETER} -m pytest tests --log-cli-level=DEBUG
 
 ## Clean every cached file.
@@ -43,7 +42,7 @@ lint:
 	${PYTHON_INTERPRETER} -m pip install --upgrade setuptools
 	${PYTHON_INTERPRETER} -m pip install --upgrade wheel
 	${PYTHON_INTERPRETER} -m pip install --upgrade virtualenv
-	virtualenv --python ${PYTHON_INTERPRETER} .venv
+	${PYTHON_INTERPRETER} -m venv .venv
 	. .venv/bin/activate; \
 		${PYTHON_INTERPRETER} -m pip install -r requirements.txt; \
 		${PYTHON_INTERPRETER} -m pip install -e .; \
