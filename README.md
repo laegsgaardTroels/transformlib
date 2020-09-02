@@ -19,7 +19,7 @@ squares
 
 ## Transform
 
-A transformation is a node with inputs and outputs. 
+A Transform is a many to many relationship between inputs and outputs using a function to specify the relationship transformation. 
 
 Sample transform:
 
