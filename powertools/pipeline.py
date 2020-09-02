@@ -1,5 +1,4 @@
 from powertools import Transform
-from powertools import config
 
 from powertools.exceptions import PowertoolsCycleException
 from powertools.exceptions import PowertoolsDuplicateTransformException
@@ -48,36 +47,22 @@ class Pipeline:
             Dict[str, Any]: Metadata about the run of the pipeline.
         """
         completed = set()
-        pipeline_run_data = []
-        logger.info(repr(self))
         logger.info(f'BEGINNING RUNNING OF {self}.')
+        start = time.time()
         for transform in self.tasks:
             run_data = {}
             run_data['transform'] = repr(transform)
 
             # Run the transform.
-            start = time.time()
             if transform not in completed:
-                try:
-                    transform.run()
-                    run_data['transform_message'] = 'SUCCES'
-                except Exception as exception:
-                    if config.ENVIRONMENT == 'TESTING':
-                        raise exception
-                    logger.exception(f'FAILED RUNNING OF {transform}.')
-                    run_data['transform_message'] = str(exception)
+                transform.run()
             else:
-                if config.ENVIRONMENT == 'TESTING':
-                    raise ValueError(f'Duplicate {self.transforms}')
-                logger.error(f'DUPLICATE {transform}.')
-                run_data['transform_message'] = 'DUPLICATE'
-            run_data['transform_time'] = time.time() - start
+                raise ValueError(f'Duplicate {self.transforms}')
 
             # Save data about the transform run.
             completed.add(transform)
-            pipeline_run_data.append(run_data)
-        logger.info(f'COMPLETED RUNNING OF {self}.')
-        return pipeline_run_data
+
+        logger.info(f'COMPLETED RUNNING OF {self} TOOK {time.time() - start}.')
 
     @classmethod
     def discover_transforms(cls, *plugins):

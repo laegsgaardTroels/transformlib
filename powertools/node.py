@@ -15,9 +15,9 @@ class Node:
     def __init__(
         self,
         path: str,
-        root_path: str = config.ROOT_PATH,
+        root_dir: str = config.ROOT_DIR,
     ):
-        self.path = f'{root_path}{path}'
+        self.path = f'{root_dir}{path}'
 
     def __repr__(self):
         return f'{self.__class__}(path={self.path})'
@@ -38,10 +38,10 @@ class Output(Node):
     def __init__(
         self,
         path: str,
-        root_path: str = config.ROOT_PATH,
+        root_dir: str = config.ROOT_DIR,
         **write_kwargs
     ):
-        super().__init__(path, root_path)
+        super().__init__(path, root_dir)
         self.write_kwargs = write_kwargs
 
     def save(self, df: pyspark.sql.DataFrame, **write_kwargs) -> None:
@@ -68,10 +68,10 @@ class Input(Node):
     def __init__(
         self,
         path: str,
-        root_path: str = config.ROOT_PATH,
+        root_dir: str = config.ROOT_DIR,
         **read_kwargs
     ):
-        super().__init__(path, root_path)
+        super().__init__(path, root_dir)
         self.read_kwargs = read_kwargs
 
     def load(self, **read_kwargs) -> pyspark.sql.DataFrame:
