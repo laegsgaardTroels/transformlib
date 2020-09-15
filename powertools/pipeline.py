@@ -37,17 +37,13 @@ class Pipeline:
 
     def __repr__(self):
         return (
-            'Pipeline(\n    -> '
-            + '\n    -> '.join(map(str, self.transforms))
-            + '\n)'
+            'Pipeline('
+            + ', '.join(map(str, self.tasks))
+            + ')'
         )
 
     def run(self):
-        """Used to run all the transforms in the pipeline.
-
-        Returns:
-            Dict[str, Any]: Metadata about the run of the pipeline.
-        """
+        """Used to run all the transforms in the pipeline."""
         logger.info(f'BEGINNING RUNNING OF {self}.')
         start = time.time()
         for transform in self.tasks:
