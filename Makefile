@@ -40,6 +40,9 @@ lint:
 		'import sys; assert sys.version_info.minor >= ${PYTHON_MINOR_VERSION}'
 	${PYTHON_INTERPRETER} -m venv .venv
 	. .venv/bin/activate; \
+		${PYTHON_INTERPRETER} -m pip install --upgrade setuptools; \
+		${PYTHON_INTERPRETER} -m pip install --upgrade wheel; \
+		${PYTHON_INTERPRETER} -m pip install --upgrade pip; \
 		${PYTHON_INTERPRETER} -m pip install -r requirements.txt; \
 		${PYTHON_INTERPRETER} -m pip install -e .; \
 
@@ -51,6 +54,7 @@ lint:
 .PHONY: docs
 docs:
 	rm -rf docs
+	sphinx-apidoc -o _docs/source powertools
 	cd _docs; \
 		${MAKE} html
 	mv _docs/build/html docs
