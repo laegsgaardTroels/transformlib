@@ -4,6 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to Powertools's documentation!
+======================================
 
 ::
 
@@ -38,7 +39,6 @@ Welcome to Powertools's documentation!
     MMMMMMMMMMMMMMMMMMMMWWWOddddddddddddkNWXWMMMMMMMMMMMMMMMMMMM
     MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWMMMMMMMMMMMMMMMMMMMMMM
 
-======================================
 
 .. toctree::
    :maxdepth: 2
