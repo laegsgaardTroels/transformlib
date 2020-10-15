@@ -6,6 +6,12 @@
 Welcome to Powertools's documentation!
 ======================================
 
+Transformations of data organized in submodules.
+
+"The designation "Transformer" stems from the species' generally-shared ability to transform"
+
+See https://tfwiki.net/wiki/Transformer.
+
 ::
 
     MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
