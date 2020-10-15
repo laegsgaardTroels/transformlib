@@ -52,7 +52,7 @@ lint:
 #################################################################################
 
 .PHONY: docs
-docs:
+docs: .venv/bin/activate
 	rm -rf docs
 	. .venv/bin/activate; \
 		sphinx-apidoc -o _docs/source powertools
