@@ -179,47 +179,6 @@ class will use the same SparkSession for testing.</p>
 </div>
 <div class="section" id="module-powertools.transform">
 <span id="powertools-transform-module"></span><h2>powertools.transform module<a class="headerlink" href="#module-powertools.transform" title="Permalink to this headline">¶</a></h2>
-<p>Transformations of data organized in submodules.</p>
-<blockquote>
-<div><p>“The designation “Transformer” stems from the species’ generally-shared ability to transform”</p>
-</div></blockquote>
-<p>See [1].</p>
-<blockquote>
-<div><p>MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-MMWWMMMMMMMMMMMMMWNX0Okdolccccccccccloxk0XNWMMMMMMMMMMMMMWMM
-MM0ccldxOKNWMXkoc;’..                   ..’:lx0NMMWNKkdl:oNM
-MMK,     .;OWl                                ,0Xd,..    lWM
-MMWl       :Xx.       ,okkkkkkkOkkkkko.       :Xk.      .OMM
-MMMk. .,.  .dXd.       .l0NMMMWMMWKd:.      .c0K;  .’’  :NMM
-MMMX: .xOx:..;dxo;.      .;d0XK0d:.      .:dOkc..’lkO: .xMMM
-MMMWd.  ‘lkOxc’.;odoc’      ….      ‘cxOxc…cxko;.  ,KMMM
-MMMM0’ .c:’’:dkxc’.,lxxo;.         ,lkOd:. .cddo,.’l;  oWMMM
-MMMMWl .ckOx:..;oxc.  lNNOo;.  .,oOXWk.  ‘loc’.’lxko. .OMMMM
-MMMMMO.   .:dkd;…   ‘00cck0OO0Oo;xNc   .’’:oxxl’.   cNMMMM
-MMMMMWk,     .:dkd:.   dX;  ,lo:.  d0,  .;xOkl’     ‘oKMMMMM
-MMMMMWKkxl’     .:dc.  :Xo        .Ox.  cxc.     .cxOXWMMMMM
-MMMMMMd.’ldxo;’.       .Ox.       :Xl   .    .’cdxo;.lNMMMMM
-MMMMMMx.   ‘kWNK0kkxdolo0O.       dNkcclloodk0N0:.   lWMMMMM
-MMMMMMO.    ‘kWMMMMMMMWKK0’      .kNKNMWMMMMMWO,     oWMMMMM
-MMMMMM0’     .;kNMWXko;.lO,      .kO,’cdONWWO:.     .xMMMMMM
-MMMMMMX;       .xWd.    c0,      .Ok.    cXK,       .OMMMMMM
-MMMMMMN:        oX;     c0,      .Ok.    ;X0’       ‘0MMMMMM
-MMMMMMWc        oX;     :0,      .Ok.    ;X0’       ;XMMMMMM
-MMMMMMMo        oK,     :O,      .kk.    ;X0’       cNMMMMMM
-MMMMMMMx.       oK,     ;0d::::::c0x.    ;X0’       oWMMMMMM
-MMMMMMMXo.      oK,      ‘’,,,,,,’’.     ;X0’     .cKMMMMMMM
-MMMMMMMMWXd,    o0,                      ;X0’   .cOWMMMMMMMM
-MMMMMMMMMWMNx;. o0’    .llcccllllllo;    ;X0’ ‘oKWMMMMMMMMMM
-MMMMMMMMMMMMMNOlkK,   .dO,………o0;   ;XKodXWMMMMMMMMMMMM
-MMMMMMMMMMMMMMMWWXc   :0:          .kO’  :XWWWMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMXd;c0d.           :Xx’c0WMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMWWWOddddddddddddkNWXWMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWMMMMMMMMMMMMMMMMMMMMMM</p>
-</div></blockquote>
-<dl class="simple">
-<dt>References:</dt><dd><p>[1] <a class="reference external" href="https://tfwiki.net/wiki/Transformer">https://tfwiki.net/wiki/Transformer</a></p>
-</dd>
-</dl>
 <dl class="py class">
 <dt id="powertools.transform.DataFrameTransform">
 <em class="property">class </em><code class="sig-prename descclassname">powertools.transform.</code><code class="sig-name descname">DataFrameTransform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_kwargs</span></em>, <em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">input_kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#powertools.transform.DataFrameTransform" title="Permalink to this definition">¶</a></dt>
@@ -334,50 +293,6 @@ NOT a DataFrame. This could be a model or the like.</p>
 </div>
 <div class="section" id="module-powertools">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-powertools" title="Permalink to this headline">¶</a></h2>
-<p>Tools used for organizing transformations of data.</p>
-<blockquote>
-<div><p>“You destroy everything you touch, Megatron!”
-“That’s because everything I touch is food for my hunger.
-My hunger for power!”
--Optimus Prime and Megatron</p>
-</div></blockquote>
-<p>See [1].</p>
-<blockquote>
-<div><p>MMMWNWMMMMMMMMMMMMMMWNWMMMMMMMMMMMMMMWNWMMMMMMMMMMMMMMWNWMMM
-MMMNddNMMMMMMMMMMMMMKdOWMMMMMMMMMMMMWOdKMMMMMMMMMMMMMNddNMMM
-MMMWo.cXMMMMMMMMMMMMNc.dNMMMMMMMMMMNd.cNMMMMMMMMMMMMXc.oWMMM
-MMMMk. ;0MMMMMMMMMMMWd..lXMMMMMMMMXl..dWMMMMMMMMMMM0; .kMMMM
-MMMM0’  ‘kNMMMMMMMMMMO.  ;0MMMMMM0:  .OMMMMMMMMMMNk’  ‘0MMMM
-MMMMX:   .,cok0XWMMMMX;   ‘kXXXXk’   ;XMMMMWX0koc,.   :XMMMM
-MMMMWo        ..;cok0Kl     ….     lK0koc;..        oWMMMM
-MMMMMk.             .ll.            .ll.             .kMMMMM
-MMMMM0’     .’..     cO,    ;oo;    ,Oc     ..’.     ‘0MMMMM
-MMMMMX;     ..’’’’,’.:0c    lKKl    l0:.’’’’’’..     ;XMMMMM
-MMMMMWl     ..    ..’:Ox.   .cc.   .xO:’..    ..     lWMMMMM
-MMMMMMx.    .’’’’’..  lO’          ‘Ol  ..’’’’’.    .xMMMMMM
-MMMMMM0’        ..’,’,o0l         .l0o,’,’..        ‘0MMMMMM
-MMMMMMX;              .,ll’      ‘ll,.              ;XMMMMMM
-MMMMMMNd;.    ‘:c;..     ‘:;.  .,;’     ..;c:’    .;xNMMMMMM
-MMMMMMMkdx;    ‘o0X0koc,.. .;::;. ..,cok0XKo’    ;xdkWMMMMMM
-MMMMMMMO,;xl.    .oKWMMWX0c.    .c0XWMMWKo.    .lx;,OMMMMMMM
-MMMMMMMK; .dx,     .lKWMM0,      ,0MMWKo.     ,xd. ;KMMMMMMM
-MMMMMMMNc  .cxc.     .l0O,        ,O0l.     .cxc.  cNMMMMMMM
-MMMMMMMWd.   ‘dd’      ..          ..      ‘dd’   .dWMMMMMMM
-MMMMMMMMO.    .lk:                        :xl.    .OMMMMMMMM
-MMMMMMMMK,      ,xo.                    .ox,      ,KMMMMMMMM
-MMMMMMMMNc       .ox;                  ;xo.       cNMMMMMMMM
-MMMMMMMMWd.        ;xl.              .lx;        .dWMMMMMMMM
-MMMMMMMMMK:.        .ox,            ,xd.        .:0MMMMMMMMM
-MMMMMMMMMMWXko:’.     :xc.        .ck:     .’:okKWMMMMMMMMMM
-MMMMMMMMMMMMMMWN0xc,.  ‘dd’      ‘dd’  .,cx0NWMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMWKko:;ox:    :xd;:okKWMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMMMMWX00Oc’’cO0KXWMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMNKKNWMMMMMMMMMMMMMMMMMMMMMMMMMMM</p>
-</div></blockquote>
-<dl class="simple">
-<dt>References:</dt><dd><p>[1] <a class="reference external" href="https://tfwiki.net/wiki/Megatron_(G1">https://tfwiki.net/wiki/Megatron_(G1</a>)</p>
-</dd>
-</dl>
 <dl class="py class">
 <dt id="powertools.DataFrameTransform">
 <em class="property">class </em><code class="sig-prename descclassname">powertools.</code><code class="sig-name descname">DataFrameTransform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_kwargs</span></em>, <em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">input_kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#powertools.DataFrameTransform" title="Permalink to this definition">¶</a></dt>
