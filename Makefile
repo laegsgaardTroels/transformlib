@@ -31,7 +31,7 @@ lint:
 # ENVIRONMENT                                                                   #
 #################################################################################
 
-## Create a virtualironment for DEVELOPMENT.
+## Create a virtual environment for development.
 .venv/bin/activate: .python-environment requirements.txt
 	rm -rf .venv
 	${PYTHON_INTERPRETER} -c \
@@ -51,6 +51,7 @@ lint:
 # DOCUMENTATION                                                                 #
 #################################################################################
 
+## Create documentation using sphinx.
 .PHONY: docs
 docs: .venv/bin/activate
 	rm -rf docs
