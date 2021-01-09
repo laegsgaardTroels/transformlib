@@ -1,0 +1,673 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>powertools package &#8212; Powertools 0.0.1 documentation</title>
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/autobot.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="index.html">
+    
+      <img src="_static/autobot.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/laegsgaardTroels/powertools" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+    <div class="bd-toc-item active">
+    
+  
+    <ul class="nav bd-sidenav">
+        
+      </ul>
+  
+  </nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#submodules" class="nav-link">Submodules</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#module-powertools.config" class="nav-link">powertools.config module</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#module-powertools.exceptions" class="nav-link">powertools.exceptions module</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#module-powertools.node" class="nav-link">powertools.node module</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#module-powertools.pipeline" class="nav-link">powertools.pipeline module</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#module-powertools.testing" class="nav-link">powertools.testing module</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#module-powertools.transform" class="nav-link">powertools.transform module</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#module-powertools" class="nav-link">Module contents</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="powertools-package">
+<h1>powertools package<a class="headerlink" href="#powertools-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-powertools.config">
+<span id="powertools-config-module"></span><h2>powertools.config module<a class="headerlink" href="#module-powertools.config" title="Permalink to this headline">¶</a></h2>
+<p>Configurations.</p>
+<p>This scripts should not have a dependency on ANY part of the project.</p>
+</div>
+<div class="section" id="module-powertools.exceptions">
+<span id="powertools-exceptions-module"></span><h2>powertools.exceptions module<a class="headerlink" href="#module-powertools.exceptions" title="Permalink to this headline">¶</a></h2>
+<dl class="py exception">
+<dt id="powertools.exceptions.PowertoolsCycleException">
+<em class="property">exception </em><code class="sig-prename descclassname">powertools.exceptions.</code><code class="sig-name descname">PowertoolsCycleException</code><a class="reference internal" href="_modules/powertools/exceptions.html#PowertoolsCycleException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.exceptions.PowertoolsCycleException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there is a cycle in the DAG.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="powertools.exceptions.PowertoolsDuplicateTransformException">
+<em class="property">exception </em><code class="sig-prename descclassname">powertools.exceptions.</code><code class="sig-name descname">PowertoolsDuplicateTransformException</code><a class="reference internal" href="_modules/powertools/exceptions.html#PowertoolsDuplicateTransformException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.exceptions.PowertoolsDuplicateTransformException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there is duplicate transforms in a Pipeline.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-powertools.node">
+<span id="powertools-node-module"></span><h2>powertools.node module<a class="headerlink" href="#module-powertools.node" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="powertools.node.Input">
+<em class="property">class </em><code class="sig-prename descclassname">powertools.node.</code><code class="sig-name descname">Input</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">root_dir</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'/tmp/'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">read_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/node.html#Input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.node.Input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#powertools.node.Node" title="powertools.node.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">powertools.node.Node</span></code></a></p>
+<p>Used for DataFrame Input to a Transform.</p>
+<dl class="py method">
+<dt id="powertools.node.Input.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">read_kwargs</span></em><span class="sig-paren">)</span> &#x2192; pyspark.sql.dataframe.DataFrame<a class="reference internal" href="_modules/powertools/node.html#Input.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.node.Input.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the input of a transform from a fixed path.</p>
+<p>Used to create input to be read.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">Input</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Input</span><span class="p">(</span><span class="s1">&#39;/path/to/input.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;powertools.node.Input&#39;&gt;(path=/tmp//path/to/input.csv)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Args:</dt><dd><p><a href="#id1"><span class="problematic" id="id2">**</span></a>read_kwargs: Kwargs to the DataFrameReader class from pyspark.sql.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pyspark.sql.DataFrame: The DataFrame that the input is pointing to.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="powertools.node.Node">
+<em class="property">class </em><code class="sig-prename descclassname">powertools.node.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">root_dir</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'/tmp/'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/node.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.node.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A reference to a DataFrame.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="powertools.node.Output">
+<em class="property">class </em><code class="sig-prename descclassname">powertools.node.</code><code class="sig-name descname">Output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">root_dir</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'/tmp/'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">write_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/node.html#Output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.node.Output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#powertools.node.Node" title="powertools.node.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">powertools.node.Node</span></code></a></p>
+<p>Used for DataFrame Output of a Transform.</p>
+<dl class="py method">
+<dt id="powertools.node.Output.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span><span class="p">:</span> <span class="n">pyspark.sql.dataframe.DataFrame</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">write_kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/powertools/node.html#Output.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.node.Output.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the ouput of a transform from a fixed path.</p>
+<p>The default save mode is set to ‘overwrite’ because this is most
+commonly used.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">Output</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Output</span><span class="p">(</span><span class="s1">&#39;/path/to/output.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;powertools.node.Output&#39;&gt;(path=/tmp//path/to/output.csv)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df (pyspark.sql.DataFrame): A DataFrame which is to be saved in the output</dt><dd><p>location.</p>
+</dd>
+<dt><a href="#id3"><span class="problematic" id="id4">**</span></a>write_kwargs: The key value arguments to the DataFrameReader class</dt><dd><p>in pyspark.sql.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-powertools.pipeline">
+<span id="powertools-pipeline-module"></span><h2>powertools.pipeline module<a class="headerlink" href="#module-powertools.pipeline" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="powertools.pipeline.Pipeline">
+<em class="property">class </em><code class="sig-prename descclassname">powertools.pipeline.</code><code class="sig-name descname">Pipeline</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">transforms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#powertools.transform.Transform" title="powertools.transform.Transform">powertools.transform.Transform</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/pipeline.html#Pipeline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.pipeline.Pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A pipeline is a topologically ordered list of transforms.</p>
+<dl class="py method">
+<dt id="powertools.pipeline.Pipeline.discover_transforms">
+<em class="property">classmethod </em><code class="sig-name descname">discover_transforms</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">plugins</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/pipeline.html#Pipeline.discover_transforms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.pipeline.Pipeline.discover_transforms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find and import all transforms in plugins.</p>
+<p>This function will automatically disover transforms from plugins
+using namespace packages e.g. fixed namespace(s), as defined by
+the input plugins args to the function, where plugins are saved.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p><a href="#id5"><span class="problematic" id="id6">*</span></a>plugins (module): Module(s) that contains transforms.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Pipeline: A pipeline of the discovered transforms.</p>
+</dd>
+<dt>References:</dt><dd><p>[1] <a class="reference external" href="https://packaging.python.org/guides/creating-and-discovering-plugins/">https://packaging.python.org/guides/creating-and-discovering-plugins/</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="powertools.pipeline.Pipeline.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/pipeline.html#Pipeline.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.pipeline.Pipeline.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to run all the transforms in the pipeline.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="powertools.pipeline.Pipeline.tasks">
+<em class="property">property </em><code class="sig-name descname">tasks</code><a class="headerlink" href="#powertools.pipeline.Pipeline.tasks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-powertools.testing">
+<span id="powertools-testing-module"></span><h2>powertools.testing module<a class="headerlink" href="#module-powertools.testing" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="powertools.testing.ReusedPySparkTestCase">
+<em class="property">class </em><code class="sig-prename descclassname">powertools.testing.</code><code class="sig-name descname">ReusedPySparkTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/testing.html#ReusedPySparkTestCase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.testing.ReusedPySparkTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<p>A base class to reuse a SparkSession across test cases.</p>
+<p>Initilizing a SparkSession takes time. All subclasses of this
+class will use the same SparkSession for testing.</p>
+<dl class="simple">
+<dt>References:</dt><dd><p>[1] <a class="reference external" href="https://github.com/apache/spark/blob/master/python/pyspark/testing/utils.py#L117">https://github.com/apache/spark/blob/master/python/pyspark/testing/utils.py#L117</a></p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="powertools.testing.ReusedPySparkTestCase.setUpClass">
+<em class="property">classmethod </em><code class="sig-name descname">setUpClass</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/testing.html#ReusedPySparkTestCase.setUpClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.testing.ReusedPySparkTestCase.setUpClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="powertools.testing.ReusedPySparkTestCase.tearDownClass">
+<em class="property">classmethod </em><code class="sig-name descname">tearDownClass</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/testing.html#ReusedPySparkTestCase.tearDownClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.testing.ReusedPySparkTestCase.tearDownClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for deconstructing the class fixture after running all tests in the class.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-powertools.transform">
+<span id="powertools-transform-module"></span><h2>powertools.transform module<a class="headerlink" href="#module-powertools.transform" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="powertools.transform.DataFrameTransform">
+<em class="property">class </em><code class="sig-prename descclassname">powertools.transform.</code><code class="sig-name descname">DataFrameTransform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_kwargs</span></em>, <em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">input_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/transform.html#DataFrameTransform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.transform.DataFrameTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#powertools.transform.Transform" title="powertools.transform.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">powertools.transform.Transform</span></code></a></p>
+<p>Used to organize transformations with DataFrame input.</p>
+<p>The DataFrameTransform has only a single DataFrame output
+and multiple DataFrame inputs.</p>
+<dl class="py method">
+<dt id="powertools.transform.DataFrameTransform.output">
+<em class="property">property </em><code class="sig-name descname">output</code><a class="headerlink" href="#powertools.transform.DataFrameTransform.output" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="powertools.transform.Transform">
+<em class="property">class </em><code class="sig-prename descclassname">powertools.transform.</code><code class="sig-name descname">Transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_kwargs</span></em>, <em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">input_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/transform.html#Transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.transform.Transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Used to organize transformations of data.</p>
+<dl class="py method">
+<dt id="powertools.transform.Transform.input_kwargs">
+<em class="property">property </em><code class="sig-name descname">input_kwargs</code><a class="headerlink" href="#powertools.transform.Transform.input_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="powertools.transform.Transform.inputs">
+<em class="property">property </em><code class="sig-name descname">inputs</code><a class="headerlink" href="#powertools.transform.Transform.inputs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="powertools.transform.Transform.kwargs">
+<em class="property">property </em><code class="sig-name descname">kwargs</code><a class="headerlink" href="#powertools.transform.Transform.kwargs" title="Permalink to this definition">¶</a></dt>
+<dd><p>The kwargs of a transform is the key value arguments inputted when running it.</p>
+<p>Having the nodes be identified by a key makes it clear what node is referred to
+in the function attribute (self.func). In below example it is clear what a, b
+refers to, it wouldn’t be if one hadn’t identified the input to the transform
+by a key value argument.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">functions</span> <span class="k">as</span> <span class="n">F</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">Output</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">),</span> <span class="n">b</span><span class="o">=</span><span class="n">Input</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">))(</span><span class="n">func</span><span class="p">)</span>
+<span class="go">&lt;class &#39;powertools.transform.Transform&#39;&gt;(func=&lt;function &lt;lambda&gt; at 0x7f79251df4c0&gt;, a=&lt;class &#39;powertools.node.Output&#39;&gt;(path=/tmp/foo), b=&lt;class &#39;powertools.node.Input&#39;&gt;(path=/tmp/bar))</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Dict[Node]: The key value arguments to the function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="powertools.transform.Transform.nodes">
+<em class="property">property </em><code class="sig-name descname">nodes</code><a class="headerlink" href="#powertools.transform.Transform.nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="powertools.transform.Transform.output_kwargs">
+<em class="property">property </em><code class="sig-name descname">output_kwargs</code><a class="headerlink" href="#powertools.transform.Transform.output_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="powertools.transform.Transform.outputs">
+<em class="property">property </em><code class="sig-name descname">outputs</code><a class="headerlink" href="#powertools.transform.Transform.outputs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="powertools.transform.Transform.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">param_args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">param_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/transform.html#Transform.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.transform.Transform.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a transform, the param_kwargs is overwritten by transform kwargs.</p>
+<p>A parameter to a transform is an external transform input which is
+NOT a DataFrame. This could be a model or the like.</p>
+<dl>
+<dt>Args:</dt><dd><p><a href="#id7"><span class="problematic" id="id8">*</span></a>param_args List[Any]: A list of parameters to a transform.
+<a href="#id9"><span class="problematic" id="id10">*</span></a>param_kwargs (Dict[str, Any]): A list og keyword argument</p>
+<blockquote>
+<div><p>parameters to a transform.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>None: A transform run does not return anything but the side</dt><dd><p>effects are specified by the output nodes in the transforms.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="powertools.transform.transform">
+<code class="sig-prename descclassname">powertools.transform.</code><code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#powertools.node.Node" title="powertools.node.Node">powertools.node.Node</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/transform.html#transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.transform.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a function to a Transform.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p><a href="#id11"><span class="problematic" id="id12">**</span></a>kwargs (Dict[str, Node]): The inputs and outputs of the transform.</p>
+</dd>
+<dt>Returns:</dt><dd><p>function: A decorator that returns a Transform object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="powertools.transform.transform_df">
+<code class="sig-prename descclassname">powertools.transform.</code><code class="sig-name descname">transform_df</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#powertools.node.Output" title="powertools.node.Output">powertools.node.Output</a></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#powertools.node.Input" title="powertools.node.Input">powertools.node.Input</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/transform.html#transform_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.transform.transform_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a function to a DataFrameTransform.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>output (Output): The single output of the Transform.
+<a href="#id13"><span class="problematic" id="id14">**</span></a>input_kwargs (Dict[str, Input]): The inputs of the transform.</p>
+</dd>
+<dt>Returns:</dt><dd><p>function: A decorator that returns a DataFrameTransform object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-powertools">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-powertools" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="powertools.DataFrameTransform">
+<em class="property">class </em><code class="sig-prename descclassname">powertools.</code><code class="sig-name descname">DataFrameTransform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_kwargs</span></em>, <em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">input_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/transform.html#DataFrameTransform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.DataFrameTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#powertools.transform.Transform" title="powertools.transform.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">powertools.transform.Transform</span></code></a></p>
+<p>Used to organize transformations with DataFrame input.</p>
+<p>The DataFrameTransform has only a single DataFrame output
+and multiple DataFrame inputs.</p>
+<dl class="py method">
+<dt id="powertools.DataFrameTransform.output">
+<em class="property">property </em><code class="sig-name descname">output</code><a class="headerlink" href="#powertools.DataFrameTransform.output" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="powertools.Input">
+<em class="property">class </em><code class="sig-prename descclassname">powertools.</code><code class="sig-name descname">Input</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">root_dir</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'/tmp/'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">read_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/node.html#Input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.Input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#powertools.node.Node" title="powertools.node.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">powertools.node.Node</span></code></a></p>
+<p>Used for DataFrame Input to a Transform.</p>
+<dl class="py method">
+<dt id="powertools.Input.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">read_kwargs</span></em><span class="sig-paren">)</span> &#x2192; pyspark.sql.dataframe.DataFrame<a class="reference internal" href="_modules/powertools/node.html#Input.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.Input.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the input of a transform from a fixed path.</p>
+<p>Used to create input to be read.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">Input</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Input</span><span class="p">(</span><span class="s1">&#39;/path/to/input.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;powertools.node.Input&#39;&gt;(path=/tmp//path/to/input.csv)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Args:</dt><dd><p><a href="#id15"><span class="problematic" id="id16">**</span></a>read_kwargs: Kwargs to the DataFrameReader class from pyspark.sql.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pyspark.sql.DataFrame: The DataFrame that the input is pointing to.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="powertools.Node">
+<em class="property">class </em><code class="sig-prename descclassname">powertools.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">root_dir</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'/tmp/'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/node.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A reference to a DataFrame.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="powertools.Output">
+<em class="property">class </em><code class="sig-prename descclassname">powertools.</code><code class="sig-name descname">Output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">root_dir</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'/tmp/'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">write_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/node.html#Output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.Output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#powertools.node.Node" title="powertools.node.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">powertools.node.Node</span></code></a></p>
+<p>Used for DataFrame Output of a Transform.</p>
+<dl class="py method">
+<dt id="powertools.Output.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span><span class="p">:</span> <span class="n">pyspark.sql.dataframe.DataFrame</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">write_kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/powertools/node.html#Output.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.Output.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the ouput of a transform from a fixed path.</p>
+<p>The default save mode is set to ‘overwrite’ because this is most
+commonly used.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">Output</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Output</span><span class="p">(</span><span class="s1">&#39;/path/to/output.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;powertools.node.Output&#39;&gt;(path=/tmp//path/to/output.csv)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df (pyspark.sql.DataFrame): A DataFrame which is to be saved in the output</dt><dd><p>location.</p>
+</dd>
+<dt><a href="#id17"><span class="problematic" id="id18">**</span></a>write_kwargs: The key value arguments to the DataFrameReader class</dt><dd><p>in pyspark.sql.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="powertools.Pipeline">
+<em class="property">class </em><code class="sig-prename descclassname">powertools.</code><code class="sig-name descname">Pipeline</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">transforms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#powertools.transform.Transform" title="powertools.transform.Transform">powertools.transform.Transform</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/pipeline.html#Pipeline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.Pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A pipeline is a topologically ordered list of transforms.</p>
+<dl class="py method">
+<dt id="powertools.Pipeline.discover_transforms">
+<em class="property">classmethod </em><code class="sig-name descname">discover_transforms</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">plugins</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/pipeline.html#Pipeline.discover_transforms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.Pipeline.discover_transforms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find and import all transforms in plugins.</p>
+<p>This function will automatically disover transforms from plugins
+using namespace packages e.g. fixed namespace(s), as defined by
+the input plugins args to the function, where plugins are saved.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p><a href="#id19"><span class="problematic" id="id20">*</span></a>plugins (module): Module(s) that contains transforms.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Pipeline: A pipeline of the discovered transforms.</p>
+</dd>
+<dt>References:</dt><dd><p>[1] <a class="reference external" href="https://packaging.python.org/guides/creating-and-discovering-plugins/">https://packaging.python.org/guides/creating-and-discovering-plugins/</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="powertools.Pipeline.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/pipeline.html#Pipeline.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.Pipeline.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to run all the transforms in the pipeline.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="powertools.Pipeline.tasks">
+<em class="property">property </em><code class="sig-name descname">tasks</code><a class="headerlink" href="#powertools.Pipeline.tasks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="powertools.Transform">
+<em class="property">class </em><code class="sig-prename descclassname">powertools.</code><code class="sig-name descname">Transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_kwargs</span></em>, <em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">input_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/transform.html#Transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.Transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Used to organize transformations of data.</p>
+<dl class="py method">
+<dt id="powertools.Transform.input_kwargs">
+<em class="property">property </em><code class="sig-name descname">input_kwargs</code><a class="headerlink" href="#powertools.Transform.input_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="powertools.Transform.inputs">
+<em class="property">property </em><code class="sig-name descname">inputs</code><a class="headerlink" href="#powertools.Transform.inputs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="powertools.Transform.kwargs">
+<em class="property">property </em><code class="sig-name descname">kwargs</code><a class="headerlink" href="#powertools.Transform.kwargs" title="Permalink to this definition">¶</a></dt>
+<dd><p>The kwargs of a transform is the key value arguments inputted when running it.</p>
+<p>Having the nodes be identified by a key makes it clear what node is referred to
+in the function attribute (self.func). In below example it is clear what a, b
+refers to, it wouldn’t be if one hadn’t identified the input to the transform
+by a key value argument.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">functions</span> <span class="k">as</span> <span class="n">F</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">Output</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">),</span> <span class="n">b</span><span class="o">=</span><span class="n">Input</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">))(</span><span class="n">func</span><span class="p">)</span>
+<span class="go">&lt;class &#39;powertools.transform.Transform&#39;&gt;(func=&lt;function &lt;lambda&gt; at 0x7f79251df4c0&gt;, a=&lt;class &#39;powertools.node.Output&#39;&gt;(path=/tmp/foo), b=&lt;class &#39;powertools.node.Input&#39;&gt;(path=/tmp/bar))</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Dict[Node]: The key value arguments to the function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="powertools.Transform.nodes">
+<em class="property">property </em><code class="sig-name descname">nodes</code><a class="headerlink" href="#powertools.Transform.nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="powertools.Transform.output_kwargs">
+<em class="property">property </em><code class="sig-name descname">output_kwargs</code><a class="headerlink" href="#powertools.Transform.output_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="powertools.Transform.outputs">
+<em class="property">property </em><code class="sig-name descname">outputs</code><a class="headerlink" href="#powertools.Transform.outputs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="powertools.Transform.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">param_args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">param_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/transform.html#Transform.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.Transform.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a transform, the param_kwargs is overwritten by transform kwargs.</p>
+<p>A parameter to a transform is an external transform input which is
+NOT a DataFrame. This could be a model or the like.</p>
+<dl>
+<dt>Args:</dt><dd><p><a href="#id21"><span class="problematic" id="id22">*</span></a>param_args List[Any]: A list of parameters to a transform.
+<a href="#id23"><span class="problematic" id="id24">*</span></a>param_kwargs (Dict[str, Any]): A list og keyword argument</p>
+<blockquote>
+<div><p>parameters to a transform.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>None: A transform run does not return anything but the side</dt><dd><p>effects are specified by the output nodes in the transforms.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="powertools.transform">
+<code class="sig-prename descclassname">powertools.</code><code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#powertools.node.Node" title="powertools.node.Node">powertools.node.Node</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/transform.html#transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a function to a Transform.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p><a href="#id25"><span class="problematic" id="id26">**</span></a>kwargs (Dict[str, Node]): The inputs and outputs of the transform.</p>
+</dd>
+<dt>Returns:</dt><dd><p>function: A decorator that returns a Transform object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="powertools.transform_df">
+<code class="sig-prename descclassname">powertools.</code><code class="sig-name descname">transform_df</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#powertools.node.Output" title="powertools.node.Output">powertools.node.Output</a></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#powertools.node.Input" title="powertools.node.Input">powertools.node.Input</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/transform.html#transform_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.transform_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a function to a DataFrameTransform.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>output (Output): The single output of the Transform.
+<a href="#id27"><span class="problematic" id="id28">**</span></a>input_kwargs (Dict[str, Input]): The inputs of the transform.</p>
+</dd>
+<dt>Returns:</dt><dd><p>function: A decorator that returns a DataFrameTransform object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2021, Troels Lægsgaard.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
