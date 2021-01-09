@@ -59,9 +59,11 @@ class Transform:
         refers to, it wouldn't be if one hadn't identified the input to the transform
         by a key value argument.
 
+        >>> from powertools import transform
         >>> from pyspark.sql import functions as F
         >>> func = lambda a, b: a.write(b.read().agg(F.count('*')))
         >>> transform(a=Output('foo'), b=Input('bar'))(func)
+        <class 'powertools.transform.Transform'>(func=<function <lambda> at 0x7f79251df4c0>, a=<class 'powertools.node.Output'>(path=/tmp/foo), b=<class 'powertools.node.Input'>(path=/tmp/bar))
 
         Returns:
             Dict[Node]: The key value arguments to the function.

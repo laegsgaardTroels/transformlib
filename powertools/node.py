@@ -50,6 +50,10 @@ class Output(Node):
         The default save mode is set to 'overwrite' because this is most
         commonly used.
 
+        >>> from powertools import Output
+        >>> Output('/path/to/output.csv', format='csv')
+        <class 'powertools.node.Output'>(path=/tmp//path/to/output.csv)
+
         Args:
             df (pyspark.sql.DataFrame): A DataFrame which is to be saved in the output
                 location.
@@ -76,6 +80,12 @@ class Input(Node):
 
     def load(self, **read_kwargs) -> pyspark.sql.DataFrame:
         """Load the input of a transform from a fixed path.
+
+        Used to create input to be read.
+
+        >>> from powertools import Input
+        >>> Input('/path/to/input.csv', format='csv')
+        <class 'powertools.node.Input'>(path=/tmp//path/to/input.csv)
 
         Args:
             **read_kwargs: Kwargs to the DataFrameReader class from pyspark.sql.

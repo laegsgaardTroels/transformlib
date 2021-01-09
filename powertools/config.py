@@ -1,4 +1,4 @@
-"""Configurations and constants.
+"""Configurations.
 
 This scripts should not have a dependency on ANY part of the project.
 """
