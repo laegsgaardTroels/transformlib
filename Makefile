@@ -54,10 +54,8 @@ lint:
 ## Create documentation using sphinx.
 .PHONY: docs
 docs: .venv/bin/activate
-	rm -rf docs
 	. .venv/bin/activate; \
-		sphinx-apidoc -o _docs/source powertools
-	cd _docs; \
+		sphinx-apidoc -o docs/source powertools; \
+	cd docs; \
 		${MAKE} html
-	mv _docs/build/html docs
-	touch docs/.nojekyll
+	# touch docs/.nojekyll
