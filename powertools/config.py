@@ -1,7 +1,4 @@
-"""Configurations.
-
-The only config is the `ROOT_DIR` environment variable, data is saved in this directory. By default
-is is `/tmp/`.
+"""The only config is the `ROOT_DIR` environment variable, data is loaded/saved in this directory.
 """
 import os
 

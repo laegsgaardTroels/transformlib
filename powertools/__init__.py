@@ -1,3 +1,5 @@
+"""powertools contains useful abstractions for organizing transformations of data in a modular way.
+"""
 from .node import Node
 from .node import Output
 from .node import Input

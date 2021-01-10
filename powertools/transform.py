@@ -1,8 +1,11 @@
+"""Contains the Transform abstraction and helper methods.
+"""
 from powertools import Node
 from powertools import Output
 from powertools import Input
 
 from typing import List
+from typing import Tuple
 from typing import Dict
 
 import logging
@@ -11,7 +14,11 @@ logger = logging.getLogger(__name__)
 
 
 class Transform:
-    """Used to organize transformations of data."""
+    """Used to organize transformations of data.
+
+    A Transform is a many to many mapping between Inputs and Outputs. When run the Inputs are
+    loaded and the calculated outputs from the function is written to the Outputs.
+    """
 
     def __init__(self, output_args, func, input_kwargs):
         self.output_args = output_args
@@ -20,6 +27,8 @@ class Transform:
 
     @property
     def output_args(self):
+        """Output arguments of the transform.
+        """
         return self._output_args
 
     @output_args.setter
@@ -30,6 +39,8 @@ class Transform:
 
     @property
     def input_kwargs(self):
+        """Input key value arguments of the transform.
+        """
         return self._input_kwargs
 
     @input_kwargs.setter
@@ -39,16 +50,22 @@ class Transform:
         self._input_kwargs = value
 
     @property
-    def outputs(self) -> List[Output]:
+    def outputs(self) -> Tuple[Output]:
+        """A tuple with all the Outputs of the Transform.
+        """
         return tuple(self.output_args)
 
     @property
-    def inputs(self) -> List[Input]:
+    def inputs(self) -> Tuple[Input]:
+        """A tuple with all the Inputs of the Transform.
+        """
         return tuple(self.input_kwargs.values())
 
     @property
-    def nodes(self) -> List[Node]:
-        return self.outputs + self.inputs
+    def nodes(self) -> Tuple[Node]:
+        """A tuple with all the Nodes of the Transform e.g. Input and Output.
+        """
+        return tuple(self.outputs + self.inputs)
 
     def __call__(self, *args, **kwargs):
         return self.func(*args, **kwargs)
@@ -86,8 +103,7 @@ class Transform:
                 parameters to a transform.
 
         Returns:
-            None: A transform run does not return anything but the side
-                effects are specified by the output nodes in the transforms.
+            Tuple[Output]: A tuple with the calculated outputs.
         """
         logger.info(f'Beginning running of {self}.')
         calc_outputs = self(
@@ -99,6 +115,8 @@ class Transform:
         )
         if len(self.outputs) == 1:
             calc_outputs = (calc_outputs, )
+        else:
+            calc_outputs = tuple(calc_outputs)
         for idx, output in enumerate(self.outputs):
             output.save(calc_outputs[idx])
         logger.info(f'Completed running of {self}.')
