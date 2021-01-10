@@ -1,0 +1,7 @@
+powertools.exceptions module
+============================
+
+.. automodule:: powertools.exceptions
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -121,11 +121,14 @@
               <div>
                 
   <h1>Source code for powertools.transform</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">Node</span>
+<span></span><span class="sd">&quot;&quot;&quot;Contains the Transform abstraction and helper methods.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">Node</span>
 <span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">Output</span>
 <span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">Input</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
@@ -134,25 +137,33 @@
 
 
 <div class="viewcode-block" id="Transform"><a class="viewcode-back" href="../../powertools.html#powertools.transform.Transform">[docs]</a><span class="k">class</span> <span class="nc">Transform</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Used to organize transformations of data.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Used to organize transformations of data.</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_kwargs</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">input_kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">output_kwargs</span> <span class="o">=</span> <span class="n">output_kwargs</span>
+<span class="sd">    A Transform is a many to many mapping between Inputs and Outputs. When run the Inputs are</span>
+<span class="sd">    loaded and the calculated outputs from the function is written to the Outputs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_args</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">input_kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_args</span> <span class="o">=</span> <span class="n">output_args</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">input_kwargs</span> <span class="o">=</span> <span class="n">input_kwargs</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">output_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_kwargs</span>
+    <span class="k">def</span> <span class="nf">output_args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Output arguments of the transform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_args</span>
 
-    <span class="nd">@output_kwargs</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">output_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+    <span class="nd">@output_args</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">output_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">value</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Duplicate </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_output_kwargs</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output_args</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">input_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Input key value arguments of the transform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_kwargs</span>
 
     <span class="nd">@input_kwargs</span><span class="o">.</span><span class="n">setter</span>
@@ -162,46 +173,36 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_input_kwargs</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Output</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_kwargs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="k">def</span> <span class="nf">outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Output</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;A tuple with all the Outputs of the Transform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_args</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Input</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Input</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;A tuple with all the Inputs of the Transform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_kwargs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Node</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Node</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;The kwargs of a transform is the key value arguments inputted when running it.</span>
-
-<span class="sd">        Having the nodes be identified by a key makes it clear what node is referred to</span>
-<span class="sd">        in the function attribute (self.func). In below example it is clear what a, b</span>
-<span class="sd">        refers to, it wouldn&#39;t be if one hadn&#39;t identified the input to the transform</span>
-<span class="sd">        by a key value argument.</span>
-
-<span class="sd">        &gt;&gt;&gt; from powertools import transform</span>
-<span class="sd">        &gt;&gt;&gt; from pyspark.sql import functions as F</span>
-<span class="sd">        &gt;&gt;&gt; func = lambda a, b: a.write(b.read().agg(F.count(&#39;*&#39;)))</span>
-<span class="sd">        &gt;&gt;&gt; transform(a=Output(&#39;foo&#39;), b=Input(&#39;bar&#39;))(func)</span>
-<span class="sd">        &lt;class &#39;powertools.transform.Transform&#39;&gt;(func=&lt;function &lt;lambda&gt; at 0x7f79251df4c0&gt;, a=&lt;class &#39;powertools.node.Output&#39;&gt;(path=/tmp/foo), b=&lt;class &#39;powertools.node.Input&#39;&gt;(path=/tmp/bar))</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Dict[Node]: The key value arguments to the function.</span>
+    <span class="k">def</span> <span class="nf">nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Node</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;A tuple with all the Nodes of the Transform e.g. Input and Output.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">output_kwargs</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">input_kwargs</span><span class="p">}</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">kwargs_repr</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">=</span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
-            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-        <span class="p">])</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s1">(func=</span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">)</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">kwargs_repr</span><span class="si">}</span><span class="s1">)&#39;</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s1">(&#39;</span>
+            <span class="o">+</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">repr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_args</span><span class="p">))</span>
+            <span class="o">+</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">key</span><span class="p">:</span> <span class="n">key</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">input_kwargs</span>
+            <span class="p">))</span>
+            <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
@@ -212,91 +213,62 @@
         <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">output_args</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">input_kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
 
-    <span class="k">def</span> <span class="nf">_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">param_args</span><span class="p">,</span> <span class="o">**</span><span class="n">param_kwargs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="p">(</span><span class="o">*</span><span class="n">param_args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">,</span> <span class="o">**</span><span class="n">param_kwargs</span><span class="p">)</span>
-
-<div class="viewcode-block" id="Transform.run"><a class="viewcode-back" href="../../powertools.html#powertools.transform.Transform.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">param_args</span><span class="p">,</span> <span class="o">**</span><span class="n">param_kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="Transform.run"><a class="viewcode-back" href="../../powertools.html#powertools.transform.Transform.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">param_kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Runs a transform, the param_kwargs is overwritten by transform kwargs.</span>
 
 <span class="sd">        A parameter to a transform is an external transform input which is</span>
 <span class="sd">        NOT a DataFrame. This could be a model or the like.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">           *param_args List[Any]: A list of parameters to a transform.</span>
 <span class="sd">           *param_kwargs (Dict[str, Any]): A list og keyword argument</span>
 <span class="sd">                parameters to a transform.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            None: A transform run does not return anything but the side</span>
-<span class="sd">                effects are specified by the output nodes in the transforms.</span>
+<span class="sd">            Tuple[Output]: A tuple with the calculated outputs.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;BEGINNING RUNNING OF </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="o">*</span><span class="n">param_args</span><span class="p">,</span> <span class="o">**</span><span class="n">param_kwargs</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;COMPLETED RUNNING OF </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">res</span></div></div>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Beginning running of </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+        <span class="n">calc_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span>
+            <span class="o">**</span><span class="n">param_kwargs</span><span class="p">,</span>
+            <span class="o">**</span><span class="p">{</span>
+                <span class="n">key</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_kwargs</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">calc_outputs</span> <span class="o">=</span> <span class="p">(</span><span class="n">calc_outputs</span><span class="p">,</span> <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">calc_outputs</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">calc_outputs</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">output</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">):</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">calc_outputs</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Completed running of </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">calc_outputs</span></div></div>
 
 
-<div class="viewcode-block" id="DataFrameTransform"><a class="viewcode-back" href="../../powertools.html#powertools.transform.DataFrameTransform">[docs]</a><span class="k">class</span> <span class="nc">DataFrameTransform</span><span class="p">(</span><span class="n">Transform</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Used to organize transformations with DataFrame input.</span>
-
-<span class="sd">    The DataFrameTransform has only a single DataFrame output</span>
-<span class="sd">    and multiple DataFrame inputs.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_kwargs</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">input_kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">output_kwargs</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">input_kwargs</span><span class="p">)</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">output</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_kwargs</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span>
-
-    <span class="k">def</span> <span class="nf">_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">param_args</span><span class="p">,</span> <span class="o">**</span><span class="n">param_kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Data is loaded  AND only inputs are given as kwargs.&quot;&quot;&quot;</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">load</span><span class="p">()</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_kwargs</span><span class="p">})</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">res</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="transform"><a class="viewcode-back" href="../../powertools.html#powertools.transform.transform">[docs]</a><span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Node</span><span class="p">):</span>
+<div class="viewcode-block" id="transform"><a class="viewcode-back" href="../../powertools.html#powertools.transform.transform">[docs]</a><span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Output</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Input</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Convert a function to a Transform.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        **kwargs (Dict[str, Node]): The inputs and outputs of the transform.</span>
+<span class="sd">        *args (List[Input]): The outputs of the transform.</span>
+<span class="sd">        **kwargs (Dict[str, Input]): The inputs to the transform.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        function: A decorator that returns a Transform object.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Transform</span><span class="p">:</span>
-        <span class="n">output_kwargs</span> <span class="o">=</span> <span class="n">_filter_outputs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">output_args</span> <span class="o">=</span> <span class="n">_filter_outputs</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
         <span class="n">input_kwargs</span> <span class="o">=</span> <span class="n">_filter_inputs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">Transform</span><span class="p">(</span><span class="n">output_kwargs</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">input_kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Transform</span><span class="p">(</span><span class="n">output_args</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">input_kwargs</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">decorator</span></div>
 
 
-<div class="viewcode-block" id="transform_df"><a class="viewcode-back" href="../../powertools.html#powertools.transform.transform_df">[docs]</a><span class="k">def</span> <span class="nf">transform_df</span><span class="p">(</span><span class="n">output</span><span class="p">:</span> <span class="n">Output</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Input</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert a function to a DataFrameTransform.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        output (Output): The single output of the Transform.</span>
-<span class="sd">        **input_kwargs (Dict[str, Input]): The inputs of the transform.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        function: A decorator that returns a DataFrameTransform object.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrameTransform</span><span class="p">:</span>
-        <span class="n">output_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="n">output</span><span class="p">}</span>
-        <span class="n">input_kwargs</span> <span class="o">=</span> <span class="n">_filter_inputs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">DataFrameTransform</span><span class="p">(</span><span class="n">output_kwargs</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">input_kwargs</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">decorator</span></div>
-
-
-<span class="k">def</span> <span class="nf">_filter_outputs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Output</span><span class="p">]:</span>
+<span class="k">def</span> <span class="nf">_filter_outputs</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Output</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Filter out anything that is not an Output.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="n">key</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">Output</span><span class="p">)</span>
-    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">arg</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">Output</span><span class="p">)</span>
+    <span class="p">]</span>
 
 
 <span class="k">def</span> <span class="nf">_filter_inputs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Input</span><span class="p">]:</span>

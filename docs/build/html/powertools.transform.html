@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>powertools.transform module &#8212; Powertools 0.0.1 documentation</title>
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/autobot.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="index.html">
+    
+      <img src="_static/autobot.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/laegsgaardTroels/powertools" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+    <div class="bd-toc-item active">
+    
+  
+    <ul class="nav bd-sidenav">
+        
+      </ul>
+  
+  </nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="module-powertools.transform">
+<span id="powertools-transform-module"></span><h1>powertools.transform module<a class="headerlink" href="#module-powertools.transform" title="Permalink to this headline">¶</a></h1>
+<p>Contains the Transform abstraction and helper methods.</p>
+<dl class="py class">
+<dt id="powertools.transform.Transform">
+<em class="property">class </em><code class="sig-prename descclassname">powertools.transform.</code><code class="sig-name descname">Transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_args</span></em>, <em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">input_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/transform.html#Transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.transform.Transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Used to organize transformations of data.</p>
+<p>A Transform is a many to many mapping between Inputs and Outputs. When run the Inputs are
+loaded and the calculated outputs from the function is written to the Outputs.</p>
+<dl class="py method">
+<dt id="powertools.transform.Transform.input_kwargs">
+<em class="property">property </em><code class="sig-name descname">input_kwargs</code><a class="headerlink" href="#powertools.transform.Transform.input_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Input key value arguments of the transform.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="powertools.transform.Transform.inputs">
+<em class="property">property </em><code class="sig-name descname">inputs</code><a class="headerlink" href="#powertools.transform.Transform.inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>A tuple with all the Inputs of the Transform.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="powertools.transform.Transform.nodes">
+<em class="property">property </em><code class="sig-name descname">nodes</code><a class="headerlink" href="#powertools.transform.Transform.nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>A tuple with all the Nodes of the Transform e.g. Input and Output.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="powertools.transform.Transform.output_args">
+<em class="property">property </em><code class="sig-name descname">output_args</code><a class="headerlink" href="#powertools.transform.Transform.output_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output arguments of the transform.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="powertools.transform.Transform.outputs">
+<em class="property">property </em><code class="sig-name descname">outputs</code><a class="headerlink" href="#powertools.transform.Transform.outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>A tuple with all the Outputs of the Transform.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="powertools.transform.Transform.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">param_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/transform.html#Transform.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.transform.Transform.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a transform, the param_kwargs is overwritten by transform kwargs.</p>
+<p>A parameter to a transform is an external transform input which is
+NOT a DataFrame. This could be a model or the like.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt><a href="#id1"><span class="problematic" id="id2">*</span></a>param_kwargs (Dict[str, Any]): A list og keyword argument</dt><dd><p>parameters to a transform.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Tuple[Output]: A tuple with the calculated outputs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="powertools.transform.transform">
+<code class="sig-prename descclassname">powertools.transform.</code><code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n"><a class="reference internal" href="powertools.node.html#powertools.node.Output" title="powertools.node.Output">powertools.node.Output</a></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><a class="reference internal" href="powertools.node.html#powertools.node.Input" title="powertools.node.Input">powertools.node.Input</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/transform.html#transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.transform.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a function to a Transform.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p><a href="#id3"><span class="problematic" id="id4">*</span></a>args (List[Input]): The outputs of the transform.
+<a href="#id5"><span class="problematic" id="id6">**</span></a>kwargs (Dict[str, Input]): The inputs to the transform.</p>
+</dd>
+<dt>Returns:</dt><dd><p>function: A decorator that returns a Transform object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2021, Troels Lægsgaard.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

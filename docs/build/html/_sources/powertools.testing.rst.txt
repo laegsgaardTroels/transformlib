@@ -1,0 +1,7 @@
+powertools.testing module
+=========================
+
+.. automodule:: powertools.testing
+   :members:
+   :undoc-members:
+   :show-inheritance:

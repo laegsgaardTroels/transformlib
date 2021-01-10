@@ -1,0 +1,7 @@
+powertools.pipeline module
+==========================
+
+.. automodule:: powertools.pipeline
+   :members:
+   :undoc-members:
+   :show-inheritance:

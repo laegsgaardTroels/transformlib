@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>powertools documentation &#8212; Powertools 0.0.1 documentation</title>
+    <title>powertools.testing module &#8212; Powertools 0.0.1 documentation</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -46,7 +46,7 @@
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
 <div class="container-xl">
 
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="index.html">
     
       <img src="_static/autobot.png" class="logo" alt="logo" />
     
@@ -103,6 +103,15 @@
           
           <div class="d-none d-xl-block col-xl-2 bd-toc">
               
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+              
           </div>
           
 
@@ -111,21 +120,33 @@
               
               <div>
                 
-  <div class="section" id="powertools-documentation">
-<h1>powertools documentation<a class="headerlink" href="#powertools-documentation" title="Permalink to this headline">¶</a></h1>
-<p><strong>Date</strong>: Jan 10, 2021</p>
-<p><strong>Useful links</strong>:
-<a class="reference external" href="https://github.com/laegsgaardTroels/powertools">Source Repository</a></p>
-<p><a class="reference internal" href="powertools.html#module-powertools" title="powertools"><code class="xref py py-mod docutils literal notranslate"><span class="pre">powertools</span></code></a> is an open source, BSD-licensed library providing useful abstractions for
-organizing transformations of data in a modular way in the <a class="reference external" href="https://www.python.org/">Python</a>
-programming language.</p>
-</div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-</ul>
+  <div class="section" id="module-powertools.testing">
+<span id="powertools-testing-module"></span><h1>powertools.testing module<a class="headerlink" href="#module-powertools.testing" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="powertools.testing.ReusedPySparkTestCase">
+<em class="property">class </em><code class="sig-prename descclassname">powertools.testing.</code><code class="sig-name descname">ReusedPySparkTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/testing.html#ReusedPySparkTestCase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.testing.ReusedPySparkTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<p>A base class to reuse a SparkSession across test cases.</p>
+<p>Initilizing a SparkSession takes time. All subclasses of this
+class will use the same SparkSession for testing.</p>
+<dl class="simple">
+<dt>References:</dt><dd><p>[1] <a class="reference external" href="https://github.com/apache/spark/blob/master/python/pyspark/testing/utils.py#L117">https://github.com/apache/spark/blob/master/python/pyspark/testing/utils.py#L117</a></p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="powertools.testing.ReusedPySparkTestCase.setUpClass">
+<em class="property">classmethod </em><code class="sig-name descname">setUpClass</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/testing.html#ReusedPySparkTestCase.setUpClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.testing.ReusedPySparkTestCase.setUpClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="powertools.testing.ReusedPySparkTestCase.tearDownClass">
+<em class="property">classmethod </em><code class="sig-name descname">tearDownClass</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/powertools/testing.html#ReusedPySparkTestCase.tearDownClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#powertools.testing.ReusedPySparkTestCase.tearDownClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for deconstructing the class fixture after running all tests in the class.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
