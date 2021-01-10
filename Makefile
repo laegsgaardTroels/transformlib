@@ -55,7 +55,9 @@ lint:
 .PHONY: docs
 docs: .venv/bin/activate
 	. .venv/bin/activate; \
-		sphinx-apidoc -o docs/source powertools; \
+		sphinx-apidoc --force -o docs/source -t docs/source/_templates --module-first \
+		powertools \
+		powertools/exceptions.py powertools/config.py powertools/testing.py; \
 	cd docs; \
 		${MAKE} html
 	# touch docs/.nojekyll
