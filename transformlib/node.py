@@ -1,4 +1,4 @@
-from powertools import config
+from transformlib import config
 
 import pyspark
 

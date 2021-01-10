@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>powertools.transform &#8212; transformlib 0.0.1 documentation</title>
+    <title>transformlib.transform &#8212; transformlib 0.0.1 documentation</title>
     
   <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -120,12 +120,12 @@
               
               <div>
                 
-  <h1>Source code for powertools.transform</h1><div class="highlight"><pre>
+  <h1>Source code for transformlib.transform</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Contains the Transform abstraction and helper methods.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">Node</span>
-<span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">Output</span>
-<span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">Input</span>
+<span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">Output</span>
+<span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">Input</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
@@ -136,7 +136,7 @@
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="Transform"><a class="viewcode-back" href="../../powertools.html#powertools.transform.Transform">[docs]</a><span class="k">class</span> <span class="nc">Transform</span><span class="p">:</span>
+<div class="viewcode-block" id="Transform"><a class="viewcode-back" href="../../transformlib.html#transformlib.Transform">[docs]</a><span class="k">class</span> <span class="nc">Transform</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Used to organize transformations of data.</span>
 
 <span class="sd">    A Transform is a many to many mapping between Inputs and Outputs. When run the Inputs are</span>
@@ -215,7 +215,7 @@
     <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">output_args</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">input_kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
 
-<div class="viewcode-block" id="Transform.run"><a class="viewcode-back" href="../../powertools.html#powertools.transform.Transform.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">param_kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="Transform.run"><a class="viewcode-back" href="../../transformlib.html#transformlib.Transform.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">param_kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Runs a transform, the param_kwargs is overwritten by transform kwargs.</span>
 
 <span class="sd">        A parameter to a transform is an external transform input which is</span>
@@ -246,7 +246,7 @@
         <span class="k">return</span> <span class="n">calc_outputs</span></div></div>
 
 
-<div class="viewcode-block" id="transform"><a class="viewcode-back" href="../../powertools.html#powertools.transform.transform">[docs]</a><span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Output</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Input</span><span class="p">):</span>
+<div class="viewcode-block" id="transform"><a class="viewcode-back" href="../../transformlib.html#transformlib.transform">[docs]</a><span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Output</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Input</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Convert a function to a Transform.</span>
 
 <span class="sd">    Args:</span>

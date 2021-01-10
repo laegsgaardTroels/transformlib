@@ -1,5 +1,5 @@
-from powertools.testing import ReusedPySparkTestCase
-from powertools import Node
+from transformlib.testing import ReusedPySparkTestCase
+from transformlib import Node
 
 
 class TestNode(ReusedPySparkTestCase):

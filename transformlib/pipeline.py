@@ -1,9 +1,9 @@
 # TODO:
 #   - Sort using graphlib in python 3.9
-from powertools import Transform
+from transformlib import Transform
 
-from powertools.exceptions import PowertoolsCycleException
-from powertools.exceptions import PowertoolsDuplicateTransformException
+from transformlib.exceptions import TransformlibCycleException
+from transformlib.exceptions import TransformlibDuplicateTransformException
 
 from typing import List
 from typing import Dict
@@ -32,7 +32,7 @@ class Pipeline:
     @property
     def tasks(self):
         if len(set(self.transforms)) != len(self.transforms):
-            raise PowertoolsDuplicateTransformException(f"Duplicate {self.transforms}")
+            raise TransformlibDuplicateTransformException(f"Duplicate {self.transforms}")
         return _get_tasks(self.transforms)  # Topologically sort the transforms.
 
     def __repr__(self):
@@ -165,4 +165,4 @@ def _tsort(graph: Graph) -> List[Transform]:
     if len(L) == len(graph):
         return L
     else:                    # if there is a cycle,
-        raise PowertoolsCycleException("Cycle detected in the DAG.")
+        raise TransformlibCycleException("Cycle detected in the DAG.")

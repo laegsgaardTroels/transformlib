@@ -1,5 +1,5 @@
-from powertools.testing import ReusedPySparkTestCase
-from powertools.exceptions import PowertoolsCycleException
+from transformlib.testing import ReusedPySparkTestCase
+from transformlib.exceptions import TransformlibCycleException
 
 from squares_with_cycle.pipelines import pipeline
 
@@ -9,5 +9,5 @@ class TestSquaresWithDag(ReusedPySparkTestCase):
 
     def test_pipeline(self):
         """"Test that the pipeline runs."""
-        with self.assertRaises(PowertoolsCycleException):
+        with self.assertRaises(TransformlibCycleException):
             pipeline.run()

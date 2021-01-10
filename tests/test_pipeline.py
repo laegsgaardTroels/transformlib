@@ -1,8 +1,8 @@
-from powertools.testing import ReusedPySparkTestCase
-from powertools import Transform
-from powertools import Pipeline
-from powertools.exceptions import PowertoolsDuplicateTransformException
-from powertools.pipeline import _tsort
+from transformlib.testing import ReusedPySparkTestCase
+from transformlib import Transform
+from transformlib import Pipeline
+from transformlib.exceptions import TransformlibDuplicateTransformException
+from transformlib.pipeline import _tsort
 
 
 class TestPipeline(ReusedPySparkTestCase):
@@ -15,17 +15,17 @@ class TestPipeline(ReusedPySparkTestCase):
             func=lambda: None,
             input_kwargs={},
         )
-        with self.assertRaises(PowertoolsDuplicateTransformException):
+        with self.assertRaises(TransformlibDuplicateTransformException):
             pipeline = Pipeline([transform, transform])
             pipeline.run()
 
     def test_run_tasks_exception_testing(self):
         """Should raise an exception if one is raised in a Transform."""
-        class PowertoolsTestRunTasksException(Exception):
+        class TransformlibTestRunTasksException(Exception):
             """Raised in this test case."""
 
         def raise_transform_exception():
-            raise PowertoolsTestRunTasksException('Transform test.')
+            raise TransformlibTestRunTasksException('Transform test.')
 
         transform = Transform(
             output_args=[],
@@ -33,7 +33,7 @@ class TestPipeline(ReusedPySparkTestCase):
             input_kwargs={},
         )
 
-        with self.assertRaises(PowertoolsTestRunTasksException):
+        with self.assertRaises(TransformlibTestRunTasksException):
             pipeline = Pipeline([transform])
             pipeline.run()
 

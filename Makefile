@@ -23,7 +23,7 @@ clean:
 .PHONY: lint
 lint: 
 	. .venv/bin/activate; \
-		${PYTHON_INTERPRETER} -m flake8 powertools
+		${PYTHON_INTERPRETER} -m flake8 transformlib
 	. .venv/bin/activate; \
 		${PYTHON_INTERPRETER} -m flake8 tests
 
@@ -56,8 +56,8 @@ lint:
 docs: .venv/bin/activate
 	. .venv/bin/activate; \
 		sphinx-apidoc --force -o docs/source -t docs/source/_templates --module-first \
-		powertools \
-		powertools/exceptions.py powertools/config.py powertools/testing.py; \
+		transformlib \
+		transformlib/exceptions.py transformlib/config.py transformlib/testing.py; \
 	cd docs; \
 		${MAKE} html
 	# touch docs/.nojekyll
