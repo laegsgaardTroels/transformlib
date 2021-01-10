@@ -1,9 +1,9 @@
-from powertools import transform_df, Output, Input
+from powertools import transform, Output, Input
 
 from pyspark.sql import functions as F
 
 
-@transform_df(
+@transform(
     Output('squares.parquet'),
     range_=Input('range.parquet'),
 )

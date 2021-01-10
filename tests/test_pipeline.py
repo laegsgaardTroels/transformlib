@@ -11,7 +11,7 @@ class TestPipeline(ReusedPySparkTestCase):
     def test_run_tasks_duplicate_testing(self):
         """Should raise exception if duplicate Transform."""
         transform = Transform(
-            output_kwargs={},
+            output_args=[],
             func=lambda: None,
             input_kwargs={},
         )
@@ -28,7 +28,7 @@ class TestPipeline(ReusedPySparkTestCase):
             raise PowertoolsTestRunTasksException('Transform test.')
 
         transform = Transform(
-            output_kwargs={},
+            output_args=[],
             func=raise_transform_exception,
             input_kwargs={},
         )
