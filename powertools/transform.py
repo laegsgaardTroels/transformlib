@@ -13,20 +13,20 @@ logger = logging.getLogger(__name__)
 class Transform:
     """Used to organize transformations of data."""
 
-    def __init__(self, output_kwargs, func, input_kwargs):
-        self.output_kwargs = output_kwargs
+    def __init__(self, output_args, func, input_kwargs):
+        self.output_args = output_args
         self.func = func
         self.input_kwargs = input_kwargs
 
     @property
-    def output_kwargs(self):
-        return self._output_kwargs
+    def output_args(self):
+        return self._output_args
 
-    @output_kwargs.setter
-    def output_kwargs(self, value):
-        if len(set(value.values())) != len(value.values()):
+    @output_args.setter
+    def output_args(self, value):
+        if len(set(value)) != len(value):
             raise ValueError(f"Duplicate {value}")
-        self._output_kwargs = value
+        self._output_args = value
 
     @property
     def input_kwargs(self):
@@ -40,7 +40,7 @@ class Transform:
 
     @property
     def outputs(self) -> List[Output]:
-        return tuple(self.output_kwargs.values())
+        return tuple(self.output_args)
 
     @property
     def inputs(self) -> List[Input]:
@@ -50,35 +50,19 @@ class Transform:
     def nodes(self) -> List[Node]:
         return self.outputs + self.inputs
 
-    @property
-    def kwargs(self) -> Dict[str, Node]:
-        """The kwargs of a transform is the key value arguments inputted when running it.
-
-        Having the nodes be identified by a key makes it clear what node is referred to
-        in the function attribute (self.func). In below example it is clear what a, b
-        refers to, it wouldn't be if one hadn't identified the input to the transform
-        by a key value argument.
-
-        >>> from powertools import transform
-        >>> from pyspark.sql import functions as F
-        >>> func = lambda a, b: a.write(b.read().agg(F.count('*')))
-        >>> transform(a=Output('foo'), b=Input('bar'))(func)
-        <class 'powertools.transform.Transform'>(func=<function <lambda> at 0x7f79251df4c0>, a=<class 'powertools.node.Output'>(path=/tmp/foo), b=<class 'powertools.node.Input'>(path=/tmp/bar))  # noqa
-
-        Returns:
-            Dict[Node]: The key value arguments to the function.
-        """
-        return {**self.output_kwargs, **self.input_kwargs}
-
     def __call__(self, *args, **kwargs):
         return self.func(*args, **kwargs)
 
     def __repr__(self):
-        kwargs_repr = ', '.join([
-            f'{key}={repr(value)}'
-            for key, value in self.kwargs.items()
-        ])
-        return f'{self.__class__}(func={repr(self.func)}, {kwargs_repr})'
+        return (
+            f'{self.__class__}('
+            + ', '.join(map(repr, self.output_args))
+            + ', '.join(map(
+                lambda key: key + '=' + repr(self.input_kwargs[key]),
+                self.input_kwargs
+            ))
+            + ')'
+        )
 
     def __str__(self):
         return self.func.__name__
@@ -89,19 +73,15 @@ class Transform:
         return False
 
     def __hash__(self):
-        return hash((self.func, *self.kwargs.items()))
+        return hash((self.func, *self.output_args, *self.input_kwargs.items()))
 
-    def _run(self, *param_args, **param_kwargs):
-        return self(*param_args, **self.kwargs, **param_kwargs)
-
-    def run(self, *param_args, **param_kwargs):
+    def run(self, **param_kwargs):
         """Runs a transform, the param_kwargs is overwritten by transform kwargs.
 
         A parameter to a transform is an external transform input which is
         NOT a DataFrame. This could be a model or the like.
 
         Args:
-           *param_args List[Any]: A list of parameters to a transform.
            *param_kwargs (Dict[str, Any]): A list og keyword argument
                 parameters to a transform.
 
@@ -109,71 +89,45 @@ class Transform:
             None: A transform run does not return anything but the side
                 effects are specified by the output nodes in the transforms.
         """
-        logger.info(f'BEGINNING RUNNING OF {self}.')
-        res = self._run(*param_args, **param_kwargs)
-        logger.info(f'COMPLETED RUNNING OF {self}.')
-        return res
+        logger.info(f'Beginning running of {self}.')
+        calc_outputs = self(
+            **param_kwargs,
+            **{
+                key: self.input_kwargs[key].load()
+                for key in self.input_kwargs
+            }
+        )
+        if len(self.outputs) == 1:
+            calc_outputs = (calc_outputs, )
+        for idx, output in enumerate(self.outputs):
+            output.save(calc_outputs[idx])
+        logger.info(f'Completed running of {self}.')
+        return calc_outputs
 
 
-class DataFrameTransform(Transform):
-    """Used to organize transformations with DataFrame input.
-
-    The DataFrameTransform has only a single DataFrame output
-    and multiple DataFrame inputs.
-    """
-
-    def __init__(self, output_kwargs, func, input_kwargs):
-        super().__init__(output_kwargs, func, input_kwargs)
-
-    @property
-    def output(self):
-        return self.output_kwargs['output']
-
-    def _run(self, *param_args, **param_kwargs):
-        """Data is loaded  AND only inputs are given as kwargs."""
-        res = self(**{key: self.input_kwargs[key].load() for key in self.input_kwargs})
-        self.output.save(res)
-
-
-def transform(**kwargs: Node):
+def transform(*args: Output, **kwargs: Input):
     """Convert a function to a Transform.
 
     Args:
-        **kwargs (Dict[str, Node]): The inputs and outputs of the transform.
+        *args (List[Input]): The outputs of the transform.
+        **kwargs (Dict[str, Input]): The inputs to the transform.
 
     Returns:
         function: A decorator that returns a Transform object.
     """
     def decorator(func) -> Transform:
-        output_kwargs = _filter_outputs(kwargs)
+        output_args = _filter_outputs(args)
         input_kwargs = _filter_inputs(kwargs)
-        return Transform(output_kwargs, func, input_kwargs)
+        return Transform(output_args, func, input_kwargs)
     return decorator
 
 
-def transform_df(output: Output, **kwargs: Input):
-    """Convert a function to a DataFrameTransform.
-
-    Args:
-        output (Output): The single output of the Transform.
-        **input_kwargs (Dict[str, Input]): The inputs of the transform.
-
-    Returns:
-        function: A decorator that returns a DataFrameTransform object.
-    """
-    def decorator(func) -> DataFrameTransform:
-        output_kwargs = {'output': output}
-        input_kwargs = _filter_inputs(kwargs)
-        return DataFrameTransform(output_kwargs, func, input_kwargs)
-    return decorator
-
-
-def _filter_outputs(kwargs) -> Dict[str, Output]:
+def _filter_outputs(args) -> List[Output]:
     """Filter out anything that is not an Output."""
-    return {
-        key: kwargs[key] for key in kwargs
-        if isinstance(kwargs[key], Output)
-    }
+    return [
+        arg for arg in args
+        if isinstance(arg, Output)
+    ]
 
 
 def _filter_inputs(kwargs) -> Dict[str, Input]:

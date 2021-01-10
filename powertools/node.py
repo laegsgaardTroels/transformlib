@@ -1,5 +1,3 @@
-# TODO: Add support for Pandas.
-# TODO: Create a method to test if node exists.
 from powertools import config
 
 import pyspark
@@ -17,7 +15,7 @@ class Node:
         path: str,
         root_dir: str = config.ROOT_DIR,
     ):
-        self.path = f'{root_dir}{path}'
+        self.path = root_dir + path
 
     def __repr__(self):
         return f'{self.__class__}(path={self.path})'

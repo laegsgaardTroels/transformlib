@@ -38,17 +38,17 @@ class Pipeline:
     def __repr__(self):
         return (
             'Pipeline('
-            + ', '.join(map(str, self.tasks))
+            + ', '.join(map(repr, self.tasks))
             + ')'
         )
 
     def run(self):
         """Used to run all the transforms in the pipeline."""
-        logger.info(f'BEGINNING RUNNING OF {self}.')
+        logger.info(f'Beginning running of {self}.')
         start = time.time()
         for transform in self.tasks:
             transform.run()
-        logger.info(f'COMPLETED RUNNING OF {self} TOOK {time.time() - start}.')
+        logger.info(f'Completed running of {self} took {time.time() - start}.')
 
     @classmethod
     def discover_transforms(cls, *plugins):
@@ -71,7 +71,7 @@ class Pipeline:
         for plugin in plugins:
 
             if isinstance(plugin, Transform):
-                logger.info(f"DISCOVERED {plugin} as plugin input.")
+                logger.info(f"Discovered {plugin} as plugin input.")
                 transforms.append(plugin)
                 continue
 
@@ -83,7 +83,7 @@ class Pipeline:
                 for attrname in dir(plugin_module):
                     new_attr = getattr(plugin_module, attrname)
                     if isinstance(new_attr, Transform):
-                        logger.info(f"DISCOVERED {new_attr} in {name}.")
+                        logger.info(f"Discovered {new_attr} in {name}.")
                         transforms.append(new_attr)
         return cls(transforms)
 

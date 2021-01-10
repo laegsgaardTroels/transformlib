@@ -1,6 +1,7 @@
 """Configurations.
 
-This scripts should not have a dependency on ANY part of the project.
+The only config is the `ROOT_DIR` environment variable, data is saved in this directory. By default
+is is `/tmp/`.
 """
 import os
 
