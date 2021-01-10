@@ -1,4 +1,4 @@
-# ⚒  Powertools ⚒
+# transformlib
 ![CI Checks](https://github.com/laegsgaardTroels/Powertools/workflows/CI%20Checks/badge.svg?branch=master)
 
 Enables the user to organize transformations of data with PySpark as a regular Python package.
@@ -25,7 +25,7 @@ Sample transform:
 
 ```python
 # range.py
-from powertools import transform_df, Output
+from transformlib import transform_df, Output
 
 from pyspark.sql import SparkSession
 
@@ -40,7 +40,7 @@ The output of one transform can be the input to another transforms.
 
 ```python
 # squares.py
-from powertools import transform_df, Output, Input
+from transformlib import transform_df, Output, Input
 
 from pyspark.sql import functions as F
 
@@ -65,7 +65,7 @@ Sample pipeline:
 
 ```python
 # pipelines.py
-from powertools import Pipeline
+from transformlib import Pipeline
 from squares import transforms
 
 pipeline = Pipeline.discover_transforms(transforms)
