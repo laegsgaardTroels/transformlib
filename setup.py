@@ -21,6 +21,6 @@ setup(
     packages=['transformlib'],
     python_requires='>=3.7',
     install_requires=[
-        'pyspark==3.0.0',
+        'pyspark==3.2.2',
     ]
 )
