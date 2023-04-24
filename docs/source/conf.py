@@ -25,7 +25,7 @@ author = 'Troels Lægsgaard'
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '0.0.1'
+release = '0.1.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -91,12 +91,6 @@ html_theme = 'nature'
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {}
-
-# Theme options are theme-specific and customize the look and feel of a theme
-# further.  For a list of options available for each theme, see the
-# documentation.
-#
-# html_theme_options = {}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
