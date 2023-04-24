@@ -62,4 +62,4 @@ docs: venv/bin/activate
 		transformlib/exceptions.py transformlib/config.py transformlib/testing.py; \
 	cd docs; \
 		${MAKE} html
-	# touch docs/.nojekyll
+	touch docs/.nojekyll

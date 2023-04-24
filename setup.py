@@ -28,6 +28,8 @@ setup(
     extras_require={
         'dev': [
             'flake8==3.8.3',
+            'jinja2==3.0.0',
+            'pydata-sphinx-theme',
             'pyspark==3.0.0',
             'pytest-cov',
             'pytest-pep8',
