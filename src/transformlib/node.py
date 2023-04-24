@@ -29,6 +29,7 @@ class Node:
 
 
 class Output(Node):
+    """An `Output` is a sink in a DAG of data transformations."""
 
     def __init__(
         self,
@@ -40,12 +41,14 @@ class Output(Node):
         self.write_kwargs = write_kwargs
 
     def save(self, obj, **save_kwargs):
+        """Saves an object containing data to the `config.ROOT_DIR`."""
         raise NotImplementedError(
             f"The save method is not implemented for {self.__class__.__name__}"
         )
 
 
 class Input(Node):
+    """An `Input` is a source in a DAG of data transformations."""
 
     def __init__(
         self,
@@ -57,6 +60,7 @@ class Input(Node):
         self.load_kwargs = load_kwargs
 
     def load(self, obj, **load_kwargs) -> None:
+        """Loads an object containing data from the `config.ROOT_DIR`."""
         raise NotImplementedError(
             f"The load method is not implemented for {self.__class__.__name__}"
         )
@@ -115,7 +119,7 @@ class PandasDataFrameOutput(Output):
     """Used for pandas DataFrame Output of a Transform."""
 
     def save(self, df: 'pandas.DataFrame', format='csv', **write_kwargs) -> None:
-        """Save the ouput of a transform from a fixed path.
+        """Save the output of a transform from a fixed path.
 
         Args:
             df (pandas.DataFrame): A pandas DataFrame which is to be saved in the
@@ -135,6 +139,8 @@ class PandasDataFrameInput(Input):
     """Used for pandas DataFrame Input to a Transform."""
 
     def load(self, format='csv', **load_kwargs) -> 'pandas.DataFrame':
+        """Lo
+        """
         import pandas as pd
         if format == 'csv':
             return pd.read_csv(self.path, **load_kwargs)

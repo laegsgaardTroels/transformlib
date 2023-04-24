@@ -1,4 +1,4 @@
-.. Powertools documentation master file, created by
+.. transformlib documentation master file, created by
    sphinx-quickstart on Wed Oct 14 21:22:04 2020.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -8,10 +8,13 @@
 transformlib documentation
 ======================================
 
-**Date**: |today|
+**Documentation Build Date**: |today|
 
 **Useful links**:
-`Source Repository <https://github.com/laegsgaardTroels/powertools>`__
+`Source Repository <https://github.com/laegsgaardTroels/transformlib>`__
+
+
+Enables the user to organize transformations of data as a regular Python package.
 
 :mod:`transformlib` is an open source, BSD-licensed library providing useful abstractions for
 organizing transformations of data in a modular way in the `Python <https://www.python.org/>`__

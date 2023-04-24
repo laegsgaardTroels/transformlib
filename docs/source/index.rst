@@ -13,6 +13,9 @@ transformlib documentation
 **Useful links**:
 `Source Repository <https://github.com/laegsgaardTroels/transformlib>`__
 
+
+Enables the user to organize transformations of data as a regular Python package.
+
 :mod:`transformlib` is an open source, BSD-licensed library providing useful abstractions for
 organizing transformations of data in a modular way in the `Python <https://www.python.org/>`__
 programming language.
