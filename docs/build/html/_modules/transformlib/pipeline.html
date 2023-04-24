@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>transformlib.pipeline &#8212; transformlib 0.0.1 documentation</title>
-    <link rel="stylesheet" href="../../_static/agogo.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -17,26 +17,22 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
-    <div class="header-wrapper" role="banner">
-      <div class="header">
-          <p class="logo"><a href="../../index.html">
-            <img class="logo" src="../../_static/autobot.png" alt="Logo"/>
-          </a></p>
-        <div class="headertitle"><a
-          href="../../index.html">transformlib 0.0.1 documentation</a></div>
-        <div class="rel" role="navigation" aria-label="related navigation">
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a>
-        </div>
-       </div>
-    </div>
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">transformlib 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">transformlib.pipeline</a></li> 
+      </ul>
+    </div>  
 
-    <div class="content-wrapper">
-      <div class="content">
-        <div class="document">
-            
+    <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body" role="main">
@@ -69,7 +65,19 @@
 
 
 <div class="viewcode-block" id="Pipeline"><a class="viewcode-back" href="../../transformlib.html#transformlib.Pipeline">[docs]</a><span class="k">class</span> <span class="nc">Pipeline</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A `Pipeline` is a topologically ordered list of transforms.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A `Pipeline` is a topologically ordered list of transforms.</span>
+
+<span class="sd">    A `Pipeline` can be run from the command line:</span>
+
+<span class="sd">    .. highlight:: bash</span>
+<span class="sd">    .. code-block:: bash</span>
+
+<span class="sd">        transform path/to/transforms/*.py</span>
+<span class="sd">        transform -v path/to/transforms/*.py</span>
+
+<span class="sd">    This will topologically sort and run all Transform objects found in the py files and save/load</span>
+<span class="sd">    the data from the `config.ROOT_DIR`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transforms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Transform</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">transforms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -79,6 +87,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A topologically ordered list of transforms.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">TransformlibDuplicateTransformException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Duplicate </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">_get_tasks</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">)</span>  <span class="c1"># Topologically sort the transforms.</span>
@@ -105,6 +114,14 @@
 <span class="sd">        This function will automatically disover transforms from plugins</span>
 <span class="sd">        using namespace packages e.g. fixed namespace(s), as defined by</span>
 <span class="sd">        the input plugins args to the function, where plugins are saved.</span>
+
+<span class="sd">        Assuming you have a module called `transforms`. You can then find and</span>
+<span class="sd">        run all the Transform objects in this module:</span>
+
+<span class="sd">        &gt;&gt;&gt; import transforms</span>
+<span class="sd">        &gt;&gt;&gt; from transformlib.pipeline import Pipeline</span>
+<span class="sd">        &gt;&gt;&gt; pipeline = Pipeline.discover_transforms(transforms)</span>
+<span class="sd">        &gt;&gt;&gt; pipeline.run()</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            *plugins (module): Module(s) that contains transforms.</span>
@@ -239,47 +256,42 @@
           </div>
         </div>
       </div>
-        </div>
-        <div class="sidebar">
-          
-          <h3>Table of Contents</h3>
-          
-          <div role="search">
-            <h3 style="margin-top: 1.5em;">Search</h3>
-            <form class="search" action="../../search.html" method="get">
-                <input type="text" name="q" />
-                <input type="submit" value="Go" />
-            </form>
-          </div>
-
-        </div>
-        <div class="clearer"></div>
-      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/autobot.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
     </div>
-
-    <div class="footer-wrapper">
-      <div class="footer">
-        <div class="left">
-          <div role="navigation" aria-label="related navigaton">
-            <a href="../../py-modindex.html" title="Python Module Index"
-              >modules</a> |
-            <a href="../../genindex.html" title="General Index"
-              >index</a>
-          </div>
-          <div role="note" aria-label="source link">
-          </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
-
-        <div class="right">
-          
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">transformlib 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">transformlib.pipeline</a></li> 
+      </ul>
+    </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Troels Lægsgaard.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
     </div>
-        </div>
-        <div class="clearer"></div>
-      </div>
-    </div>
-
   </body>
 </html>

@@ -25,7 +25,19 @@ Graph = Dict[Transform, List[Transform]]
 
 
 class Pipeline:
-    """A `Pipeline` is a topologically ordered list of transforms."""
+    """A `Pipeline` is a topologically ordered list of transforms.
+
+    A `Pipeline` can be run from the command line:
+
+    .. highlight:: bash
+    .. code-block:: bash
+
+        transform path/to/transforms/*.py
+        transform -v path/to/transforms/*.py
+
+    This will topologically sort and run all Transform objects found in the py files and save/load
+    the data from the `config.ROOT_DIR`.
+    """
 
     def __init__(self, transforms: Optional[List[Transform]] = None):
         if transforms is None:
@@ -35,6 +47,7 @@ class Pipeline:
 
     @property
     def tasks(self):
+        """A topologically ordered list of transforms."""
         if len(set(self.transforms)) != len(self.transforms):
             raise TransformlibDuplicateTransformException(f"Duplicate {self.transforms}")
         return _get_tasks(self.transforms)  # Topologically sort the transforms.
@@ -61,6 +74,14 @@ class Pipeline:
         This function will automatically disover transforms from plugins
         using namespace packages e.g. fixed namespace(s), as defined by
         the input plugins args to the function, where plugins are saved.
+
+        Assuming you have a module called `transforms`. You can then find and
+        run all the Transform objects in this module:
+
+        >>> import transforms
+        >>> from transformlib.pipeline import Pipeline
+        >>> pipeline = Pipeline.discover_transforms(transforms)
+        >>> pipeline.run()
 
         Args:
             *plugins (module): Module(s) that contains transforms.

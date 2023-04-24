@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>transformlib.node &#8212; transformlib 0.0.1 documentation</title>
-    <link rel="stylesheet" href="../../_static/agogo.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -17,26 +17,22 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
-    <div class="header-wrapper" role="banner">
-      <div class="header">
-          <p class="logo"><a href="../../index.html">
-            <img class="logo" src="../../_static/autobot.png" alt="Logo"/>
-          </a></p>
-        <div class="headertitle"><a
-          href="../../index.html">transformlib 0.0.1 documentation</a></div>
-        <div class="rel" role="navigation" aria-label="related navigation">
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a>
-        </div>
-       </div>
-    </div>
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">transformlib 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">transformlib.node</a></li> 
+      </ul>
+    </div>  
 
-    <div class="content-wrapper">
-      <div class="content">
-        <div class="document">
-            
+    <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body" role="main">
@@ -44,23 +40,30 @@
   <h1>Source code for transformlib.node</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">config</span>
 
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Node"><a class="viewcode-back" href="../../transformlib.html#transformlib.Node">[docs]</a><span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A `Node` in a directed asyclic graph (DAG) of data transformations.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The `Node` base class is a node in a directed asyclic graph (DAG) of data transformations.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">ROOT_DIR</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
+        <span class="n">root_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">ROOT_DIR</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">root_dir</span> <span class="o">+</span> <span class="n">path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">=</span> <span class="n">root_dir</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s1">(path=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s1">)&#39;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">(path=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s1">)&#39;</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span>
@@ -114,14 +117,14 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Used for PySpark DataFrame Output of a Transform.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="PySparkDataFrameOutput.save"><a class="viewcode-back" href="../../transformlib.html#transformlib.PySparkDataFrameOutput.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="s1">&#39;pyspark.sql.DataFrame&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">write_kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save the ouput of a transform from a fixed path.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save and output PySpark DataFrame from a fixed path.</span>
 
 <span class="sd">        The default save mode is set to &#39;overwrite&#39; because this is most</span>
 <span class="sd">        commonly used.</span>
 
-<span class="sd">        &gt;&gt;&gt; from powertools import Output</span>
-<span class="sd">        &gt;&gt;&gt; Output(&#39;/path/to/output.csv&#39;, format=&#39;csv&#39;)</span>
-<span class="sd">        &lt;class &#39;powertools.node.Output&#39;&gt;(path=/tmp//path/to/output.csv)</span>
+<span class="sd">        &gt;&gt;&gt; from transformlib import PySparkDataFrameOutput</span>
+<span class="sd">        &gt;&gt;&gt; PySparkDataFrameOutput(&#39;/path/to/output.csv&#39;, format=&#39;csv&#39;)</span>
+<span class="sd">        PySparkDataFrameOutput(path=/path/to/output.csv)</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            df (pyspark.sql.DataFrame): A DataFrame which is to be saved in the output</span>
@@ -139,13 +142,13 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Used for PySpark DataFrame Input to a Transform.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="PySparkDataFrameInput.load"><a class="viewcode-back" href="../../transformlib.html#transformlib.PySparkDataFrameInput.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;pyspark.sql.DataFrame&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load the input of a transform from a fixed path.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load an input PySpark DataFrame from a fixed path.</span>
 
 <span class="sd">        Used to create input to be read.</span>
 
-<span class="sd">        &gt;&gt;&gt; from powertools import Input</span>
-<span class="sd">        &gt;&gt;&gt; Input(&#39;/path/to/input.csv&#39;, format=&#39;csv&#39;)</span>
-<span class="sd">        &lt;class &#39;powertools.node.Input&#39;&gt;(path=/tmp//path/to/input.csv)</span>
+<span class="sd">        &gt;&gt;&gt; from transformlib import Input</span>
+<span class="sd">        &gt;&gt;&gt; PySparkDataFrameInput(&#39;/path/to/input.csv&#39;, format=&#39;csv&#39;)</span>
+<span class="sd">        PySparkDataFrameInput(path=/path/to/input.csv)</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            **read_kwargs: Kwargs to the DataFrameReader class from pyspark.sql.</span>
@@ -163,7 +166,11 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Used for pandas DataFrame Output of a Transform.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="PandasDataFrameOutput.save"><a class="viewcode-back" href="../../transformlib.html#transformlib.PandasDataFrameOutput.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="s1">&#39;pandas.DataFrame&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">write_kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save the output of a transform from a fixed path.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save the output Pandas DataFrame from a fixed path.</span>
+
+<span class="sd">        &gt;&gt;&gt; from transformlib import PandasDataFrameOutput</span>
+<span class="sd">        &gt;&gt;&gt; PandasDataFrameOutput(&#39;/path/to/input.csv&#39;, format=&#39;csv&#39;)</span>
+<span class="sd">        PandasDataFrameOutput(path=/path/to/input.csv)</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            df (pandas.DataFrame): A pandas DataFrame which is to be saved in the</span>
@@ -172,9 +179,9 @@
 <span class="sd">                in pyspark.sql.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span><span class="p">:</span>
-            <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">write_kwargs</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">,</span> <span class="o">**</span><span class="n">write_kwargs</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;parquet&#39;</span><span class="p">:</span>
-            <span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">write_kwargs</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">,</span> <span class="o">**</span><span class="n">write_kwargs</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The save method is not implemented for </span><span class="si">{</span><span class="nb">format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div></div>
 
@@ -183,13 +190,20 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Used for pandas DataFrame Input to a Transform.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="PandasDataFrameInput.load"><a class="viewcode-back" href="../../transformlib.html#transformlib.PandasDataFrameInput.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;pandas.DataFrame&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lo</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load an input Pandas DataFrame from a fixed path.</span>
+
+<span class="sd">        &gt;&gt;&gt; from transformlib import PandasDataFrameInput</span>
+<span class="sd">        &gt;&gt;&gt; PandasDataFrameInput(&#39;/path/to/output.csv&#39;)</span>
+<span class="sd">        PandasDataFrameInput(path=/path/to/output.csv)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            pandas.DataFrame: The DataFrame that the input is pointing to.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
         <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">,</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;parquet&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">,</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The save method is not implemented for </span><span class="si">{</span><span class="nb">format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div></div>
 </pre></div>
@@ -198,47 +212,42 @@
           </div>
         </div>
       </div>
-        </div>
-        <div class="sidebar">
-          
-          <h3>Table of Contents</h3>
-          
-          <div role="search">
-            <h3 style="margin-top: 1.5em;">Search</h3>
-            <form class="search" action="../../search.html" method="get">
-                <input type="text" name="q" />
-                <input type="submit" value="Go" />
-            </form>
-          </div>
-
-        </div>
-        <div class="clearer"></div>
-      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/autobot.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
     </div>
-
-    <div class="footer-wrapper">
-      <div class="footer">
-        <div class="left">
-          <div role="navigation" aria-label="related navigaton">
-            <a href="../../py-modindex.html" title="Python Module Index"
-              >modules</a> |
-            <a href="../../genindex.html" title="General Index"
-              >index</a>
-          </div>
-          <div role="note" aria-label="source link">
-          </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
-
-        <div class="right">
-          
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">transformlib 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">transformlib.node</a></li> 
+      </ul>
+    </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Troels Lægsgaard.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
     </div>
-        </div>
-        <div class="clearer"></div>
-      </div>
-    </div>
-
   </body>
 </html>

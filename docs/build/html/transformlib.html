@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>transformlib package &#8212; transformlib 0.0.1 documentation</title>
-    <link rel="stylesheet" href="_static/agogo.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -18,26 +18,21 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
   </head><body>
-    <div class="header-wrapper" role="banner">
-      <div class="header">
-          <p class="logo"><a href="index.html">
-            <img class="logo" src="_static/autobot.png" alt="Logo"/>
-          </a></p>
-        <div class="headertitle"><a
-          href="index.html">transformlib 0.0.1 documentation</a></div>
-        <div class="rel" role="navigation" aria-label="related navigation">
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
-             accesskey="I">index</a>
-        </div>
-       </div>
-    </div>
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">transformlib 0.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">transformlib package</a></li> 
+      </ul>
+    </div>  
 
-    <div class="content-wrapper">
-      <div class="content">
-        <div class="document">
-            
+    <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body" role="main">
@@ -60,9 +55,9 @@
 
 <dl class="py class">
 <dt id="transformlib.Node">
-<em class="property">class </em><code class="sig-prename descclassname">transformlib.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">root_dir</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'/tmp/'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/node.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.Node" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">transformlib.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">root_dir</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'/tmp/'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/node.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.Node" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>A <cite>Node</cite> in a directed asyclic graph (DAG) of data transformations.</p>
+<p>The <cite>Node</cite> base class is a node in a directed asyclic graph (DAG) of data transformations.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -86,7 +81,16 @@
 <dl class="py method">
 <dt id="transformlib.PandasDataFrameInput.load">
 <code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">format</span><span class="o">=</span><span class="default_value">'csv'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">load_kwargs</span></em><span class="sig-paren">)</span> &#x2192; pandas.DataFrame<a class="reference internal" href="_modules/transformlib/node.html#PandasDataFrameInput.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.PandasDataFrameInput.load" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lo</p>
+<dd><p>Load an input Pandas DataFrame from a fixed path.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">PandasDataFrameInput</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PandasDataFrameInput</span><span class="p">(</span><span class="s1">&#39;/path/to/output.csv&#39;</span><span class="p">)</span>
+<span class="go">PandasDataFrameInput(path=/path/to/output.csv)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The DataFrame that the input is pointing to.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -99,7 +103,12 @@
 <dl class="py method">
 <dt id="transformlib.PandasDataFrameOutput.save">
 <code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span><span class="p">:</span> <span class="n">pandas.DataFrame</span></em>, <em class="sig-param"><span class="n">format</span><span class="o">=</span><span class="default_value">'csv'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">write_kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/transformlib/node.html#PandasDataFrameOutput.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.PandasDataFrameOutput.save" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save the output of a transform from a fixed path.</p>
+<dd><p>Save the output Pandas DataFrame from a fixed path.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">PandasDataFrameOutput</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PandasDataFrameOutput</span><span class="p">(</span><span class="s1">&#39;/path/to/input.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
+<span class="go">PandasDataFrameOutput(path=/path/to/input.csv)</span>
+</pre></div>
+</div>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
 <dt>df (pandas.DataFrame): A pandas DataFrame which is to be saved in the</dt><dd><p>output location.</p>
@@ -118,6 +127,13 @@
 <em class="property">class </em><code class="sig-prename descclassname">transformlib.</code><code class="sig-name descname">Pipeline</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">transforms</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="#transformlib.transform.Transform" title="transformlib.transform.Transform">transformlib.transform.Transform</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/pipeline.html#Pipeline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.Pipeline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A <cite>Pipeline</cite> is a topologically ordered list of transforms.</p>
+<p>A <cite>Pipeline</cite> can be run from the command line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>transform<span class="w"> </span>path/to/transforms/*.py
+transform<span class="w"> </span>-v<span class="w"> </span>path/to/transforms/*.py
+</pre></div>
+</div>
+<p>This will topologically sort and run all Transform objects found in the py files and save/load
+the data from the <cite>config.ROOT_DIR</cite>.</p>
 <dl class="py method">
 <dt id="transformlib.Pipeline.add_transforms_from_path">
 <code class="sig-name descname">add_transforms_from_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plugin_path</span><span class="p">:</span> <span class="n">pathlib.Path</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/transformlib/pipeline.html#Pipeline.add_transforms_from_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.Pipeline.add_transforms_from_path" title="Permalink to this definition">¶</a></dt>
@@ -138,6 +154,14 @@
 <p>This function will automatically disover transforms from plugins
 using namespace packages e.g. fixed namespace(s), as defined by
 the input plugins args to the function, where plugins are saved.</p>
+<p>Assuming you have a module called <cite>transforms</cite>. You can then find and
+run all the Transform objects in this module:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">transforms</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transformlib.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="o">.</span><span class="n">discover_transforms</span><span class="p">(</span><span class="n">transforms</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
 <dl class="simple">
 <dt>Args:</dt><dd><p><a href="#system-message-2"><span class="problematic" id="problematic-2">*</span></a>plugins (module): Module(s) that contains transforms.</p>
 </dd>
@@ -157,7 +181,8 @@ the input plugins args to the function, where plugins are saved.</p>
 <dl class="py method">
 <dt id="transformlib.Pipeline.tasks">
 <em class="property">property </em><code class="sig-name descname">tasks</code><a class="headerlink" href="#transformlib.Pipeline.tasks" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>A topologically ordered list of transforms.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -169,11 +194,11 @@ the input plugins args to the function, where plugins are saved.</p>
 <dl class="py method">
 <dt id="transformlib.PySparkDataFrameInput.load">
 <code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">load_kwargs</span></em><span class="sig-paren">)</span> &#x2192; pyspark.sql.DataFrame<a class="reference internal" href="_modules/transformlib/node.html#PySparkDataFrameInput.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.PySparkDataFrameInput.load" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load the input of a transform from a fixed path.</p>
+<dd><p>Load an input PySpark DataFrame from a fixed path.</p>
 <p>Used to create input to be read.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">Input</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Input</span><span class="p">(</span><span class="s1">&#39;/path/to/input.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
-<span class="go">&lt;class &#39;powertools.node.Input&#39;&gt;(path=/tmp//path/to/input.csv)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">Input</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PySparkDataFrameInput</span><span class="p">(</span><span class="s1">&#39;/path/to/input.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
+<span class="go">PySparkDataFrameInput(path=/path/to/input.csv)</span>
 </pre></div>
 </div>
 <dl class="simple">
@@ -194,12 +219,12 @@ the input plugins args to the function, where plugins are saved.</p>
 <dl class="py method">
 <dt id="transformlib.PySparkDataFrameOutput.save">
 <code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span><span class="p">:</span> <span class="n">pyspark.sql.DataFrame</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">write_kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/transformlib/node.html#PySparkDataFrameOutput.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.PySparkDataFrameOutput.save" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save the ouput of a transform from a fixed path.</p>
+<dd><p>Save and output PySpark DataFrame from a fixed path.</p>
 <p>The default save mode is set to ‘overwrite’ because this is most
 commonly used.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">Output</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Output</span><span class="p">(</span><span class="s1">&#39;/path/to/output.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
-<span class="go">&lt;class &#39;powertools.node.Output&#39;&gt;(path=/tmp//path/to/output.csv)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">PySparkDataFrameOutput</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PySparkDataFrameOutput</span><span class="p">(</span><span class="s1">&#39;/path/to/output.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
+<span class="go">PySparkDataFrameOutput(path=/path/to/output.csv)</span>
 </pre></div>
 </div>
 <dl class="simple">
@@ -281,9 +306,9 @@ commonly used.</p>
 
 <dl class="py class">
 <dt id="transformlib.node.Node">
-<em class="property">class </em><code class="sig-prename descclassname">transformlib.node.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">root_dir</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'/tmp/'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/node.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.node.Node" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">transformlib.node.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">root_dir</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'/tmp/'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/node.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.node.Node" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>A <cite>Node</cite> in a directed asyclic graph (DAG) of data transformations.</p>
+<p>The <cite>Node</cite> base class is a node in a directed asyclic graph (DAG) of data transformations.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -307,7 +332,16 @@ commonly used.</p>
 <dl class="py method">
 <dt id="transformlib.node.PandasDataFrameInput.load">
 <code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">format</span><span class="o">=</span><span class="default_value">'csv'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">load_kwargs</span></em><span class="sig-paren">)</span> &#x2192; pandas.DataFrame<a class="reference internal" href="_modules/transformlib/node.html#PandasDataFrameInput.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.node.PandasDataFrameInput.load" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lo</p>
+<dd><p>Load an input Pandas DataFrame from a fixed path.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">PandasDataFrameInput</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PandasDataFrameInput</span><span class="p">(</span><span class="s1">&#39;/path/to/output.csv&#39;</span><span class="p">)</span>
+<span class="go">PandasDataFrameInput(path=/path/to/output.csv)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The DataFrame that the input is pointing to.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -320,7 +354,12 @@ commonly used.</p>
 <dl class="py method">
 <dt id="transformlib.node.PandasDataFrameOutput.save">
 <code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span><span class="p">:</span> <span class="n">pandas.DataFrame</span></em>, <em class="sig-param"><span class="n">format</span><span class="o">=</span><span class="default_value">'csv'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">write_kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/transformlib/node.html#PandasDataFrameOutput.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.node.PandasDataFrameOutput.save" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save the output of a transform from a fixed path.</p>
+<dd><p>Save the output Pandas DataFrame from a fixed path.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">PandasDataFrameOutput</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PandasDataFrameOutput</span><span class="p">(</span><span class="s1">&#39;/path/to/input.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
+<span class="go">PandasDataFrameOutput(path=/path/to/input.csv)</span>
+</pre></div>
+</div>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
 <dt>df (pandas.DataFrame): A pandas DataFrame which is to be saved in the</dt><dd><p>output location.</p>
@@ -342,11 +381,11 @@ commonly used.</p>
 <dl class="py method">
 <dt id="transformlib.node.PySparkDataFrameInput.load">
 <code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">load_kwargs</span></em><span class="sig-paren">)</span> &#x2192; pyspark.sql.DataFrame<a class="reference internal" href="_modules/transformlib/node.html#PySparkDataFrameInput.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.node.PySparkDataFrameInput.load" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load the input of a transform from a fixed path.</p>
+<dd><p>Load an input PySpark DataFrame from a fixed path.</p>
 <p>Used to create input to be read.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">Input</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Input</span><span class="p">(</span><span class="s1">&#39;/path/to/input.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
-<span class="go">&lt;class &#39;powertools.node.Input&#39;&gt;(path=/tmp//path/to/input.csv)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">Input</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PySparkDataFrameInput</span><span class="p">(</span><span class="s1">&#39;/path/to/input.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
+<span class="go">PySparkDataFrameInput(path=/path/to/input.csv)</span>
 </pre></div>
 </div>
 <dl class="simple">
@@ -367,12 +406,12 @@ commonly used.</p>
 <dl class="py method">
 <dt id="transformlib.node.PySparkDataFrameOutput.save">
 <code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span><span class="p">:</span> <span class="n">pyspark.sql.DataFrame</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">write_kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/transformlib/node.html#PySparkDataFrameOutput.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.node.PySparkDataFrameOutput.save" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save the ouput of a transform from a fixed path.</p>
+<dd><p>Save and output PySpark DataFrame from a fixed path.</p>
 <p>The default save mode is set to ‘overwrite’ because this is most
 commonly used.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">powertools</span> <span class="kn">import</span> <span class="n">Output</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Output</span><span class="p">(</span><span class="s1">&#39;/path/to/output.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
-<span class="go">&lt;class &#39;powertools.node.Output&#39;&gt;(path=/tmp//path/to/output.csv)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">PySparkDataFrameOutput</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PySparkDataFrameOutput</span><span class="p">(</span><span class="s1">&#39;/path/to/output.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
+<span class="go">PySparkDataFrameOutput(path=/path/to/output.csv)</span>
 </pre></div>
 </div>
 <dl class="simple">
@@ -396,6 +435,13 @@ commonly used.</p>
 <em class="property">class </em><code class="sig-prename descclassname">transformlib.pipeline.</code><code class="sig-name descname">Pipeline</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">transforms</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="#transformlib.transform.Transform" title="transformlib.transform.Transform">transformlib.transform.Transform</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/pipeline.html#Pipeline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.pipeline.Pipeline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A <cite>Pipeline</cite> is a topologically ordered list of transforms.</p>
+<p>A <cite>Pipeline</cite> can be run from the command line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>transform<span class="w"> </span>path/to/transforms/*.py
+transform<span class="w"> </span>-v<span class="w"> </span>path/to/transforms/*.py
+</pre></div>
+</div>
+<p>This will topologically sort and run all Transform objects found in the py files and save/load
+the data from the <cite>config.ROOT_DIR</cite>.</p>
 <dl class="py method">
 <dt id="transformlib.pipeline.Pipeline.add_transforms_from_path">
 <code class="sig-name descname">add_transforms_from_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plugin_path</span><span class="p">:</span> <span class="n">pathlib.Path</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/transformlib/pipeline.html#Pipeline.add_transforms_from_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.pipeline.Pipeline.add_transforms_from_path" title="Permalink to this definition">¶</a></dt>
@@ -416,6 +462,14 @@ commonly used.</p>
 <p>This function will automatically disover transforms from plugins
 using namespace packages e.g. fixed namespace(s), as defined by
 the input plugins args to the function, where plugins are saved.</p>
+<p>Assuming you have a module called <cite>transforms</cite>. You can then find and
+run all the Transform objects in this module:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">transforms</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transformlib.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="o">.</span><span class="n">discover_transforms</span><span class="p">(</span><span class="n">transforms</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
 <dl class="simple">
 <dt>Args:</dt><dd><p><a href="#system-message-9"><span class="problematic" id="problematic-9">*</span></a>plugins (module): Module(s) that contains transforms.</p>
 </dd>
@@ -435,7 +489,8 @@ the input plugins args to the function, where plugins are saved.</p>
 <dl class="py method">
 <dt id="transformlib.pipeline.Pipeline.tasks">
 <em class="property">property </em><code class="sig-name descname">tasks</code><a class="headerlink" href="#transformlib.pipeline.Pipeline.tasks" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>A topologically ordered list of transforms.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -497,50 +552,59 @@ the input plugins args to the function, where plugins are saved.</p>
           </div>
         </div>
       </div>
-        </div>
-        <div class="sidebar">
-          
-          <h3>Table of Contents</h3>
-          
-          <div role="search">
-            <h3 style="margin-top: 1.5em;">Search</h3>
-            <form class="search" action="search.html" method="get">
-                <input type="text" name="q" />
-                <input type="submit" value="Go" />
-            </form>
-          </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/autobot.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">transformlib package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-transformlib.node">transformlib.node module</a></li>
+<li><a class="reference internal" href="#module-transformlib.pipeline">transformlib.pipeline module</a></li>
+<li><a class="reference internal" href="#module-transformlib.transform">transformlib.transform module</a></li>
+</ul>
+</li>
+</ul>
 
-        </div>
-        <div class="clearer"></div>
-      </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/transformlib.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
     </div>
-
-    <div class="footer-wrapper">
-      <div class="footer">
-        <div class="left">
-          <div role="navigation" aria-label="related navigaton">
-            <a href="py-modindex.html" title="Python Module Index"
-              >modules</a> |
-            <a href="genindex.html" title="General Index"
-              >index</a>
-          </div>
-          <div role="note" aria-label="source link">
-              <br/>
-              <a href="_sources/transformlib.rst.txt"
-                rel="nofollow">Show Source</a>
-          </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
-
-        <div class="right">
-          
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">transformlib 0.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">transformlib package</a></li> 
+      </ul>
+    </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Troels Lægsgaard.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
     </div>
-        </div>
-        <div class="clearer"></div>
-      </div>
-    </div>
-
   </body>
 </html>
