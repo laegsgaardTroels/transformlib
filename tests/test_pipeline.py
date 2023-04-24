@@ -1,40 +1,60 @@
-from transformlib.testing import ReusedPySparkTestCase
+import pytest
+
+from tests.utils import ReusedPySparkTestCase
 from transformlib import Transform
 from transformlib import Pipeline
-from transformlib.exceptions import TransformlibDuplicateTransformException
+from transformlib.exceptions import (
+    TransformlibDuplicateTransformException,
+    TransformlibCycleException
+)
 from transformlib.pipeline import _tsort
 
 
-class TestPipeline(ReusedPySparkTestCase):
-    """Used to test the Pipeline class."""
+def test_run_tasks_duplicate_testing():
+    """Should raise exception if duplicate Transform."""
+    transform = Transform(
+        output_kwargs={},
+        func=lambda: None,
+        input_kwargs={},
+    )
+    with pytest.raises(TransformlibDuplicateTransformException):
+        pipeline = Pipeline([transform, transform])
+        pipeline.run()
 
-    def test_run_tasks_duplicate_testing(self):
-        """Should raise exception if duplicate Transform."""
-        transform = Transform(
-            output_args=[],
-            func=lambda: None,
-            input_kwargs={},
-        )
-        with self.assertRaises(TransformlibDuplicateTransformException):
-            pipeline = Pipeline([transform, transform])
-            pipeline.run()
 
-    def test_run_tasks_exception_testing(self):
-        """Should raise an exception if one is raised in a Transform."""
-        class TransformlibTestRunTasksException(Exception):
-            """Raised in this test case."""
+def test_run_tasks_exception_testing():
+    """Should raise an exception if one is raised in a Transform."""
+    class TransformlibTestRunTasksException(Exception):
+        """Raised in this test case."""
 
-        def raise_transform_exception():
-            raise TransformlibTestRunTasksException('Transform test.')
+    def raise_transform_exception():
+        raise TransformlibTestRunTasksException('Transform test.')
 
-        transform = Transform(
-            output_args=[],
-            func=raise_transform_exception,
-            input_kwargs={},
-        )
+    transform = Transform(
+        output_kwargs={},
+        func=raise_transform_exception,
+        input_kwargs={},
+    )
 
-        with self.assertRaises(TransformlibTestRunTasksException):
-            pipeline = Pipeline([transform])
+    with pytest.raises(TransformlibTestRunTasksException):
+        pipeline = Pipeline([transform])
+        pipeline.run()
+
+
+class TestSquares(ReusedPySparkTestCase):
+    """Used to test that transformlib on the squares transforms."""
+
+    def test_squares_discover_transforms(self):
+        """"Test that the pipeline runs."""
+        from tests.transforms import squares
+        pipeline = Pipeline.discover_transforms(squares)
+        pipeline.run()
+
+    def test_squares_with_cycle_discover_transforms(self):
+        """"Test that the pipeline runs and raises an Exception."""
+        from tests.transforms import squares_with_cycle
+        pipeline = Pipeline.discover_transforms(squares_with_cycle)
+        with pytest.raises(TransformlibCycleException):
             pipeline.run()
 
 

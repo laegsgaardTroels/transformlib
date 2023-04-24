@@ -5,4 +5,4 @@
 # Expected python version.
 export PYTHON_INTERPRETER=python3
 export PYTHON_MAJOR_VERSION=3
-export PYTHON_MINOR_VERSION=7
+export PYTHON_MINOR_VERSION=9

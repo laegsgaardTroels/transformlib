@@ -1,4 +1,0 @@
-flake8==3.8.3
-pyspark==3.0.0
-pytest==5.3.5
-sphinx==3.2.1
