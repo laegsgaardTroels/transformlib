@@ -38,10 +38,13 @@
           <div class="body" role="main">
             
   <h1>Source code for transformlib.node</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">config</span>
-
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">config</span>
+
 <span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -52,18 +55,21 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
-        <span class="n">root_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">ROOT_DIR</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
+        <span class="n">data_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">=</span> <span class="n">root_dir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relative_path</span> <span class="o">=</span> <span class="n">relative_path</span>
+        <span class="k">if</span> <span class="n">data_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">DEFAULT_DATA_DIR</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">=</span> <span class="n">data_dir</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span>
+    <span class="k">def</span> <span class="nf">path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">relative_path</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">(path=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s1">)&#39;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">relative_path</span><span class="si">}</span><span class="s1">)&#39;</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span>
@@ -80,15 +86,15 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">ROOT_DIR</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">write_kwargs</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">data_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">save_kwargs</span>
     <span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">write_kwargs</span> <span class="o">=</span> <span class="n">write_kwargs</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_kwargs</span> <span class="o">=</span> <span class="n">save_kwargs</span>
 
 <div class="viewcode-block" id="Output.save"><a class="viewcode-back" href="../../transformlib.html#transformlib.Output.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="o">**</span><span class="n">save_kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Saves an object containing data to the `config.ROOT_DIR`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Saves an object containing data to the `config.DATA_DIR`.&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;The save method is not implemented for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span></div></div>
@@ -99,15 +105,15 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">ROOT_DIR</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">data_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">load_kwargs</span>
     <span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_kwargs</span> <span class="o">=</span> <span class="n">load_kwargs</span>
 
 <div class="viewcode-block" id="Input.load"><a class="viewcode-back" href="../../transformlib.html#transformlib.Input.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads an object containing data from the `config.ROOT_DIR`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads an object containing data from the `config.DATA_DIR`.&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;The load method is not implemented for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span></div></div>
@@ -116,7 +122,7 @@
 <div class="viewcode-block" id="PySparkDataFrameOutput"><a class="viewcode-back" href="../../transformlib.html#transformlib.PySparkDataFrameOutput">[docs]</a><span class="k">class</span> <span class="nc">PySparkDataFrameOutput</span><span class="p">(</span><span class="n">Output</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Used for PySpark DataFrame Output of a Transform.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="PySparkDataFrameOutput.save"><a class="viewcode-back" href="../../transformlib.html#transformlib.PySparkDataFrameOutput.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="s1">&#39;pyspark.sql.DataFrame&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">write_kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="PySparkDataFrameOutput.save"><a class="viewcode-back" href="../../transformlib.html#transformlib.PySparkDataFrameOutput.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="s1">&#39;pyspark.sql.DataFrame&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">save_kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Save and output PySpark DataFrame from a fixed path.</span>
 
 <span class="sd">        The default save mode is set to &#39;overwrite&#39; because this is most</span>
@@ -129,13 +135,13 @@
 <span class="sd">        Args:</span>
 <span class="sd">            df (pyspark.sql.DataFrame): A DataFrame which is to be saved in the output</span>
 <span class="sd">                location.</span>
-<span class="sd">            **write_kwargs: The key value arguments to the DataFrameReader class</span>
+<span class="sd">            **save_kwargs: The key value arguments to the DataFrameReader class</span>
 <span class="sd">                in pyspark.sql.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">write_kwargs</span> <span class="o">=</span> <span class="n">write_kwargs</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_kwargs</span>
-        <span class="k">if</span> <span class="s1">&#39;mode&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">write_kwargs</span><span class="p">:</span>
-            <span class="n">write_kwargs</span><span class="p">[</span><span class="s1">&#39;mode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;overwrite&#39;</span>
-        <span class="n">df</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">write_kwargs</span><span class="p">)</span></div></div>
+        <span class="n">save_kwargs</span> <span class="o">=</span> <span class="n">save_kwargs</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_kwargs</span>
+        <span class="k">if</span> <span class="s1">&#39;mode&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">save_kwargs</span><span class="p">:</span>
+            <span class="n">save_kwargs</span><span class="p">[</span><span class="s1">&#39;mode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;overwrite&#39;</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">),</span> <span class="o">**</span><span class="n">save_kwargs</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="PySparkDataFrameInput"><a class="viewcode-back" href="../../transformlib.html#transformlib.PySparkDataFrameInput">[docs]</a><span class="k">class</span> <span class="nc">PySparkDataFrameInput</span><span class="p">(</span><span class="n">Input</span><span class="p">):</span>
@@ -159,13 +165,13 @@
         <span class="kn">import</span> <span class="nn">pyspark</span>
         <span class="n">spark</span> <span class="o">=</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
         <span class="n">load_kwargs</span> <span class="o">=</span> <span class="n">load_kwargs</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_kwargs</span>
-        <span class="k">return</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">),</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="PandasDataFrameOutput"><a class="viewcode-back" href="../../transformlib.html#transformlib.PandasDataFrameOutput">[docs]</a><span class="k">class</span> <span class="nc">PandasDataFrameOutput</span><span class="p">(</span><span class="n">Output</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Used for pandas DataFrame Output of a Transform.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="PandasDataFrameOutput.save"><a class="viewcode-back" href="../../transformlib.html#transformlib.PandasDataFrameOutput.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="s1">&#39;pandas.DataFrame&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">write_kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="PandasDataFrameOutput.save"><a class="viewcode-back" href="../../transformlib.html#transformlib.PandasDataFrameOutput.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="s1">&#39;pandas.DataFrame&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">save_kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Save the output Pandas DataFrame from a fixed path.</span>
 
 <span class="sd">        &gt;&gt;&gt; from transformlib import PandasDataFrameOutput</span>
@@ -175,13 +181,13 @@
 <span class="sd">        Args:</span>
 <span class="sd">            df (pandas.DataFrame): A pandas DataFrame which is to be saved in the</span>
 <span class="sd">                output location.</span>
-<span class="sd">            **write_kwargs: The key value arguments to the DataFrameReader class</span>
+<span class="sd">            **save_kwargs: The key value arguments to the DataFrameReader class</span>
 <span class="sd">                in pyspark.sql.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span><span class="p">:</span>
-            <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">,</span> <span class="o">**</span><span class="n">write_kwargs</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">save_kwargs</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;parquet&#39;</span><span class="p">:</span>
-            <span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">,</span> <span class="o">**</span><span class="n">write_kwargs</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">save_kwargs</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The save method is not implemented for </span><span class="si">{</span><span class="nb">format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div></div>
 
@@ -201,9 +207,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
         <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">,</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;parquet&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">,</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The save method is not implemented for </span><span class="si">{</span><span class="nb">format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div></div>
 </pre></div>
