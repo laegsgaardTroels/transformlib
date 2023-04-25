@@ -1,6 +1,7 @@
-"""The only config is the `ROOT_DIR` environment variable, data is loaded/saved from this directory.
+"""Configurations used by `transformlib`.
 """
-import os
+# The data directory where data is loaded and saved relative to.
+DATA_DIR = 'DATA_DIR'
 
-# The root directory where data is loaded and saved.
-ROOT_DIR = os.getenv('ROOT_DIR', '/tmp/')
+# The default data directory.
+DEFAULT_DATA_DIR = '/tmp/'

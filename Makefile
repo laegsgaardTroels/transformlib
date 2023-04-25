@@ -38,6 +38,7 @@ tests:
 			--log-cli-level=INFO \
 			--cov-report term \
 			--cov=src \
+			--basetemp=tests/tmpdir \
 			tests/
 
 ## Lint using flake8.

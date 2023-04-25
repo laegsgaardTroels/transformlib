@@ -1,8 +1,10 @@
 import pytest
 
 from tests.utils import ReusedPySparkTestCase
-from transformlib import Transform
-from transformlib import Pipeline
+from transformlib import (
+    Transform,
+    Pipeline
+)
 from transformlib.exceptions import (
     TransformlibDuplicateTransformException,
     TransformlibCycleException

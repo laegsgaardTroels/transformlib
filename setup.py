@@ -11,7 +11,7 @@ README = (HERE / "README.md").read_text()
 setup(
     name='transformlib',
     author='Troels Lægsgaard',
-    version='0.1.0',
+    version='0.2.0',
     description=(
         "Enables the user to organize transformations of data as a regular Python package."
     ),

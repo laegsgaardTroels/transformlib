@@ -8,6 +8,7 @@ from .node import (
 )
 from .transform import Transform, transform
 from .pipeline import Pipeline
+from . import config
 
 __all__ = [
     'Node',
@@ -15,5 +16,6 @@ __all__ = [
     'Transform', 'transform',
     'PySparkDataFrameOutput', 'PySparkDataFrameInput',
     'PandasDataFrameOutput', 'PandasDataFrameInput',
-    'Pipeline'
+    'Pipeline',
+    'config'
 ]

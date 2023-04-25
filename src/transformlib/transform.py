@@ -49,11 +49,12 @@ class Transform:
 
     def __repr__(self):
         return (
-            f'{self.__class__}('
+            f'{self.__class__.__name__}('
             + ', '.join(map(
                 lambda key: key + '=' + repr(self.output_kwargs[key]),
                 self.output_kwargs
             ))
+            + (', ' if self.input_kwargs else '')
             + ', '.join(map(
                 lambda key: key + '=' + repr(self.input_kwargs[key]),
                 self.input_kwargs

@@ -53,11 +53,7 @@ class Pipeline:
         return _get_tasks(self.transforms)  # Topologically sort the transforms.
 
     def __repr__(self):
-        return (
-            'Pipeline('
-            + ', '.join(map(repr, self.tasks))
-            + ')'
-        )
+        return f"Pipeline({', '.join(map(repr, self.tasks))})"
 
     def run(self) -> None:
         """Used to run all the transforms in the pipeline."""

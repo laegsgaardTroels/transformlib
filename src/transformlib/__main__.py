@@ -1,7 +1,7 @@
-from pathlib import Path
 import argparse
 import logging
 import sys
+from pathlib import Path
 
 from transformlib import Pipeline
 
@@ -28,6 +28,7 @@ def main() -> None:
         logging.basicConfig(level=logging.INFO)
     pipeline = Pipeline(transforms=[])
     for path in args.path:
+        print(path)
         pipeline.add_transforms_from_path(path)
     pipeline.run()
 

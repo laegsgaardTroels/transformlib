@@ -51,6 +51,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 tests/data/mnt/write
+tmpdir/
 
 # Translations
 *.mo

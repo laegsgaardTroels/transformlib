@@ -1,7 +1,10 @@
+import os
+from pathlib import Path
+from typing import Optional
+from typing import Union
+
 from transformlib import config
 
-from typing import Union
-from pathlib import Path
 import logging
 
 logger = logging.getLogger(__name__)
@@ -12,18 +15,21 @@ class Node:
 
     def __init__(
         self,
-        path: Union[str, Path],
-        root_dir: Union[str, Path] = config.ROOT_DIR,
+        relative_path: Union[str, Path],
+        data_dir: Optional[Union[str, Path]] = None,
     ):
-        self.path = path
-        self.root_dir = root_dir
+        self.relative_path = relative_path
+        if data_dir is None:
+            self.data_dir = os.getenv(config.DATA_DIR, config.DEFAULT_DATA_DIR)
+        else:
+            self.data_dir = data_dir
 
     @property
-    def _path(self):
-        return Path(self.root_dir) / self.path
+    def path(self):
+        return Path(self.data_dir) / self.relative_path
 
     def __repr__(self):
-        return f'{self.__class__.__name__}(path={self.path})'
+        return f'{self.__class__.__name__}({self.relative_path})'
 
     def __str__(self):
         return self.path
@@ -40,15 +46,15 @@ class Output(Node):
 
     def __init__(
         self,
-        path: str,
-        root_dir: str = config.ROOT_DIR,
-        **write_kwargs
+        relative_path: str,
+        data_dir: Optional[Union[str, Path]] = None,
+        **save_kwargs
     ):
-        super().__init__(path, root_dir)
-        self.write_kwargs = write_kwargs
+        super().__init__(relative_path=relative_path, data_dir=data_dir)
+        self.save_kwargs = save_kwargs
 
     def save(self, obj, **save_kwargs):
-        """Saves an object containing data to the `config.ROOT_DIR`."""
+        """Saves an object containing data to the `config.DATA_DIR`."""
         raise NotImplementedError(
             f"The save method is not implemented for {self.__class__.__name__}"
         )
@@ -59,15 +65,15 @@ class Input(Node):
 
     def __init__(
         self,
-        path: str,
-        root_dir: str = config.ROOT_DIR,
+        relative_path: str,
+        data_dir: Optional[Union[str, Path]] = None,
         **load_kwargs
     ):
-        super().__init__(path, root_dir)
+        super().__init__(relative_path=relative_path, data_dir=data_dir)
         self.load_kwargs = load_kwargs
 
     def load(self, obj, **load_kwargs) -> None:
-        """Loads an object containing data from the `config.ROOT_DIR`."""
+        """Loads an object containing data from the `config.DATA_DIR`."""
         raise NotImplementedError(
             f"The load method is not implemented for {self.__class__.__name__}"
         )
@@ -76,7 +82,7 @@ class Input(Node):
 class PySparkDataFrameOutput(Output):
     """Used for PySpark DataFrame Output of a Transform."""
 
-    def save(self, df: 'pyspark.sql.DataFrame', **write_kwargs) -> None:
+    def save(self, df: 'pyspark.sql.DataFrame', **save_kwargs) -> None:
         """Save and output PySpark DataFrame from a fixed path.
 
         The default save mode is set to 'overwrite' because this is most
@@ -89,13 +95,13 @@ class PySparkDataFrameOutput(Output):
         Args:
             df (pyspark.sql.DataFrame): A DataFrame which is to be saved in the output
                 location.
-            **write_kwargs: The key value arguments to the DataFrameReader class
+            **save_kwargs: The key value arguments to the DataFrameReader class
                 in pyspark.sql.
         """
-        write_kwargs = write_kwargs or self.write_kwargs
-        if 'mode' not in write_kwargs:
-            write_kwargs['mode'] = 'overwrite'
-        df.write.save(path=self.path, **write_kwargs)
+        save_kwargs = save_kwargs or self.save_kwargs
+        if 'mode' not in save_kwargs:
+            save_kwargs['mode'] = 'overwrite'
+        df.write.save(path=str(self.path), **save_kwargs)
 
 
 class PySparkDataFrameInput(Input):
@@ -119,13 +125,13 @@ class PySparkDataFrameInput(Input):
         import pyspark
         spark = pyspark.sql.SparkSession.builder.getOrCreate()
         load_kwargs = load_kwargs or self.load_kwargs
-        return spark.read.load(path=self.path, **load_kwargs)
+        return spark.read.load(path=str(self.path), **load_kwargs)
 
 
 class PandasDataFrameOutput(Output):
     """Used for pandas DataFrame Output of a Transform."""
 
-    def save(self, df: 'pandas.DataFrame', format='csv', **write_kwargs) -> None:
+    def save(self, df: 'pandas.DataFrame', format='csv', **save_kwargs) -> None:
         """Save the output Pandas DataFrame from a fixed path.
 
         >>> from transformlib import PandasDataFrameOutput
@@ -135,13 +141,13 @@ class PandasDataFrameOutput(Output):
         Args:
             df (pandas.DataFrame): A pandas DataFrame which is to be saved in the
                 output location.
-            **write_kwargs: The key value arguments to the DataFrameReader class
+            **save_kwargs: The key value arguments to the DataFrameReader class
                 in pyspark.sql.
         """
         if format == 'csv':
-            df.to_csv(self._path, **write_kwargs)
+            df.to_csv(self.path, **save_kwargs)
         elif format == 'parquet':
-            df.to_parquet(self._path, **write_kwargs)
+            df.to_parquet(self.path, **save_kwargs)
         else:
             raise NotImplementedError(f"The save method is not implemented for {format}")
 
@@ -161,8 +167,8 @@ class PandasDataFrameInput(Input):
         """
         import pandas as pd
         if format == 'csv':
-            return pd.read_csv(self._path, **load_kwargs)
+            return pd.read_csv(self.path, **load_kwargs)
         elif format == 'parquet':
-            return pd.read_parquet(self._path, **load_kwargs)
+            return pd.read_parquet(self.path, **load_kwargs)
         else:
             raise NotImplementedError(f"The save method is not implemented for {format}")
