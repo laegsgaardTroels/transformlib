@@ -1,12 +1,23 @@
 import pathlib
+import re
 from setuptools import setup, find_packages
-from transformlib import __version__
 
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
 
 # The text of the README file
 README = (HERE / "README.md").read_text()
+
+# A file containing the __version__ variable.
+VERSIONFILE = "src/transformlib/__init__.py"
+
+try:
+    __version__ = (
+        re.search(r"^__version__ = ['\"]([^'\"]*)['\"]", open(VERSIONFILE, "rt").read(), re.M)
+        .group(1)
+    )
+except Exception as exception:
+    raise RuntimeError(f"Unable to find version string in {VERSIONFILE}") from exception
 
 
 setup(

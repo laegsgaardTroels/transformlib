@@ -10,6 +10,7 @@ __all__ = [
     'Output', 'Input',
     'Transform', 'transform',
     'Pipeline',
-    'config'
+    'config',
+    '__version__',
 ]
-__version__ = '0.2.2'
+__version__ = '0.2.3'
