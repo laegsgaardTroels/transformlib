@@ -9,7 +9,7 @@ PYTHON_INTERPRETER := python
 
 ## Create a virtual environment for development.
 .PHONY: venv
-venv: .python-environment
+venv: .python-version
 	rm -rf venv
 	${PYTHON_INTERPRETER} -c \
 		'import sys; assert sys.version_info.major == ${PYTHON_MAJOR_VERSION}'
@@ -65,7 +65,7 @@ lint:
 
 ## Create documentation using sphinx.
 .PHONY: docs
-docs: venv/bin/activate
+docs:
 	. venv/bin/activate; \
 		sphinx-apidoc --force -o docs/source -t docs/source/_templates --module-first \
 		transformlib \
