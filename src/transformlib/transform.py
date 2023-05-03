@@ -70,7 +70,7 @@ class Transform:
 
     @property
     def nodes(self) -> Tuple[Node]:
-        """A tuple with all the :py:class:`transformlib.Output` and :py:class:`transformlib.Input`of the Transform."""
+        """All :py:class:`transformlib.Output` and :py:class:`transformlib.Input`."""
         return self.outputs + self.inputs
 
     def run(self) -> None:
