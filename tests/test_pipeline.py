@@ -1,18 +1,21 @@
 import pytest
 
-from tests.utils import ReusedPySparkTestCase
 from transformlib import (
     Transform,
-    Pipeline
+    Pipeline,
+    Input,
+    Output
 )
-from transformlib.exceptions import (
+from transformlib.pipeline import (
     TransformlibDuplicateTransformException,
-    TransformlibCycleException
+    TransformlibCycleException,
+    TransformlibDuplicateInputException,
+    TransformlibDuplicateOutputException,
+    _tsort
 )
-from transformlib.pipeline import _tsort
 
 
-def test_run_tasks_duplicate_testing():
+def test_run_duplicate_transforms():
     """Should raise exception if duplicate Transform."""
     transform = Transform(
         output_kwargs={},
@@ -24,7 +27,7 @@ def test_run_tasks_duplicate_testing():
         pipeline.run()
 
 
-def test_run_tasks_exception_testing():
+def test_run_transform_exception_handling():
     """Should raise an exception if one is raised in a Transform."""
     class TransformlibTestRunTasksException(Exception):
         """Raised in this test case."""
@@ -37,27 +40,79 @@ def test_run_tasks_exception_testing():
         func=raise_transform_exception,
         input_kwargs={},
     )
-
+    pipeline = Pipeline([transform])
     with pytest.raises(TransformlibTestRunTasksException):
-        pipeline = Pipeline([transform])
         pipeline.run()
 
 
-class TestSquares(ReusedPySparkTestCase):
-    """Used to test that transformlib on the squares transforms."""
+def test_run_cycle_exception():
+    """Should raise an exception if a cycle in the DAG."""
 
-    def test_squares_discover_transforms(self):
-        """"Test that the pipeline runs."""
-        from tests.transforms import squares
-        pipeline = Pipeline.discover_transforms(squares)
+    def func1(foo_input, bar_input):
+        return None
+
+    def func2(bar_input, foo_input):
+        return None
+
+    transform1 = Transform(
+        output_kwargs={'foo_input': Output('foo')},
+        func=func1,
+        input_kwargs={'bar_input': Input('bar')},
+    )
+    transform2 = Transform(
+        output_kwargs={'bar_output': Output('bar')},
+        func=func2,
+        input_kwargs={'foo_input': Input('foo')},
+    )
+    pipeline = Pipeline([transform1, transform2])
+    with pytest.raises(TransformlibCycleException):
         pipeline.run()
 
-    def test_squares_with_cycle_discover_transforms(self):
-        """"Test that the pipeline runs and raises an Exception."""
-        from tests.transforms import squares_with_cycle
-        pipeline = Pipeline.discover_transforms(squares_with_cycle)
-        with pytest.raises(TransformlibCycleException):
-            pipeline.run()
+
+def test_run_duplicate_output_exception():
+    transform1 = Transform(
+        output_kwargs={'foo_output': Output('foo')},
+        func=lambda foo_output: None,
+        input_kwargs={},
+    )
+    transform2 = Transform(
+        output_kwargs={'foo_output': Output('foo')},
+        func=lambda foo_output: None,
+        input_kwargs={},
+    )
+    pipeline = Pipeline([transform1, transform2])
+    with pytest.raises(TransformlibDuplicateOutputException):
+        pipeline.run()
+
+
+def test_run_duplicate_input_exception():
+    transform1 = Transform(
+        output_kwargs={},
+        func=lambda foo_output: None,
+        input_kwargs={'foo_input': Output('foo')},
+    )
+    transform2 = Transform(
+        output_kwargs={},
+        func=lambda foo_output: None,
+        input_kwargs={'foo_input': Input('foo')},
+    )
+    pipeline = Pipeline([transform1, transform2])
+    with pytest.raises(TransformlibDuplicateInputException):
+        pipeline.run()
+
+
+def test_discover_transforms(tmp_path, monkeypatch):
+    """"Test that the pipeline runs."""
+    monkeypatch.setenv('TRANSFORMLIB_DATA_DIR', str(tmp_path))
+    (tmp_path / 'mapping.txt').write_text("""1,2
+3,4
+5,6
+7,8
+9,10""")
+    from tests import transforms
+    pipeline = Pipeline.discover_transforms(transforms)
+    pipeline.run()
+    assert (tmp_path / 'mapping.json').exists()
 
 
 def test_tsort():

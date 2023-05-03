@@ -1,5 +1,6 @@
 import pathlib
 from setuptools import setup, find_packages
+from transformlib import __version__
 
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
@@ -11,7 +12,7 @@ README = (HERE / "README.md").read_text()
 setup(
     name='transformlib',
     author='Troels Lægsgaard',
-    version='0.2.0',
+    version=__version__,
     description=(
         "Enables the user to organize transformations of data as a regular Python package."
     ),

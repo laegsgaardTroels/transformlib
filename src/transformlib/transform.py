@@ -1,5 +1,3 @@
-"""Contains the Transform abstraction and helper methods.
-"""
 from transformlib import Node
 from transformlib import Output
 from transformlib import Input
@@ -13,12 +11,46 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+def transform(**kwargs: Node) -> 'Transform':
+    """Convert a function to a :py:class:`transformlib.Transform`.
+
+    Args:
+        **kwargs (Dict[str, Node]): The :py:class:`transformlib.Input`
+            and :py:class:`transformlib.Output` nodes of the transform.
+
+    Returns:
+        function: A decorator that returns a Transform object.
+    """
+    def decorator(func) -> Transform:
+        output_kwargs = _filter_outputs(kwargs)
+        input_kwargs = _filter_inputs(kwargs)
+        return Transform(output_kwargs, func, input_kwargs)
+    return decorator
+
+
 class Transform:
     """Used to organize transformations of data.
 
-    A `Transform` is a many to many mapping between `Input` and `Output` nodes. When run the
-    `Input` nodes are loaded and the calculated outputs from the function is written to the
-    `Output` nodes.
+    A :py:class:`transformlib.Transform` is a many to many mapping between
+    :py:class:`transformlib.Input` and :py:class:`transformlib.Output` nodes.
+
+    A Transform is often constructed using the :py:func:`transformlib.transform` decorator:
+
+    .. highlight:: python
+    .. code-block:: python
+
+        import json
+        from transformlib import transform, Output, Input
+
+
+        @transform(
+            json_output=Output('mapping.json'),
+            txt_input=Input('mapping.txt'),
+        )
+        def convert_to_json(json_output, txt_input):
+            text = txt_input.path.read_text()
+            mapping = dict(map(lambda line: line.split(','), text.splitlines()))
+            json_output.path.write_text(json.dumps(mapping, indent=4))
     """
 
     def __init__(self, output_kwargs, func, input_kwargs):
@@ -28,26 +60,30 @@ class Transform:
 
     @property
     def outputs(self) -> Tuple[Output]:
-        """A tuple with all the Outputs of the Transform.
-        """
+        """A tuple with all the :py:class:`transformlib.Output` of the Transform."""
         return tuple(self.output_kwargs.values())
 
     @property
     def inputs(self) -> Tuple[Input]:
-        """A tuple with all the Inputs of the Transform.
-        """
+        """A tuple with all the :py:class:`transformlib.Input` to the Transform."""
         return tuple(self.input_kwargs.values())
 
     @property
     def nodes(self) -> Tuple[Node]:
-        """A tuple with all the Nodes of the Transform e.g. Input and Output.
-        """
-        return tuple(self.outputs + self.inputs)
+        """A tuple with all the :py:class:`transformlib.Output` and :py:class:`transformlib.Input`of the Transform."""
+        return self.outputs + self.inputs
+
+    def run(self) -> None:
+        """Runs the Transform."""
+        logger.info(f'Beginning running of {self}.')
+        start = time.perf_counter()
+        self(**self.output_kwargs, **self.input_kwargs)
+        logger.info(f'Completed running of {self} took {time.perf_counter() - start}.')
 
     def __call__(self, *args, **kwargs):
         return self.func(*args, **kwargs)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return (
             f'{self.__class__.__name__}('
             + ', '.join(map(
@@ -62,39 +98,16 @@ class Transform:
             + ')'
         )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.func.__name__
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if set(self.nodes) == set(other.nodes):
             return True
         return False
 
-    def __hash__(self):
-        return hash((self.func, *self.output_kwargs.items(), *self.input_kwargs.items()))
-
-    def run(self) -> None:
-        """Runs a transform."""
-        logger.info(f'Beginning running of {self}.')
-        start = time.perf_counter()
-        self(**self.output_kwargs, **self.input_kwargs)
-        logger.info(f'Completed running of {self} took {time.perf_counter() - start}.')
-
-
-def transform(**kwargs: Node):
-    """Convert a function to a Transform.
-
-    Args:
-        **kwargs (Dict[str, Node]): The nodes of the transform.
-
-    Returns:
-        function: A decorator that returns a Transform object.
-    """
-    def decorator(func) -> Transform:
-        output_kwargs = _filter_outputs(kwargs)
-        input_kwargs = _filter_inputs(kwargs)
-        return Transform(output_kwargs, func, input_kwargs)
-    return decorator
+    def __hash__(self) -> int:
+        return hash(self.nodes)
 
 
 def _filter_outputs(kwargs) -> Dict[str, Output]:

@@ -5,9 +5,28 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>transformlib.pipeline &#8212; transformlib 0.1.0 documentation</title>
-    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <title>transformlib.pipeline &#8212; transformlib 0.2.0 documentation</title>
+    
+    <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  
+    
+    <link rel="stylesheet"
+      href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+    
+      
+  
+    
+    <link rel="stylesheet" href="../../_static/styles/pydata-sphinx-theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
@@ -15,35 +34,107 @@
     <script src="../../_static/language_data.js"></script>
     <link rel="shortcut icon" href="../../_static/autobot.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">transformlib 0.1.0 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">transformlib.pipeline</a></li> 
-      </ul>
-    </div>  
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/autobot.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
             
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+              <div class="sidebar-start-items">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+              </div>
+              <div class="sidebar-end-items">
+              </div>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
   <h1>Source code for transformlib.pipeline</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">Transform</span>
-
-<span class="kn">from</span> <span class="nn">transformlib.exceptions</span> <span class="kn">import</span> <span class="n">TransformlibCycleException</span>
-<span class="kn">from</span> <span class="nn">transformlib.exceptions</span> <span class="kn">import</span> <span class="n">TransformlibDuplicateTransformException</span>
+<span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">Node</span><span class="p">,</span> <span class="n">Output</span><span class="p">,</span> <span class="n">Input</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
@@ -64,10 +155,26 @@
 <span class="n">Graph</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Transform</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Transform</span><span class="p">]]</span>
 
 
-<div class="viewcode-block" id="Pipeline"><a class="viewcode-back" href="../../transformlib.html#transformlib.Pipeline">[docs]</a><span class="k">class</span> <span class="nc">Pipeline</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A `Pipeline` is a topologically ordered list of transforms.</span>
+<div class="viewcode-block" id="TransformlibCycleException"><a class="viewcode-back" href="../../transformlib.html#transformlib.TransformlibCycleException">[docs]</a><span class="k">class</span> <span class="nc">TransformlibCycleException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when there is a cycle in the Pipeline.&quot;&quot;&quot;</span></div>
 
-<span class="sd">    A `Pipeline` can be run from the command line:</span>
+
+<div class="viewcode-block" id="TransformlibDuplicateTransformException"><a class="viewcode-back" href="../../transformlib.html#transformlib.TransformlibDuplicateTransformException">[docs]</a><span class="k">class</span> <span class="nc">TransformlibDuplicateTransformException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when there is duplicate Transform in the Pipeline.&quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="TransformlibDuplicateInputException"><a class="viewcode-back" href="../../transformlib.html#transformlib.TransformlibDuplicateInputException">[docs]</a><span class="k">class</span> <span class="nc">TransformlibDuplicateInputException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when there is duplicate Input in the Pipeline.&quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="TransformlibDuplicateOutputException"><a class="viewcode-back" href="../../transformlib.html#transformlib.TransformlibDuplicateOutputException">[docs]</a><span class="k">class</span> <span class="nc">TransformlibDuplicateOutputException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when there is duplicate Output in the Pipeline.&quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="Pipeline"><a class="viewcode-back" href="../../transformlib.html#transformlib.Pipeline">[docs]</a><span class="k">class</span> <span class="nc">Pipeline</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A Pipeline is a topologically ordered list of :py:class:`transformlib.Transform` objects.</span>
+
+<span class="sd">    A :py:class:`transformlib.Pipeline` can be run from the command line:</span>
 
 <span class="sd">    .. highlight:: bash</span>
 <span class="sd">    .. code-block:: bash</span>
@@ -75,8 +182,8 @@
 <span class="sd">        transform path/to/transforms/*.py</span>
 <span class="sd">        transform -v path/to/transforms/*.py</span>
 
-<span class="sd">    This will topologically sort and run all Transform objects found in the py files and save/load</span>
-<span class="sd">    the data from the `config.ROOT_DIR`.</span>
+<span class="sd">    This will topologically sort and run all :py:class:`transformlib.Transform` objects found in</span>
+<span class="sd">    the py files.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transforms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Transform</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
@@ -86,17 +193,33 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span> <span class="o">=</span> <span class="n">transforms</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Output</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A tuple with all the Output nodes of the Pipeline.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">node</span> <span class="k">for</span> <span class="n">transform</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">transform</span><span class="o">.</span><span class="n">outputs</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Input</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A tuple with all the Input nodes of the Pipeline.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">node</span> <span class="k">for</span> <span class="n">transform</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">transform</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Node</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A tuple with all the Node objects of the Pipeline.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">node</span> <span class="k">for</span> <span class="n">transform</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">transform</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Transform</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;A topologically ordered list of transforms.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">TransformlibDuplicateInputException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Duplicate inputs </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">TransformlibDuplicateOutputException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Duplicate inputs </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">TransformlibDuplicateTransformException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Duplicate </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">_get_tasks</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">)</span>  <span class="c1"># Topologically sort the transforms.</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Pipeline(</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">repr</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">))</span><span class="si">}</span><span class="s2">)&quot;</span>
-
 <div class="viewcode-block" id="Pipeline.run"><a class="viewcode-back" href="../../transformlib.html#transformlib.Pipeline.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Used to run all the transforms in the pipeline.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Used to run all the :py:class:`transformlib.Transform` objects in the pipeline.&quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Beginning running of </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
         <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">transform</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">:</span>
@@ -111,8 +234,8 @@
 <span class="sd">        using namespace packages e.g. fixed namespace(s), as defined by</span>
 <span class="sd">        the input plugins args to the function, where plugins are saved.</span>
 
-<span class="sd">        Assuming you have a module called `transforms`. You can then find and</span>
-<span class="sd">        run all the Transform objects in this module:</span>
+<span class="sd">        Assuming one has a module called transforms. Then one can then find and</span>
+<span class="sd">        run all the :py:class:`transformlib.Transform` objects in this module:</span>
 
 <span class="sd">        &gt;&gt;&gt; import transforms</span>
 <span class="sd">        &gt;&gt;&gt; from transformlib.pipeline import Pipeline</span>
@@ -132,7 +255,7 @@
         <span class="k">for</span> <span class="n">plugin</span> <span class="ow">in</span> <span class="n">plugins</span><span class="p">:</span>
 
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">plugin</span><span class="p">,</span> <span class="n">Transform</span><span class="p">):</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Discovered </span><span class="si">{</span><span class="n">plugin</span><span class="si">}</span><span class="s2"> as plugin input.&quot;</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Discovered Transform: </span><span class="si">{</span><span class="n">new_attr</span><span class="si">}</span><span class="s2"> as plugin input.&quot;</span><span class="p">)</span>
                 <span class="n">transforms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">plugin</span><span class="p">)</span>
                 <span class="k">continue</span>
 
@@ -144,15 +267,25 @@
                 <span class="k">for</span> <span class="n">attrname</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">plugin_module</span><span class="p">):</span>
                     <span class="n">new_attr</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">plugin_module</span><span class="p">,</span> <span class="n">attrname</span><span class="p">)</span>
                     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_attr</span><span class="p">,</span> <span class="n">Transform</span><span class="p">):</span>
-                        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Discovered </span><span class="si">{</span><span class="n">new_attr</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Discovered Transform: </span><span class="si">{</span><span class="n">new_attr</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
                         <span class="n">transforms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_attr</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">transforms</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Pipeline.add_transforms_from_path"><a class="viewcode-back" href="../../transformlib.html#transformlib.Pipeline.add_transforms_from_path">[docs]</a>    <span class="k">def</span> <span class="nf">add_transforms_from_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plugin_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find and import all transform from a file.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find and import all :py:class:`transformlib.Transform` objects from a file.</span>
+
+<span class="sd">        When doing this the plugin parent path is added to PATH and removed</span>
+<span class="sd">        after the plugin has been searched for :py:class:`transformlib.Transform` objects.</span>
+
+<span class="sd">        Assuming one has a module called transforms. Then one can then find and</span>
+<span class="sd">        run all the :py:class:`transformlib.Transform` objects in this module:</span>
+
+<span class="sd">        &gt;&gt;&gt; from transformlib.pipeline import Pipeline</span>
+<span class="sd">        &gt;&gt;&gt; pipeline = Pipeline.add_transforms_from_path(&#39;path/to/transform.py&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; pipeline.run()</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            plugin_path (Path): A path to a py file with Transform to</span>
+<span class="sd">            plugin_path (Path): A path to a py file with :py:class:`transformlib.Transform` to</span>
 <span class="sd">                be added to the Pipeline.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
@@ -162,10 +295,13 @@
             <span class="k">for</span> <span class="n">attrname</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">plugin_module</span><span class="p">):</span>
                 <span class="n">new_attr</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">plugin_module</span><span class="p">,</span> <span class="n">attrname</span><span class="p">)</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_attr</span><span class="p">,</span> <span class="n">Transform</span><span class="p">):</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Discovered </span><span class="si">{</span><span class="n">new_attr</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Discovered Transform: </span><span class="si">{</span><span class="n">new_attr</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_attr</span><span class="p">)</span>
         <span class="k">finally</span><span class="p">:</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div></div>
+            <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Pipeline(</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">repr</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">))</span><span class="si">}</span><span class="s2">)&quot;</span></div>
 
 
 <span class="k">def</span> <span class="nf">_get_tasks</span><span class="p">(</span><span class="n">transforms</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Transform</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Transform</span><span class="p">]:</span>
@@ -187,23 +323,21 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a graph out of a list of transforms.</span>
 
 <span class="sd">    The graph is encoded as a dict of {from: List[to]}, where from and to are</span>
-<span class="sd">    transforms.</span>
+<span class="sd">    Transform objects.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        transforms (List[Transform]): A list of transforms.</span>
+<span class="sd">        transforms (List[Transform]): A list of Transform objects.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Graph: The list of transforms encoded as a graph. A graph is a dictionary of</span>
-<span class="sd">            transforms (keys) to a list of transformations (value) which have outputs</span>
+<span class="sd">        Graph: The list of Transform objects encoded as a graph. A graph is a dictionary of</span>
+<span class="sd">            transforms (key) to a list of transformations (value) which have outputs</span>
 <span class="sd">            that are inputs to given transform (key).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="n">from_</span><span class="p">:</span>
         <span class="p">[</span>
             <span class="n">to</span> <span class="k">for</span> <span class="n">to</span> <span class="ow">in</span> <span class="n">transforms</span>
-            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span>
-                <span class="n">output</span> <span class="ow">in</span> <span class="n">to</span><span class="o">.</span><span class="n">inputs</span> <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">from_</span><span class="o">.</span><span class="n">outputs</span>
-            <span class="p">)</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">output</span> <span class="ow">in</span> <span class="n">to</span><span class="o">.</span><span class="n">inputs</span> <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">from_</span><span class="o">.</span><span class="n">outputs</span><span class="p">)</span>
         <span class="p">]</span>
         <span class="k">for</span> <span class="n">from_</span> <span class="ow">in</span> <span class="n">transforms</span>
     <span class="p">}</span>
@@ -248,46 +382,36 @@
         <span class="k">raise</span> <span class="n">TransformlibCycleException</span><span class="p">(</span><span class="s2">&quot;Cycle detected in the DAG.&quot;</span><span class="p">)</span>
 </pre></div>
 
-            <div class="clearer"></div>
-          </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../../index.html">
-              <img class="logo" src="../../_static/autobot.png" alt="Logo"/>
-            </a></p>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
 </div>
-<script>$('#searchbox').show(0);</script>
-        </div>
+              
+          </main>
+          
+
       </div>
-      <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">transformlib 0.1.0 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">transformlib.pipeline</a></li> 
-      </ul>
+  
+    <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Troels Lægsgaard.<br>
+</p>
     </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2021, Troels Lægsgaard.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1.<br>
+</p>
     </div>
+    
+  </div>
+</footer>
   </body>
 </html>

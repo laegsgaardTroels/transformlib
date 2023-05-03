@@ -1,4 +1,7 @@
-include .python-environment
+PYTHON_VERSION := $(subst ., ,$(shell cat .python-version))
+PYTHON_MAJOR_VERSION := $(word 1,$(PYTHON_VERSION))
+PYTHON_MINOR_VERSION := $(word 2,$(PYTHON_VERSION))
+PYTHON_INTERPRETER := python
 
 #################################################################################
 # ENVIRONMENT                                                                   #
@@ -29,6 +32,12 @@ clean:
 #################################################################################
 # DEVELOPMENT                                                                   #
 #################################################################################
+
+.PHONY: tag
+tag:
+	. venv/bin/activate; \
+		git tag -a v$(shell python setup.py --version) -m 'Version $(shell python setup.py --version)'; \
+		git push origin v$(shell python setup.py --version)
 
 ## Run all tests. Used to set up a new user. When running: `make` this target will run.
 .PHONY: tests
