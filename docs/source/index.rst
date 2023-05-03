@@ -27,7 +27,7 @@ Often one ends up having a lot of main scripts that somehow transform and saves 
     ├── download_txt.py
     └── produce_reports.py
 
-One of these scripts could look like the example here beloww
+One of these scripts could look like the example here below.
 
 .. highlight:: python
 .. code-block:: python

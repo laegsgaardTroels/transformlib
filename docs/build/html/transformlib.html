@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>transformlib package &#8212; transformlib 0.2.0 documentation</title>
+    <title>transformlib package &#8212; transformlib 0.2.3 documentation</title>
     
     <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 <link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -321,7 +321,7 @@ run all the <a class="reference internal" href="#transformlib.Transform" title="
 <dl class="py method">
 <dt id="transformlib.Transform.nodes">
 <em class="property">property </em><code class="sig-name descname">nodes</code><a class="headerlink" href="#transformlib.Transform.nodes" title="Permalink to this definition">¶</a></dt>
-<dd><p>A tuple with all the <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> and :py:class:<a href="#system-message-2"><span class="problematic" id="problematic-2">`</span></a>transformlib.Input`of the Transform.</p>
+<dd><p>All <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> and <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -344,7 +344,7 @@ run all the <a class="reference internal" href="#transformlib.Transform" title="
 <dd><p>Convert a function to a <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a>.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
-<dt><a href="#system-message-3"><span class="problematic" id="problematic-3">**</span></a>kwargs (Dict[str, Node]): The <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a></dt><dd><p>and <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> nodes of the transform.</p>
+<dt><a href="#system-message-2"><span class="problematic" id="problematic-2">**</span></a>kwargs (Dict[str, Node]): The <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a></dt><dd><p>and <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> nodes of the transform.</p>
 </dd>
 </dl>
 </dd>
@@ -438,7 +438,7 @@ run all the <a class="reference internal" href="#transformlib.Transform" title="
 </pre></div>
 </div>
 <dl class="simple">
-<dt>Args:</dt><dd><p><a href="#system-message-4"><span class="problematic" id="problematic-4">*</span></a>plugins (module): Module(s) that contains transforms.</p>
+<dt>Args:</dt><dd><p><a href="#system-message-3"><span class="problematic" id="problematic-3">*</span></a>plugins (module): Module(s) that contains transforms.</p>
 </dd>
 <dt>Returns:</dt><dd><p>Pipeline: A pipeline of the discovered transforms.</p>
 </dd>
@@ -541,7 +541,7 @@ run all the <a class="reference internal" href="#transformlib.Transform" title="
 <dl class="py method">
 <dt id="transformlib.transform.Transform.nodes">
 <em class="property">property </em><code class="sig-name descname">nodes</code><a class="headerlink" href="#transformlib.transform.Transform.nodes" title="Permalink to this definition">¶</a></dt>
-<dd><p>A tuple with all the <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> and :py:class:<a href="#system-message-5"><span class="problematic" id="problematic-5">`</span></a>transformlib.Input`of the Transform.</p>
+<dd><p>All <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> and <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -564,7 +564,7 @@ run all the <a class="reference internal" href="#transformlib.Transform" title="
 <dd><p>Convert a function to a <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a>.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
-<dt><a href="#system-message-6"><span class="problematic" id="problematic-6">**</span></a>kwargs (Dict[str, Node]): The <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a></dt><dd><p>and <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> nodes of the transform.</p>
+<dt><a href="#system-message-4"><span class="problematic" id="problematic-4">**</span></a>kwargs (Dict[str, Node]): The <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a></dt><dd><p>and <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> nodes of the transform.</p>
 </dd>
 </dl>
 </dd>
