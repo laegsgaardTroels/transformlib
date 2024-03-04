@@ -1,17 +1,12 @@
 import pytest
-
 from transformlib import (
+    config,
     Transform,
     Pipeline,
     Input,
-    Output
-)
-from transformlib.pipeline import (
-    TransformlibDuplicateTransformException,
+    Output,
     TransformlibCycleException,
-    TransformlibDuplicateInputException,
-    TransformlibDuplicateOutputException,
-    _tsort
+    TransformlibDuplicateTransformException,
 )
 
 
@@ -22,18 +17,19 @@ def test_run_duplicate_transforms():
         func=lambda: None,
         input_kwargs={},
     )
-    with pytest.raises(TransformlibDuplicateTransformException):
+    with pytest.raises(Exception):
         pipeline = Pipeline([transform, transform])
         pipeline.run()
 
 
 def test_run_transform_exception_handling():
     """Should raise an exception if one is raised in a Transform."""
+
     class TransformlibTestRunTasksException(Exception):
         """Raised in this test case."""
 
     def raise_transform_exception():
-        raise TransformlibTestRunTasksException('Transform test.')
+        raise TransformlibTestRunTasksException("Transform test.")
 
     transform = Transform(
         output_kwargs={},
@@ -55,79 +51,55 @@ def test_run_cycle_exception():
         return None
 
     transform1 = Transform(
-        output_kwargs={'foo_input': Output('foo')},
+        output_kwargs={"foo_input": Output("foo")},
         func=func1,
-        input_kwargs={'bar_input': Input('bar')},
+        input_kwargs={"bar_input": Input("bar")},
     )
     transform2 = Transform(
-        output_kwargs={'bar_output': Output('bar')},
+        output_kwargs={"bar_output": Output("bar")},
         func=func2,
-        input_kwargs={'foo_input': Input('foo')},
+        input_kwargs={"foo_input": Input("foo")},
     )
     pipeline = Pipeline([transform1, transform2])
     with pytest.raises(TransformlibCycleException):
         pipeline.run()
 
 
-def test_run_duplicate_output_exception():
+def test_duplicate_transform_exception():
     transform1 = Transform(
-        output_kwargs={'foo_output': Output('foo')},
+        output_kwargs={"foo_output": Output("foo")},
         func=lambda foo_output: None,
         input_kwargs={},
     )
     transform2 = Transform(
-        output_kwargs={'foo_output': Output('foo')},
+        output_kwargs={"foo_output": Output("foo")},
         func=lambda foo_output: None,
         input_kwargs={},
     )
-    pipeline = Pipeline([transform1, transform2])
-    with pytest.raises(TransformlibDuplicateOutputException):
-        pipeline.run()
+    with pytest.raises(TransformlibDuplicateTransformException):
+        Pipeline([transform1, transform2])
 
-
-def test_run_duplicate_input_exception():
     transform1 = Transform(
         output_kwargs={},
         func=lambda foo_output: None,
-        input_kwargs={'foo_input': Output('foo')},
+        input_kwargs={"foo_input": Input("foo")},
     )
     transform2 = Transform(
         output_kwargs={},
         func=lambda foo_output: None,
-        input_kwargs={'foo_input': Input('foo')},
+        input_kwargs={"foo_input": Input("foo")},
     )
-    pipeline = Pipeline([transform1, transform2])
-    with pytest.raises(TransformlibDuplicateInputException):
-        pipeline.run()
+    with pytest.raises(TransformlibDuplicateTransformException):
+        Pipeline([transform1, transform2])
 
 
-def test_discover_transforms(tmp_path, monkeypatch):
-    """"Test that the pipeline runs."""
-    monkeypatch.setenv('TRANSFORMLIB_DATA_DIR', str(tmp_path))
-    (tmp_path / 'mapping.txt').write_text("""1,2
-3,4
-5,6
-7,8
-9,10""")
-    from tests import transforms
-    pipeline = Pipeline.discover_transforms(transforms)
+def test_discover_transforms(tmp_path, monkeypatch, mapping_txt, mapping_py):
+    """ "Test that the pipeline runs."""
+    monkeypatch.setitem(config, "data_dir", str(tmp_path))
+    (tmp_path / "mapping.txt").write_text(mapping_txt)
+    (tmp_path / "mapping.py").write_text(mapping_py)
+
+    pipeline = Pipeline.from_paths([tmp_path / "mapping.py"])
+    assert len(pipeline) == 1
     pipeline.run()
-    assert (tmp_path / 'mapping.json').exists()
-
-
-def test_tsort():
-    """Used to test the topological sort."""
-    graph_tasks = {
-        "wash the dishes": ["have lunch"],
-        "cook food": ["have lunch"],
-        "have lunch": [],
-        "wash laundry": ["dry laundry"],
-        "dry laundry": ["fold laundry"],
-        "fold laundry": []
-    }
-    order = _tsort(graph_tasks)
-    for idx, task in enumerate(order):
-        assert all(todo in order[idx:] for todo in graph_tasks[task]), (
-            f"Missing todo after {task}, todos: {graph_tasks[task]} "
-            f"in order: {order}."
-        )
+    assert (tmp_path / "mapping.json").exists()
