@@ -68,8 +68,5 @@ lint:
 docs:
 	. venv/bin/activate; \
 		sphinx-apidoc --force -o docs/source -t docs/source/_templates --module-first \
-		transformlib \
-		transformlib/exceptions.py transformlib/config.py transformlib/testing.py; \
-	cd docs; \
-		${MAKE} html
+		src/transformlib
 	touch docs/.nojekyll
