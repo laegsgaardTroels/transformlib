@@ -275,7 +275,7 @@ class Pipeline:
         return len(self.transforms)
 
 
-__version__ = "0.2.7"
+__version__ = "0.2.6"
 __all__ = [
     "Node",
     "Output",
