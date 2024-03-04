@@ -1,7 +1,0 @@
-powertools.node module
-======================
-
-.. automodule:: powertools.node
-   :members:
-   :undoc-members:
-   :show-inheritance:

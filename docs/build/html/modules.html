@@ -1,158 +1,68 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>transformlib &#8212; transformlib 0.2.5 documentation</title>
-    
-    <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-  
-    
-    <link rel="stylesheet"
-      href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-  
-    
-      
-  
-    
-    <link rel="stylesheet" href="_static/styles/pydata-sphinx-theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
-  
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <link rel="shortcut icon" href="_static/autobot.png"/>
+    <title>transformlib &#8212; transformlib 0.2.6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css?v=d59dc883" />
+    <script src="_static/documentation_options.js?v=fc7d8818"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="_static/autobot.png"/>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
-  </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
-
-  <div id="navbar-start">
-    
-    
-
-<a class="navbar-brand" href="index.html">
-  <img src="_static/autobot.png" class="logo" alt="logo">
-</a>
-
-
-    
-  </div>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  
-  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
-    <div id="navbar-center" class="mr-auto">
-      
-      <div class="navbar-center-item">
-        <ul id="navbar-main-elements" class="navbar-nav">
-    
-    
-</ul>
-      </div>
-      
-    </div>
-
-    <div id="navbar-end">
-      
-      <div class="navbar-end-item">
-        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">transformlib 0.2.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">transformlib</a></li> 
       </ul>
-      </div>
-      
-    </div>
-  </div>
-</div>
-    </nav>
-    
+    </div>  
 
-    <div class="container-xl">
-      <div class="row">
-          
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
             
-            <!-- Only show if we have sidebars configured, else just a small margin  -->
-            <div class="col-12 col-md-3 bd-sidebar">
-              <div class="sidebar-start-items">
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-              </div>
-              <div class="sidebar-end-items">
-              </div>
-            </div>
-            
-          
-
-          
-          <div class="d-none d-xl-block col-xl-2 bd-toc">
-            
-              
-              <div class="toc-item">
-                
-
-<nav id="bd-toc-nav">
-    
-</nav>
-              </div>
-              
-              <div class="toc-item">
-                
-              </div>
-              
-            
-          </div>
-          
-
-          
-          
-            
-          
-          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
-              
-              <div>
-                
   <section id="transformlib">
-<h1>transformlib<a class="headerlink" href="#transformlib" title="Permalink to this headline">¶</a></h1>
+<h1>transformlib<a class="headerlink" href="#transformlib" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="transformlib.html">transformlib package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="transformlib.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="transformlib.html#module-transformlib.node">transformlib.node module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="transformlib.html#module-transformlib.pipeline">transformlib.pipeline module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="transformlib.html#module-transformlib.transform">transformlib.transform module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.Input"><code class="docutils literal notranslate"><span class="pre">Input</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Node.data_dir"><code class="docutils literal notranslate"><span class="pre">Node.data_dir</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Node.path"><code class="docutils literal notranslate"><span class="pre">Node.path</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.Output"><code class="docutils literal notranslate"><span class="pre">Output</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.Pipeline"><code class="docutils literal notranslate"><span class="pre">Pipeline</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Pipeline.from_paths"><code class="docutils literal notranslate"><span class="pre">Pipeline.from_paths()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Pipeline.inputs"><code class="docutils literal notranslate"><span class="pre">Pipeline.inputs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Pipeline.nodes"><code class="docutils literal notranslate"><span class="pre">Pipeline.nodes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Pipeline.outputs"><code class="docutils literal notranslate"><span class="pre">Pipeline.outputs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Pipeline.run"><code class="docutils literal notranslate"><span class="pre">Pipeline.run()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Pipeline.tasks"><code class="docutils literal notranslate"><span class="pre">Pipeline.tasks</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.Transform"><code class="docutils literal notranslate"><span class="pre">Transform</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.inputs"><code class="docutils literal notranslate"><span class="pre">Transform.inputs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.nodes"><code class="docutils literal notranslate"><span class="pre">Transform.nodes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.outputs"><code class="docutils literal notranslate"><span class="pre">Transform.outputs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.run"><code class="docutils literal notranslate"><span class="pre">Transform.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.transform"><code class="docutils literal notranslate"><span class="pre">transform()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -160,36 +70,45 @@
 </section>
 
 
-              </div>
-              
-              
-              <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-</div>
-              
-          </main>
-          
-
+            <div class="clearer"></div>
+          </div>
+        </div>
       </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/autobot.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
     </div>
-  
-    <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-  <footer class="footer mt-5 mt-md-0">
-  <div class="container">
-    
-    <div class="footer-item">
-      <p class="copyright">
-    &copy; Copyright 2021, Troels Lægsgaard.<br>
-</p>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
     </div>
-    
-    <div class="footer-item">
-      <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1.<br>
-</p>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">transformlib 0.2.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">transformlib</a></li> 
+      </ul>
     </div>
-    
-  </div>
-</footer>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2021, Troels Lægsgaard.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
   </body>
 </html>

@@ -1,612 +1,226 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>transformlib package &#8212; transformlib 0.2.5 documentation</title>
-    
-    <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-  
-    
-    <link rel="stylesheet"
-      href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-  
-    
-      
-  
-    
-    <link rel="stylesheet" href="_static/styles/pydata-sphinx-theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
-  
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <link rel="shortcut icon" href="_static/autobot.png"/>
+    <title>transformlib package &#8212; transformlib 0.2.6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css?v=d59dc883" />
+    <script src="_static/documentation_options.js?v=fc7d8818"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="_static/autobot.png"/>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
-  </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
-
-  <div id="navbar-start">
-    
-    
-
-<a class="navbar-brand" href="index.html">
-  <img src="_static/autobot.png" class="logo" alt="logo">
-</a>
-
-
-    
-  </div>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  
-  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
-    <div id="navbar-center" class="mr-auto">
-      
-      <div class="navbar-center-item">
-        <ul id="navbar-main-elements" class="navbar-nav">
-    
-    
-</ul>
-      </div>
-      
-    </div>
-
-    <div id="navbar-end">
-      
-      <div class="navbar-end-item">
-        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">transformlib 0.2.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">transformlib package</a></li> 
       </ul>
-      </div>
-      
-    </div>
-  </div>
-</div>
-    </nav>
-    
+    </div>  
 
-    <div class="container-xl">
-      <div class="row">
-          
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
             
-            <!-- Only show if we have sidebars configured, else just a small margin  -->
-            <div class="col-12 col-md-3 bd-sidebar">
-              <div class="sidebar-start-items">
+  <section id="module-transformlib">
+<span id="transformlib-package"></span><h1>transformlib package<a class="headerlink" href="#module-transformlib" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="transformlib.Input">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">Input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib.html#Input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Input" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#transformlib.Node" title="transformlib.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a></p>
+<p>An Input is a source in a DAG of data transformations.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="transformlib.Node">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib.html#Node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Node" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Node base class is a node in a directed asyclic graph (DAG) of data transformations.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="transformlib.Node.data_dir">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><a class="headerlink" href="#transformlib.Node.data_dir" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="transformlib.Node.path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><a class="headerlink" href="#transformlib.Node.path" title="Link to this definition">¶</a></dt>
+<dd><p>The path to the node in the directory <code class="xref py py-const docutils literal notranslate"><span class="pre">config.DATA_DIR</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="transformlib.Output">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">Output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib.html#Output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Output" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#transformlib.Node" title="transformlib.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a></p>
+<p>An Output is a sink in a DAG of data transformations.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="transformlib.Pipeline">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">Pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transforms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><span class="pre">Transform</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib.html#Pipeline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Pipeline" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A Pipeline is a topologically ordered list of <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects.</p>
+<p>A <a class="reference internal" href="#transformlib.Pipeline" title="transformlib.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Pipeline</span></code></a> can be run from the command line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>transform<span class="w"> </span>path/to/transforms/*.py
+transform<span class="w"> </span>-v<span class="w"> </span>path/to/transforms/*.py
+</pre></div>
+</div>
+<p>This will topologically sort and run all <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects found in
+the py files.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="transformlib.Pipeline.from_paths">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Path</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib.html#Pipeline.from_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Pipeline.from_paths" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="transformlib.Pipeline.inputs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Pipeline.inputs" title="Link to this definition">¶</a></dt>
+<dd><p>A tuple with all the Input nodes of the Pipeline.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="transformlib.Pipeline.nodes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Node" title="transformlib.Node"><span class="pre">Node</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Pipeline.nodes" title="Link to this definition">¶</a></dt>
+<dd><p>A tuple with all the Node objects of the Pipeline.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="transformlib.Pipeline.outputs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Pipeline.outputs" title="Link to this definition">¶</a></dt>
+<dd><p>A tuple with all the Output nodes of the Pipeline.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="transformlib.Pipeline.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/transformlib.html#Pipeline.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Pipeline.run" title="Link to this definition">¶</a></dt>
+<dd><p>Used to run all the <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects in the pipeline.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="transformlib.Pipeline.tasks">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tasks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><span class="pre">Transform</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Pipeline.tasks" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="transformlib.Transform">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">Transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib.html#Transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Transform" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Used to organize transformations of data.</p>
+<p>A <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> is a many to many mapping between
+<a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a> and <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> nodes.</p>
+<p>A Transform is often constructed using the <a class="reference internal" href="#transformlib.transform" title="transformlib.transform"><code class="xref py py-func docutils literal notranslate"><span class="pre">transformlib.transform()</span></code></a> decorator:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">transform</span><span class="p">,</span> <span class="n">Output</span><span class="p">,</span> <span class="n">Input</span>
+
+
+<span class="nd">@transform</span><span class="p">(</span>
+    <span class="n">json_output</span><span class="o">=</span><span class="n">Output</span><span class="p">(</span><span class="s1">&#39;mapping.json&#39;</span><span class="p">),</span>
+    <span class="n">txt_input</span><span class="o">=</span><span class="n">Input</span><span class="p">(</span><span class="s1">&#39;mapping.txt&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">convert_to_json</span><span class="p">(</span><span class="n">json_output</span><span class="p">,</span> <span class="n">txt_input</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">txt_input</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
+    <span class="n">mapping</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">),</span> <span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()))</span>
+    <span class="n">json_output</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="transformlib.Transform.inputs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.inputs" title="Link to this definition">¶</a></dt>
+<dd><p>A tuple with all the <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a> to the Transform.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="transformlib.Transform.nodes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><span class="pre">Input</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.nodes" title="Link to this definition">¶</a></dt>
+<dd><p>All <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> and <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="transformlib.Transform.outputs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.outputs" title="Link to this definition">¶</a></dt>
+<dd><p>A tuple with all the <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> of the Transform.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="transformlib.Transform.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/transformlib.html#Transform.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Transform.run" title="Link to this definition">¶</a></dt>
+<dd><p>Runs the Transform.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="transformlib.transform">
+<span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><span class="pre">Input</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><span class="pre">Output</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><span class="pre">Transform</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/transformlib.html#transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.transform" title="Link to this definition">¶</a></dt>
+<dd><p>Convert a function to a <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a>.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs (Dict[str, Node]): The <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a></dt><dd><p>and <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> nodes of the transform.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>function: A decorator that returns a Transform object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/autobot.png" alt="Logo"/>
+            </a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
-              </div>
-              <div class="sidebar-end-items">
-              </div>
-            </div>
-            
-          
-
-          
-          <div class="d-none d-xl-block col-xl-2 bd-toc">
-            
-              
-              <div class="toc-item">
-                
-<div class="tocsection onthispage pt-5 pb-3">
-    <i class="fas fa-list"></i> On this page
-</div>
-
-<nav id="bd-toc-nav">
-    <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#submodules">
-   Submodules
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-transformlib.node">
-   transformlib.node module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-transformlib.pipeline">
-   transformlib.pipeline module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-transformlib.transform">
-   transformlib.transform module
-  </a>
- </li>
-</ul>
-
-</nav>
-              </div>
-              
-              <div class="toc-item">
-                
-              </div>
-              
-            
-          </div>
-          
-
-          
-          
-            
-          
-          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
-              
-              <div>
-                
-  <section id="module-transformlib">
-<span id="transformlib-package"></span><h1>transformlib package<a class="headerlink" href="#module-transformlib" title="Permalink to this headline">¶</a></h1>
-<p>Contains useful abstractions for organizing transformations of data in a modular way.</p>
-<dl class="py class">
-<dt id="transformlib.Input">
-<em class="property">class </em><code class="sig-prename descclassname">transformlib.</code><code class="sig-name descname">Input</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">relative_path</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">data_dir</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/node.html#Input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.Input" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#transformlib.node.Node" title="transformlib.node.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.node.Node</span></code></a></p>
-<p>An Input is a source in a DAG of data transformations.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt id="transformlib.Node">
-<em class="property">class </em><code class="sig-prename descclassname">transformlib.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">relative_path</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">data_dir</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/node.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.Node" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>The Node base class is a node in a directed asyclic graph (DAG) of data transformations.</p>
-<dl class="py method">
-<dt id="transformlib.Node.path">
-<em class="property">property </em><code class="sig-name descname">path</code><a class="headerlink" href="#transformlib.Node.path" title="Permalink to this definition">¶</a></dt>
-<dd><p>The path to the node in the directory <code class="xref py py-const docutils literal notranslate"><span class="pre">config.DATA_DIR</span></code>.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="transformlib.Output">
-<em class="property">class </em><code class="sig-prename descclassname">transformlib.</code><code class="sig-name descname">Output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">relative_path</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">data_dir</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/node.html#Output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.Output" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#transformlib.node.Node" title="transformlib.node.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.node.Node</span></code></a></p>
-<p>An Output is a sink in a DAG of data transformations.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt id="transformlib.Pipeline">
-<em class="property">class </em><code class="sig-prename descclassname">transformlib.</code><code class="sig-name descname">Pipeline</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">transforms</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="#transformlib.transform.Transform" title="transformlib.transform.Transform">transformlib.transform.Transform</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/pipeline.html#Pipeline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.Pipeline" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>A Pipeline is a topologically ordered list of <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects.</p>
-<p>A <a class="reference internal" href="#transformlib.Pipeline" title="transformlib.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Pipeline</span></code></a> can be run from the command line:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>transform<span class="w"> </span>path/to/transforms/*.py
-transform<span class="w"> </span>-v<span class="w"> </span>path/to/transforms/*.py
-</pre></div>
-</div>
-<p>This will topologically sort and run all <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects found in
-the py files.</p>
-<dl class="py method">
-<dt id="transformlib.Pipeline.add_transforms_from_path">
-<code class="sig-name descname">add_transforms_from_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plugin_path</span><span class="p">:</span> <span class="n">pathlib.Path</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/transformlib/pipeline.html#Pipeline.add_transforms_from_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.Pipeline.add_transforms_from_path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find and import all <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects from a file.</p>
-<p>When doing this the plugin parent path is added to PATH and removed
-after the plugin has been searched for <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects.</p>
-<p>Assuming one has a module called transforms. Then one can then find and
-run all the <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects in this module:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transformlib.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="o">.</span><span class="n">add_transforms_from_path</span><span class="p">(</span><span class="s1">&#39;path/to/transform.py&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</pre></div>
-</div>
-<dl class="simple">
-<dt>Args:</dt><dd><dl class="simple">
-<dt>plugin_path (Path): A path to a py file with <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> to</dt><dd><p>be added to the Pipeline.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.Pipeline.discover_transforms">
-<em class="property">classmethod </em><code class="sig-name descname">discover_transforms</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">plugins</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/pipeline.html#Pipeline.discover_transforms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.Pipeline.discover_transforms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find and import all transforms in plugins.</p>
-<p>This function will automatically disover transforms from plugins
-using namespace packages e.g. fixed namespace(s), as defined by
-the input plugins args to the function, where plugins are saved.</p>
-<p>Assuming one has a module called transforms. Then one can then find and
-run all the <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects in this module:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">transforms</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transformlib.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="o">.</span><span class="n">discover_transforms</span><span class="p">(</span><span class="n">transforms</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</pre></div>
-</div>
-<dl class="simple">
-<dt>Args:</dt><dd><p><a href="#system-message-1"><span class="problematic" id="problematic-1">*</span></a>plugins (module): Module(s) that contains transforms.</p>
-</dd>
-<dt>Returns:</dt><dd><p>Pipeline: A pipeline of the discovered transforms.</p>
-</dd>
-<dt>References:</dt><dd><p>[1] <a class="reference external" href="https://packaging.python.org/guides/creating-and-discovering-plugins/">https://packaging.python.org/guides/creating-and-discovering-plugins/</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.Pipeline.inputs">
-<em class="property">property </em><code class="sig-name descname">inputs</code><a class="headerlink" href="#transformlib.Pipeline.inputs" title="Permalink to this definition">¶</a></dt>
-<dd><p>A tuple with all the Input nodes of the Pipeline.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.Pipeline.nodes">
-<em class="property">property </em><code class="sig-name descname">nodes</code><a class="headerlink" href="#transformlib.Pipeline.nodes" title="Permalink to this definition">¶</a></dt>
-<dd><p>A tuple with all the Node objects of the Pipeline.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.Pipeline.outputs">
-<em class="property">property </em><code class="sig-name descname">outputs</code><a class="headerlink" href="#transformlib.Pipeline.outputs" title="Permalink to this definition">¶</a></dt>
-<dd><p>A tuple with all the Output nodes of the Pipeline.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.Pipeline.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/transformlib/pipeline.html#Pipeline.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.Pipeline.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Used to run all the <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects in the pipeline.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.Pipeline.tasks">
-<em class="property">property </em><code class="sig-name descname">tasks</code><a class="headerlink" href="#transformlib.Pipeline.tasks" title="Permalink to this definition">¶</a></dt>
-<dd><p>A topologically ordered list of transforms.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="transformlib.Transform">
-<em class="property">class </em><code class="sig-prename descclassname">transformlib.</code><code class="sig-name descname">Transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_kwargs</span></em>, <em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">input_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/transform.html#Transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.Transform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Used to organize transformations of data.</p>
-<p>A <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> is a many to many mapping between
-<a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a> and <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> nodes.</p>
-<p>A Transform is often constructed using the <a class="reference internal" href="#module-transformlib.transform" title="transformlib.transform"><code class="xref py py-func docutils literal notranslate"><span class="pre">transformlib.transform()</span></code></a> decorator:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">transform</span><span class="p">,</span> <span class="n">Output</span><span class="p">,</span> <span class="n">Input</span>
-
-
-<span class="nd">@transform</span><span class="p">(</span>
-    <span class="n">json_output</span><span class="o">=</span><span class="n">Output</span><span class="p">(</span><span class="s1">&#39;mapping.json&#39;</span><span class="p">),</span>
-    <span class="n">txt_input</span><span class="o">=</span><span class="n">Input</span><span class="p">(</span><span class="s1">&#39;mapping.txt&#39;</span><span class="p">),</span>
-<span class="p">)</span>
-<span class="k">def</span> <span class="nf">convert_to_json</span><span class="p">(</span><span class="n">json_output</span><span class="p">,</span> <span class="n">txt_input</span><span class="p">):</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">txt_input</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
-    <span class="n">mapping</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">),</span> <span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()))</span>
-    <span class="n">json_output</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt id="transformlib.Transform.inputs">
-<em class="property">property </em><code class="sig-name descname">inputs</code><a class="headerlink" href="#transformlib.Transform.inputs" title="Permalink to this definition">¶</a></dt>
-<dd><p>A tuple with all the <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a> to the Transform.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.Transform.nodes">
-<em class="property">property </em><code class="sig-name descname">nodes</code><a class="headerlink" href="#transformlib.Transform.nodes" title="Permalink to this definition">¶</a></dt>
-<dd><p>All <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> and <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a>.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.Transform.outputs">
-<em class="property">property </em><code class="sig-name descname">outputs</code><a class="headerlink" href="#transformlib.Transform.outputs" title="Permalink to this definition">¶</a></dt>
-<dd><p>A tuple with all the <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> of the Transform.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.Transform.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/transformlib/transform.html#Transform.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.Transform.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Runs the Transform.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt id="transformlib.transform">
-<code class="sig-prename descclassname">transformlib.</code><code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#transformlib.node.Node" title="transformlib.node.Node">transformlib.node.Node</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#transformlib.transform.Transform" title="transformlib.transform.Transform">transformlib.transform.Transform</a><a class="reference internal" href="_modules/transformlib/transform.html#transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.transform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert a function to a <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a>.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><dl class="simple">
-<dt><a href="#system-message-2"><span class="problematic" id="problematic-2">**</span></a>kwargs (Dict[str, Node]): The <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a></dt><dd><p>and <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> nodes of the transform.</p>
-</dd>
-</dl>
-</dd>
-<dt>Returns:</dt><dd><p>function: A decorator that returns a Transform object.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</section>
-<section id="module-transformlib.node">
-<span id="transformlib-node-module"></span><h2>transformlib.node module<a class="headerlink" href="#module-transformlib.node" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="transformlib.node.Input">
-<em class="property">class </em><code class="sig-prename descclassname">transformlib.node.</code><code class="sig-name descname">Input</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">relative_path</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">data_dir</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/node.html#Input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.node.Input" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#transformlib.node.Node" title="transformlib.node.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.node.Node</span></code></a></p>
-<p>An Input is a source in a DAG of data transformations.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt id="transformlib.node.Node">
-<em class="property">class </em><code class="sig-prename descclassname">transformlib.node.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">relative_path</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">data_dir</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/node.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.node.Node" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>The Node base class is a node in a directed asyclic graph (DAG) of data transformations.</p>
-<dl class="py method">
-<dt id="transformlib.node.Node.path">
-<em class="property">property </em><code class="sig-name descname">path</code><a class="headerlink" href="#transformlib.node.Node.path" title="Permalink to this definition">¶</a></dt>
-<dd><p>The path to the node in the directory <code class="xref py py-const docutils literal notranslate"><span class="pre">config.DATA_DIR</span></code>.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="transformlib.node.Output">
-<em class="property">class </em><code class="sig-prename descclassname">transformlib.node.</code><code class="sig-name descname">Output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">relative_path</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">data_dir</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/node.html#Output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.node.Output" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#transformlib.node.Node" title="transformlib.node.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.node.Node</span></code></a></p>
-<p>An Output is a sink in a DAG of data transformations.</p>
-</dd></dl>
-
-</section>
-<section id="module-transformlib.pipeline">
-<span id="transformlib-pipeline-module"></span><h2>transformlib.pipeline module<a class="headerlink" href="#module-transformlib.pipeline" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="transformlib.pipeline.Pipeline">
-<em class="property">class </em><code class="sig-prename descclassname">transformlib.pipeline.</code><code class="sig-name descname">Pipeline</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">transforms</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="#transformlib.transform.Transform" title="transformlib.transform.Transform">transformlib.transform.Transform</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/pipeline.html#Pipeline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.pipeline.Pipeline" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>A Pipeline is a topologically ordered list of <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects.</p>
-<p>A <a class="reference internal" href="#transformlib.Pipeline" title="transformlib.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Pipeline</span></code></a> can be run from the command line:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>transform<span class="w"> </span>path/to/transforms/*.py
-transform<span class="w"> </span>-v<span class="w"> </span>path/to/transforms/*.py
-</pre></div>
-</div>
-<p>This will topologically sort and run all <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects found in
-the py files.</p>
-<dl class="py method">
-<dt id="transformlib.pipeline.Pipeline.add_transforms_from_path">
-<code class="sig-name descname">add_transforms_from_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plugin_path</span><span class="p">:</span> <span class="n">pathlib.Path</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/transformlib/pipeline.html#Pipeline.add_transforms_from_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.pipeline.Pipeline.add_transforms_from_path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find and import all <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects from a file.</p>
-<p>When doing this the plugin parent path is added to PATH and removed
-after the plugin has been searched for <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects.</p>
-<p>Assuming one has a module called transforms. Then one can then find and
-run all the <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects in this module:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transformlib.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="o">.</span><span class="n">add_transforms_from_path</span><span class="p">(</span><span class="s1">&#39;path/to/transform.py&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</pre></div>
-</div>
-<dl class="simple">
-<dt>Args:</dt><dd><dl class="simple">
-<dt>plugin_path (Path): A path to a py file with <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> to</dt><dd><p>be added to the Pipeline.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.pipeline.Pipeline.discover_transforms">
-<em class="property">classmethod </em><code class="sig-name descname">discover_transforms</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">plugins</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/pipeline.html#Pipeline.discover_transforms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.pipeline.Pipeline.discover_transforms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find and import all transforms in plugins.</p>
-<p>This function will automatically disover transforms from plugins
-using namespace packages e.g. fixed namespace(s), as defined by
-the input plugins args to the function, where plugins are saved.</p>
-<p>Assuming one has a module called transforms. Then one can then find and
-run all the <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects in this module:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">transforms</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transformlib.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="o">.</span><span class="n">discover_transforms</span><span class="p">(</span><span class="n">transforms</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</pre></div>
-</div>
-<dl class="simple">
-<dt>Args:</dt><dd><p><a href="#system-message-3"><span class="problematic" id="problematic-3">*</span></a>plugins (module): Module(s) that contains transforms.</p>
-</dd>
-<dt>Returns:</dt><dd><p>Pipeline: A pipeline of the discovered transforms.</p>
-</dd>
-<dt>References:</dt><dd><p>[1] <a class="reference external" href="https://packaging.python.org/guides/creating-and-discovering-plugins/">https://packaging.python.org/guides/creating-and-discovering-plugins/</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.pipeline.Pipeline.inputs">
-<em class="property">property </em><code class="sig-name descname">inputs</code><a class="headerlink" href="#transformlib.pipeline.Pipeline.inputs" title="Permalink to this definition">¶</a></dt>
-<dd><p>A tuple with all the Input nodes of the Pipeline.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.pipeline.Pipeline.nodes">
-<em class="property">property </em><code class="sig-name descname">nodes</code><a class="headerlink" href="#transformlib.pipeline.Pipeline.nodes" title="Permalink to this definition">¶</a></dt>
-<dd><p>A tuple with all the Node objects of the Pipeline.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.pipeline.Pipeline.outputs">
-<em class="property">property </em><code class="sig-name descname">outputs</code><a class="headerlink" href="#transformlib.pipeline.Pipeline.outputs" title="Permalink to this definition">¶</a></dt>
-<dd><p>A tuple with all the Output nodes of the Pipeline.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.pipeline.Pipeline.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/transformlib/pipeline.html#Pipeline.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.pipeline.Pipeline.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Used to run all the <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects in the pipeline.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.pipeline.Pipeline.tasks">
-<em class="property">property </em><code class="sig-name descname">tasks</code><a class="headerlink" href="#transformlib.pipeline.Pipeline.tasks" title="Permalink to this definition">¶</a></dt>
-<dd><p>A topologically ordered list of transforms.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py exception">
-<dt id="transformlib.pipeline.TransformlibCycleException">
-<em class="property">exception </em><code class="sig-prename descclassname">transformlib.pipeline.</code><code class="sig-name descname">TransformlibCycleException</code><a class="reference internal" href="_modules/transformlib/pipeline.html#TransformlibCycleException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.pipeline.TransformlibCycleException" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>Raised when there is a cycle in the Pipeline.</p>
-</dd></dl>
-
-<dl class="py exception">
-<dt id="transformlib.pipeline.TransformlibDuplicateInputException">
-<em class="property">exception </em><code class="sig-prename descclassname">transformlib.pipeline.</code><code class="sig-name descname">TransformlibDuplicateInputException</code><a class="reference internal" href="_modules/transformlib/pipeline.html#TransformlibDuplicateInputException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.pipeline.TransformlibDuplicateInputException" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>Raised when there is duplicate Input in the Pipeline.</p>
-</dd></dl>
-
-<dl class="py exception">
-<dt id="transformlib.pipeline.TransformlibDuplicateOutputException">
-<em class="property">exception </em><code class="sig-prename descclassname">transformlib.pipeline.</code><code class="sig-name descname">TransformlibDuplicateOutputException</code><a class="reference internal" href="_modules/transformlib/pipeline.html#TransformlibDuplicateOutputException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.pipeline.TransformlibDuplicateOutputException" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>Raised when there is duplicate Output in the Pipeline.</p>
-</dd></dl>
-
-<dl class="py exception">
-<dt id="transformlib.pipeline.TransformlibDuplicateTransformException">
-<em class="property">exception </em><code class="sig-prename descclassname">transformlib.pipeline.</code><code class="sig-name descname">TransformlibDuplicateTransformException</code><a class="reference internal" href="_modules/transformlib/pipeline.html#TransformlibDuplicateTransformException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.pipeline.TransformlibDuplicateTransformException" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>Raised when there is duplicate Transform in the Pipeline.</p>
-</dd></dl>
-
-</section>
-<section id="module-transformlib.transform">
-<span id="transformlib-transform-module"></span><h2>transformlib.transform module<a class="headerlink" href="#module-transformlib.transform" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="transformlib.transform.Transform">
-<em class="property">class </em><code class="sig-prename descclassname">transformlib.transform.</code><code class="sig-name descname">Transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_kwargs</span></em>, <em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">input_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/transform.html#Transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.transform.Transform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Used to organize transformations of data.</p>
-<p>A <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> is a many to many mapping between
-<a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a> and <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> nodes.</p>
-<p>A Transform is often constructed using the <a class="reference internal" href="#module-transformlib.transform" title="transformlib.transform"><code class="xref py py-func docutils literal notranslate"><span class="pre">transformlib.transform()</span></code></a> decorator:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">transform</span><span class="p">,</span> <span class="n">Output</span><span class="p">,</span> <span class="n">Input</span>
-
-
-<span class="nd">@transform</span><span class="p">(</span>
-    <span class="n">json_output</span><span class="o">=</span><span class="n">Output</span><span class="p">(</span><span class="s1">&#39;mapping.json&#39;</span><span class="p">),</span>
-    <span class="n">txt_input</span><span class="o">=</span><span class="n">Input</span><span class="p">(</span><span class="s1">&#39;mapping.txt&#39;</span><span class="p">),</span>
-<span class="p">)</span>
-<span class="k">def</span> <span class="nf">convert_to_json</span><span class="p">(</span><span class="n">json_output</span><span class="p">,</span> <span class="n">txt_input</span><span class="p">):</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">txt_input</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
-    <span class="n">mapping</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">),</span> <span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()))</span>
-    <span class="n">json_output</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt id="transformlib.transform.Transform.inputs">
-<em class="property">property </em><code class="sig-name descname">inputs</code><a class="headerlink" href="#transformlib.transform.Transform.inputs" title="Permalink to this definition">¶</a></dt>
-<dd><p>A tuple with all the <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a> to the Transform.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.transform.Transform.nodes">
-<em class="property">property </em><code class="sig-name descname">nodes</code><a class="headerlink" href="#transformlib.transform.Transform.nodes" title="Permalink to this definition">¶</a></dt>
-<dd><p>All <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> and <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a>.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.transform.Transform.outputs">
-<em class="property">property </em><code class="sig-name descname">outputs</code><a class="headerlink" href="#transformlib.transform.Transform.outputs" title="Permalink to this definition">¶</a></dt>
-<dd><p>A tuple with all the <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> of the Transform.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="transformlib.transform.Transform.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/transformlib/transform.html#Transform.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.transform.Transform.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Runs the Transform.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt id="transformlib.transform.transform">
-<code class="sig-prename descclassname">transformlib.transform.</code><code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#transformlib.node.Node" title="transformlib.node.Node">transformlib.node.Node</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#transformlib.transform.Transform" title="transformlib.transform.Transform">transformlib.transform.Transform</a><a class="reference internal" href="_modules/transformlib/transform.html#transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformlib.transform.transform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert a function to a <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a>.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><dl class="simple">
-<dt><a href="#system-message-4"><span class="problematic" id="problematic-4">**</span></a>kwargs (Dict[str, Node]): The <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a></dt><dd><p>and <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> nodes of the transform.</p>
-</dd>
-</dl>
-</dd>
-<dt>Returns:</dt><dd><p>function: A decorator that returns a Transform object.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-</section>
-
-
-              </div>
-              
-              
-              <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-</div>
-              
-          </main>
-          
-
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
       </div>
+      <div class="clearer"></div>
     </div>
-  
-    <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-  <footer class="footer mt-5 mt-md-0">
-  <div class="container">
-    
-    <div class="footer-item">
-      <p class="copyright">
-    &copy; Copyright 2021, Troels Lægsgaard.<br>
-</p>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">transformlib 0.2.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">transformlib package</a></li> 
+      </ul>
     </div>
-    
-    <div class="footer-item">
-      <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1.<br>
-</p>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2021, Troels Lægsgaard.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
-    
-  </div>
-</footer>
   </body>
 </html>

@@ -1,7 +1,0 @@
-powertools.config module
-========================
-
-.. automodule:: powertools.config
-   :members:
-   :undoc-members:
-   :show-inheritance:
