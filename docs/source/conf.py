@@ -14,7 +14,6 @@
 #
 import os
 import sys
-from setup import __version__
 sys.path.insert(0, os.path.abspath('.'))
 
 # -- Project information -----------------------------------------------------
@@ -24,13 +23,10 @@ copyright = '2021, Troels Lægsgaard'
 author = 'Troels Lægsgaard'
 
 # The short X.Y version
-version = '{major}.{minor}'.format(
-    major=__version__.split('.')[0],
-    minor=__version__.split('.')[1],
-)
+version = "0.2"
 
 # The full version, including alpha/beta/rc tags
-release = __version__
+release = "0.2.6"
 
 
 # -- General configuration ---------------------------------------------------
