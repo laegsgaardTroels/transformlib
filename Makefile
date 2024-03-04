@@ -68,5 +68,6 @@ lint:
 docs:
 	. venv/bin/activate; \
 		sphinx-apidoc --force -o docs/source -t docs/source/_templates --module-first \
-		src/transformlib
+		src/transformlib; \
+		$(MAKE) -C docs html
 	touch docs/.nojekyll
