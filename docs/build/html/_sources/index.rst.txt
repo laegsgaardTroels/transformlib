@@ -12,7 +12,7 @@ transformlib documentation
 
 **Useful links**:
 `Source Repository <https://github.com/laegsgaardTroels/transformlib>`__
-`Examples <https://github.com/laegsgaardTroels/transformlib/examples>`__
+`Examples <https://github.com/laegsgaardTroels/transformlib/tree/master/examples>`__
 
 
 Enables the user to organize transformations of data as a regular Python package.
