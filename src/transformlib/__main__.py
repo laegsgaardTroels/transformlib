@@ -1,14 +1,11 @@
 import argparse
 import logging
-import sys
 from pathlib import Path
 
-from transformlib import Pipeline
-
-logger = logging.getLogger(__name__)
+from transformlib import config, Pipeline
 
 
-def main(paths: list[Path] | list[str], verbose: bool) -> None:
+def main() -> None:
     """A Command Line Inferface (CLI) for running :py:class:`transformlib.Transform`.
 
     Example usage:
@@ -25,14 +22,6 @@ def main(paths: list[Path] | list[str], verbose: bool) -> None:
         path: (List[Path]): One or more Paths to Transforms one wish to run in a Pipeline.
         verbose (bool): Should the Transform be run with logging set to INFO.
     """
-    paths = list(map(Path, paths))
-    if verbose:
-        logging.basicConfig(level=logging.INFO)
-    pipeline = Pipeline.from_paths(paths=paths)
-    pipeline.run()
-
-
-if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run transforms found on paths.")
     parser.add_argument(
         "path",
@@ -46,5 +35,16 @@ if __name__ == "__main__":
         action=argparse.BooleanOptionalAction,
         help="Should the Transform be run with logging set to INFO.",
     )
+    parser.add_argument(
+        "-d",
+        "--data-dir",
+        default="/tmp/",
+        help="Directory where data is saved.",
+    )
     args = parser.parse_args()
-    sys.exit(main(paths=args.path, verbose=args.verbose))
+
+    config["data_dir"] = args.data_dir
+    if args.verbose:
+        logging.basicConfig(level=logging.INFO)
+    pipeline = Pipeline.from_paths(paths=list(map(Path, args.path)))
+    pipeline.run()
