@@ -45,6 +45,8 @@ setup(
             'pytest-pep8',
             'pytest==8.0.2',
             'sphinx==7.2.6',
+            'scikit-learn==1.4.1.post1',
+            'pandas==2.2.1',
         ]
     },
     entry_points={
