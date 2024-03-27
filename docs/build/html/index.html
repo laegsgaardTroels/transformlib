@@ -36,55 +36,13 @@
             
   <section id="transformlib-documentation">
 <h1>transformlib documentation<a class="headerlink" href="#transformlib-documentation" title="Link to this heading">¶</a></h1>
-<p><strong>Documentation Build Date</strong>: Mar 04, 2024 <strong>Version</strong>: 0.2.6</p>
+<p><strong>Documentation Build Date</strong>: Mar 27, 2024 <strong>Version</strong>: 0.2.6</p>
 <p><strong>Useful links</strong>:
 <a class="reference external" href="https://github.com/laegsgaardTroels/transformlib">Source Repository</a></p>
 <p>Enables the user to organize transformations of data as a regular Python package.</p>
 <p>Often one ends up having a lot of main scripts that somehow transform and saves data.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tree<span class="w"> </span>transforms
-transforms
-├──<span class="w"> </span>convert_to_json.py
-├──<span class="w"> </span>download_txt.py
-└──<span class="w"> </span>produce_reports.py
-</pre></div>
-</div>
-<p>One of these scripts could look like the example here below.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">import</span> <span class="nn">json</span>
-
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;mapping.txt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
-    <span class="n">mapping</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">),</span> <span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()))</span>
-    <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;mapping.json&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span>
-</pre></div>
-</div>
 <p>This package enables the user to organize these scripts in a way that makes them easy to run in
-the expected order of execution and easier to read. Below is an example of above main script but
-where the <a class="reference internal" href="transformlib.html#transformlib.transform" title="transformlib.transform"><code class="xref py py-func docutils literal notranslate"><span class="pre">transformlib.transform()</span></code></a> decorator and <a class="reference internal" href="transformlib.html#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a>, <a class="reference internal" href="transformlib.html#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a>
-class has been used to make the script easier to read.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">transform</span><span class="p">,</span> <span class="n">Output</span><span class="p">,</span> <span class="n">Input</span>
-
-
-<span class="nd">@transform</span><span class="p">(</span>
-    <span class="n">json_output</span><span class="o">=</span><span class="n">Output</span><span class="p">(</span><span class="s1">&#39;mapping.json&#39;</span><span class="p">),</span>
-    <span class="n">txt_input</span><span class="o">=</span><span class="n">Input</span><span class="p">(</span><span class="s1">&#39;mapping.txt&#39;</span><span class="p">),</span>
-<span class="p">)</span>
-<span class="k">def</span> <span class="nf">convert_to_json</span><span class="p">(</span><span class="n">json_output</span><span class="p">,</span> <span class="n">txt_input</span><span class="p">):</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">txt_input</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
-    <span class="n">mapping</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">),</span> <span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()))</span>
-    <span class="n">json_output</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>Once one has organized the scripts in this way one can run the transformations with an installed command line interface.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>transform<span class="w"> </span>-h
-transform<span class="w"> </span>transforms/*.py
-transform<span class="w"> </span>-v<span class="w"> </span>transforms/*.py
-</pre></div>
-</div>
+the expected order of execution and easier to read.</p>
 </section>
 <section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
