@@ -6,6 +6,7 @@ import pandas as pd
 
 @transform(california_housing=Output("california_housing.csv"))
 def download(california_housing):
+    """Downloads the California Housing dataset."""
     housing = fetch_california_housing()
     df = pd.DataFrame(housing.data, columns=housing.feature_names)
     df[housing.target_names[0]] = housing.target

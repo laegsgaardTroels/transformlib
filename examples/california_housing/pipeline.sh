@@ -1,2 +1,2 @@
 #!/bin/bash
-transform transforms/*.py -d output -v
+transform transforms/*.py -d data -v
