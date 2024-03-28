@@ -3,7 +3,7 @@ from transformlib import config
 import pytest
 import subprocess
 
-from examples.california_housing.run import pipeline as california_housing_pipeline
+from examples.california_housing.pipeline import pipeline as california_housing_pipeline
 
 
 @pytest.mark.parametrize(
@@ -13,7 +13,7 @@ from examples.california_housing.run import pipeline as california_housing_pipel
     ],
 )
 def test_run_sh(example_dir: str):
-    subprocess.call(["/bin/bash", f"./examples/{example_dir}/run.sh"])
+    subprocess.call(["/bin/bash", f"./examples/{example_dir}/pipeline.sh"])
 
 
 @pytest.mark.parametrize(
