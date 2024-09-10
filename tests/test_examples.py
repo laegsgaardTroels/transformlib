@@ -1,27 +1,22 @@
 from transformlib import config
+from transformlib._transformlib import import_and_append_to_sys_path
 
 import pytest
+import pathlib
 import subprocess
 
-from examples.california_housing.pipeline import pipeline as california_housing_pipeline
+
+EXAMPLE_DIRS = list(pathlib.Path("./examples/").glob("*"))
 
 
-@pytest.mark.parametrize(
-    "example_dir",
-    [
-        "california_housing",
-    ],
-)
-def test_run_sh(example_dir: str):
-    subprocess.call(["/bin/bash", f"./examples/{example_dir}/pipeline.sh"])
+@pytest.mark.parametrize("example_dir", EXAMPLE_DIRS)
+def test_run_sh(example_dir: pathlib.Path, monkeypatch):
+    monkeypatch.chdir(example_dir)
+    subprocess.run(["/bin/bash", "pipeline.sh"], check=True)
 
 
-@pytest.mark.parametrize(
-    "pipeline",
-    [
-        california_housing_pipeline,
-    ],
-)
-def test_run_py(tmp_path, pipeline):
+@pytest.mark.parametrize("example_dir", EXAMPLE_DIRS)
+def test_run_py(example_dir: pathlib.Path, tmp_path):
+    pipeline = import_and_append_to_sys_path(example_dir / "pipeline.py")
     config["data_dir"] = tmp_path
-    pipeline.run()
+    pipeline.pipeline.run()

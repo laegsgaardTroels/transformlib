@@ -1,8 +1,8 @@
 from pathlib import Path
-import sys
-import importlib
-import time
 import graphlib
+import importlib
+import sys
+import time
 import typing
 
 import logging
@@ -14,29 +14,35 @@ config = {"data_dir": "/tmp/"}
 
 
 class TransformlibCycleException(graphlib.CycleError):
-    """Raised when there is a cycle in the Pipeline."""
+    """Raised when there is a cycle in the :py:class:`transformlib.Pipeline`."""
 
 
 class TransformlibDuplicateTransformException(Exception):
-    """Raised when there is duplicate Transform in the Pipeline."""
+    """Raised when there is duplicate Transform in the :py:class:`transformlib.Pipeline`."""
 
 
 class TransformlibDuplicateInputException(Exception):
-    """Raised when there is duplicate Input in the Pipeline."""
+    """Raised when there is duplicate Input in the :py:class:`transformlib.Pipeline`."""
 
 
 class TransformlibDuplicateOutputException(Exception):
-    """Raised when there is duplicate Output in the Pipeline."""
+    """Raised when there is duplicate Output in the :py:class:`transformlib.Pipeline`."""
 
 
 class Node:
-    """The Node base class is a node in a directed asyclic graph of data transformations."""
+    """The Node base class is a node in a directed asyclic graph of data transformations.
+
+    Attributes:
+        relative_path (Path | str): The path relative to :py:const:`config.DATA_DIR` where
+            data associated with the node is saved or loaded from.
+    """
 
     def __init__(self, relative_path: Path | str):
         self.relative_path = relative_path
 
     @property
     def data_dir(self) -> Path:
+        """The root directory where all data is saved and loaded relative to."""
         return Path(config["data_dir"])
 
     @property
@@ -67,6 +73,8 @@ class Input(Node):
 
 
 class Parameter:
+    """A Parameter can be used to parameterize a Node in a directed asyclic graph of data transformations."""
+
     def __init__(self, value):
         self.value = value
 
@@ -89,23 +97,13 @@ class Transform:
     A :py:class:`transformlib.Transform` is a many to many mapping between
     :py:class:`transformlib.Input` and :py:class:`transformlib.Output` nodes.
 
-    A Transform is often constructed using the :py:func:`transformlib.transform` decorator:
-
-    .. highlight:: python
-    .. code-block:: python
-
-        import json
-        from transformlib import transform, Output, Input
-
-
-        @transform(
-            json_output=Output('mapping.json'),
-            txt_input=Input('mapping.txt'),
-        )
-        def convert_to_json(json_output, txt_input):
-            text = txt_input.path.read_text()
-            mapping = dict(map(lambda line: line.split(','), text.splitlines()))
-            json_output.path.write_text(json.dumps(mapping, indent=4))
+    Attributes:
+        output_kwargs (dict[str, Output]): A mapping from Output name to Output instance.
+        function (Function): A function that contains the data transformation logic used to load and
+            transform the :py:class:`transformlib.Input` nodes and save the output to the
+            :py:class:`transformlib.Output` nodes.
+        input_kwargs (dict[str, Input]):  A mapping from Input name to Input instance.
+        parameter_kwargs (dict[str, Parameter]): A mapping from Parameter name to Parameter instance.
     """
 
     def __init__(
@@ -172,6 +170,9 @@ class Transform:
     def __hash__(self) -> int:
         return hash(tuple(self.nodes))
 
+    def __name__(self) -> str:
+        return self.function.__name__
+
 
 def kwargs_repr(kwargs: dict[str, typing.Any]) -> str:
     return ", ".join(
@@ -186,6 +187,27 @@ def transform(
     **kwargs: Input | Output | Parameter,
 ) -> typing.Callable[[Function], Transform]:
     """Convert a function to a :py:class:`transformlib.Transform`.
+
+    A Transform is often constructed using the :py:func:`transformlib.transform` decorator:
+
+    .. highlight:: python
+    .. code-block:: python
+
+        import json
+        from transformlib import transform, Output, Input
+
+
+        @transform(
+            json_output=Output('mapping.json'),
+            txt_input=Input('mapping.txt'),
+        )
+        def convert_to_json(json_output, txt_input):
+            text = txt_input.path.read_text()
+            mapping = dict(map(lambda line: line.split(','), text.splitlines()))
+            json_output.path.write_text(json.dumps(mapping, indent=4))
+
+    In above example the `convert_to_json` is a :py:class:`transformlib.Transform` object that
+    can be part of a :py:class:`transformlib.Pipeline` of many transformations.
 
     Args:
         **kwargs (dict[str, Node]): The :py:class:`transformlib.Input`
@@ -229,23 +251,30 @@ class Pipeline:
     the .py files.
     """
 
-    def __init__(self, transforms: list[Transform] | None = None):
+    def __init__(
+        self, transforms: list[Transform] | dict[str, Transform] | None = None
+    ):
         if transforms is None:
-            self.transforms = []
-        else:
+            self.transforms = {}
+        elif isinstance(transforms, list):
+            if len(set(transforms)) != len(transforms):
+                raise TransformlibDuplicateTransformException(
+                    f"Duplicate transforms={transforms}"
+                )
+            self.transforms = {t.__name__: t for t in transforms}
+        elif isinstance(transforms, dict):
             self.transforms = transforms
-        if len(set(self.transforms)) != len(self.transforms):
-            raise TransformlibDuplicateTransformException(
-                f"Duplicate transforms={self.transforms}"
-            )
+        else:
+            raise NotImplementedError(f"Not supported {transforms=}")
 
     @property
     def tasks(self) -> list[Transform]:
+        """A topologically sorted list of :py:class:`transformlib.Transform`(s) in the Pipeline."""
         tsort = graphlib.TopologicalSorter()
-        for transform in self.transforms:
+        for transform in self.transforms.values():
             predecessors = [
                 t
-                for t in self.transforms
+                for t in self.transforms.values()
                 if any(o in transform.inputs for o in t.outputs)
             ]
             tsort.add(transform, *predecessors)
@@ -257,17 +286,23 @@ class Pipeline:
     @property
     def outputs(self) -> list[Output]:
         """A tuple with all the :py:class:`transformlib.Output` of the :py:class:`transformlib.Pipeline`."""
-        return [node for transform in self.transforms for node in transform.outputs]
+        return [
+            node for transform in self.transforms.values() for node in transform.outputs
+        ]
 
     @property
     def inputs(self) -> list[Input]:
         """A tuple with all the :py:class:`transformlib.Input` of the :py:class:`transformlib.Pipeline`."""
-        return [node for transform in self.transforms for node in transform.inputs]
+        return [
+            node for transform in self.transforms.values() for node in transform.inputs
+        ]
 
     @property
     def nodes(self) -> list[Input | Output]:
         """All :py:class:`transformlib.Output`(s) and :py:class:`transformlib.Input`(s)."""
-        return [node for transform in self.transforms for node in transform.nodes]
+        return [
+            node for transform in self.transforms.values() for node in transform.nodes
+        ]
 
     def run(self) -> None:
         """Used to run all the :py:class:`transformlib.Transform`(s) in the :py:class:`transformlib.Pipeline`."""
@@ -279,23 +314,30 @@ class Pipeline:
 
     @classmethod
     def from_paths(cls, paths: list[str] | list[Path]):
-        """Initialize a :py:class:`transformlib.Pipeline` from all :py:class:`transformlib.Transform`(s) found in a list of path(s) to modules."""
-        transforms = []
+        """Initialize a :py:class:`transformlib.Pipeline` from all :py:class:`transformlib.Transform`(s) found in a list of path(s) to .py files.
+
+        As part of this initialization the parent folder to each path is appended to PYTHONPATH.
+        """
+        transforms = {}
         for path in list(map(Path, paths)):
-            if path.suffix != ".py":
-                raise NotImplementedError(f"path={path} is not a .py file")
             if path.stem.startswith("__"):
                 continue
-            if str(path.parent.resolve()) not in sys.path:
-                sys.path.append(str(path.parent.resolve()))
-
-            plugin_module = importlib.import_module(path.stem)
-            for attrname in dir(plugin_module):
-                attr = getattr(plugin_module, attrname)
+            module = import_and_append_to_sys_path(path)
+            for attr_name in dir(module):
+                attr = getattr(module, attr_name)
                 if isinstance(attr, Transform):
                     logger.info(f"Discovered Transform: {attr} in {path}")
-                    transforms.append(attr)
+                    transforms[f"{path.resolve()}::{attr.__name__}"] = attr
         return cls(transforms)
 
     def __len__(self) -> int:
         return len(self.transforms)
+
+
+def import_and_append_to_sys_path(path: Path):
+    """Import a .py file as a module and append its folder to PYTHONPATH."""
+    if path.suffix != ".py":
+        raise NotImplementedError(f"path={path} is not a .py file")
+    if str(path.parent.resolve()) not in sys.path:
+        sys.path.append(str(path.parent.resolve()))
+    return importlib.import_module(path.stem)
