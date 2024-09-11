@@ -73,9 +73,13 @@ class Input(Node):
 
 
 class Parameter:
-    """A Parameter can be used to parameterize a Node in a directed asyclic graph of data transformations."""
+    """A Parameter can be used to parameterize a Node in a directed asyclic graph of data transformations.
 
-    def __init__(self, value):
+    Args:
+        value (str | int | float | complex | bool | None): The current value of the Parameter.
+    """
+
+    def __init__(self, value: str | int | float | complex | bool | None):
         self.value = value
 
     def __repr__(self) -> str:
@@ -106,8 +110,8 @@ class Transform:
         parameter_kwargs (dict[str, Parameter]): A mapping from Parameter name to Parameter instance.
 
     Raises:
-        TransformlibDuplicateInputException: If duplicate :py:class:`transformlib.Input`.
-        TransformlibDuplicateOutputException: If duplicate :py:class:`transformlib.Output`.
+        TransformlibDuplicateInputException: If duplicate :py:class:`transformlib.Input` exists.
+        TransformlibDuplicateOutputException: If duplicate :py:class:`transformlib.Output` exists.
     """
 
     def __init__(
@@ -143,6 +147,10 @@ class Transform:
     def nodes(self) -> list[Input | Output]:
         """All :py:class:`transformlib.Output`\\ (s) and :py:class:`transformlib.Input`\\ (s)."""
         return self.outputs + self.inputs
+
+    @property
+    def parameters(self) -> list[Parameter]:
+        return list(self.parameter_kwargs.values())
 
     def run(self) -> None:
         """Loads data from the :py:class:`transformlib.Input`\\ (s), transforms it and saves data to the :py:class:`transformlib.Output`\\ (s)."""
@@ -307,6 +315,11 @@ class Pipeline:
         return [
             node for transform in self.transforms.values() for node in transform.nodes
         ]
+
+    @property
+    def parameters(self) -> list[Parameter]:
+        """All :py:class:`transformlib.Parameter`\\ (s)."""
+        return [parameter for transform in self.transforms.values() for parameter in transform.parameters]
 
     def run(self) -> None:
         """Used to run all the :py:class:`transformlib.Transform`\\ (s) in the :py:class:`transformlib.Pipeline`."""

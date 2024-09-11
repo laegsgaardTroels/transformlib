@@ -2,6 +2,7 @@ from transformlib._transformlib import (
     Node,
     Output,
     Input,
+    Parameter,
     Transform,
     transform,
     Pipeline,
@@ -12,11 +13,12 @@ from transformlib._transformlib import (
     TransformlibDuplicateOutputException,
 )
 
-__version__ = "0.2.7"
+__version__ = "0.3.7"
 __all__ = [
     "Node",
     "Output",
     "Input",
+    "Parameter",
     "Transform",
     "transform",
     "Pipeline",
