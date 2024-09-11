@@ -137,7 +137,7 @@ class Transform:
 
     @property
     def nodes(self) -> list[Input | Output]:
-        """All :py:class:`transformlib.Output`(s) and :py:class:`transformlib.Input`(s)."""
+        """All :py:class:`transformlib.Output`\\ (s) and :py:class:`transformlib.Input`\\ (s)."""
         return self.outputs + self.inputs
 
     def run(self) -> None:
@@ -269,7 +269,7 @@ class Pipeline:
 
     @property
     def tasks(self) -> list[Transform]:
-        """A topologically sorted list of :py:class:`transformlib.Transform`(s) in the Pipeline."""
+        """A topologically sorted list of :py:class:`transformlib.Transform`\\ (s) in the Pipeline."""
         tsort = graphlib.TopologicalSorter()
         for transform in self.transforms.values():
             predecessors = [
@@ -299,7 +299,7 @@ class Pipeline:
 
     @property
     def nodes(self) -> list[Input | Output]:
-        """All :py:class:`transformlib.Output`(s) and :py:class:`transformlib.Input`(s)."""
+        """All :py:class:`transformlib.Output`\\ (s) and :py:class:`transformlib.Input`\\ (s)."""
         return [
             node for transform in self.transforms.values() for node in transform.nodes
         ]
@@ -314,7 +314,7 @@ class Pipeline:
 
     @classmethod
     def from_paths(cls, paths: list[str] | list[Path]):
-        """Initialize a :py:class:`transformlib.Pipeline` from all :py:class:`transformlib.Transform`(s) found in a list of path(s) to .py files.
+        """Initialize a :py:class:`transformlib.Pipeline` from all :py:class:`transformlib.Transform`\\ (s) found in a list of path(s) to .py files.
 
         As part of this initialization the parent folder to each path is appended to PYTHONPATH.
         """
