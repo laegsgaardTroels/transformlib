@@ -24,5 +24,6 @@ the expected order of execution and easier to read.
 
 .. toctree::
 
-   usage
+   usage/installation
+   usage/quickstart
    transformlib

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>transformlib &#8212; transformlib 0.2.7 documentation</title>
+    <title>Quickstart &#8212; transformlib 0.2.7 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=d59dc883" />
     <script src="../_static/documentation_options.js?v=58050c01"></script>
@@ -14,7 +14,8 @@
     <link rel="icon" href="../_static/autobot.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="../api.html" /> 
+    <link rel="next" title="transformlib package" href="../transformlib.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,11 +27,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../api.html" title="&lt;no title&gt;"
+          <a href="../transformlib.html" title="transformlib package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">transformlib 0.2.7 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">&lt;no title&gt;</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">transformlib</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Quickstart</a></li> 
       </ul>
     </div>  
 
@@ -39,8 +42,31 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-transformlib">
-<span id="transformlib"></span><h1>transformlib<a class="headerlink" href="#module-transformlib" title="Link to this heading">¶</a></h1>
+  <section id="quickstart">
+<h1>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">¶</a></h1>
+<p>Assume one wants to build a Machine Learning model for the California housing dataset. The recommended folder structure will then be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.
+├── data
+│   └── california_housing.csv
+├── pipeline.py
+├── pipeline.sh
+└── transforms
+    ├── download.py
+    ├── eval.py
+    ├── split.py
+    ├── train.py
+    └── tune.py
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">transforms/</span></code> folder contains all the transformation applied to the data. To run the transforms one can use the installed Command Line Inferface (CLI):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>transform<span class="w"> </span>transforms/*.py<span class="w"> </span>-d<span class="w"> </span>data<span class="w"> </span>-v
+</pre></div>
+</div>
+<p>This will topologically sort and run all <a class="reference internal" href="../transformlib.html#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> objects found in the .py files found at <code class="docutils literal notranslate"><span class="pre">transforms/*.py</span></code> and load/save the results to the data directory <code class="docutils literal notranslate"><span class="pre">data/</span></code>. For all the options see:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>transform<span class="w"> </span>-h
+</pre></div>
+</div>
+<p>For more see the <a class="reference external" href="https://github.com/laegsgaardTroels/transformlib/tree/master/examples/california_housing">california housing example</a>.</p>
 </section>
 
 
@@ -77,11 +103,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../api.html" title="&lt;no title&gt;"
+          <a href="../transformlib.html" title="transformlib package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">transformlib 0.2.7 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../api.html" >&lt;no title&gt;</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">transformlib</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Quickstart</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

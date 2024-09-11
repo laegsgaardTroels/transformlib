@@ -84,7 +84,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The Node base class is a node in a directed asyclic graph of data transformations.</span>
 
 <span class="sd">    Attributes:</span>
-<span class="sd">        relative_path (Path | str): The path relative to :py:const:`config.DATA_DIR` where</span>
+<span class="sd">        relative_path (Path | str): The path relative to :py:data:`config[&#39;data_dir&#39;]` where</span>
 <span class="sd">            data associated with the node is saved or loaded from.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -98,7 +98,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The path to the node in the directory :py:const:`config.DATA_DIR`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The path to the node in the directory :py:data:`config[&#39;data_dir&#39;]`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">relative_path</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -152,18 +152,22 @@
 <div class="viewcode-block" id="Transform">
 <a class="viewcode-back" href="../../transformlib.html#transformlib.Transform">[docs]</a>
 <span class="k">class</span> <span class="nc">Transform</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Used to organize transformations of data.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A :py:class:`transformlib.Transform` loads, transforms and saves data.</span>
 
-<span class="sd">    A :py:class:`transformlib.Transform` is a many to many mapping between</span>
-<span class="sd">    :py:class:`transformlib.Input` and :py:class:`transformlib.Output` nodes.</span>
+<span class="sd">    A :py:class:`transformlib.Transform` is a lazily evaluated many to many transformation</span>
+<span class="sd">    between :py:class:`transformlib.Input` and :py:class:`transformlib.Output` nodes.</span>
 
-<span class="sd">    Attributes:</span>
+<span class="sd">    Args:</span>
 <span class="sd">        output_kwargs (dict[str, Output]): A mapping from Output name to Output instance.</span>
 <span class="sd">        function (Function): A function that contains the data transformation logic used to load and</span>
 <span class="sd">            transform the :py:class:`transformlib.Input` nodes and save the output to the</span>
 <span class="sd">            :py:class:`transformlib.Output` nodes.</span>
 <span class="sd">        input_kwargs (dict[str, Input]):  A mapping from Input name to Input instance.</span>
 <span class="sd">        parameter_kwargs (dict[str, Parameter]): A mapping from Parameter name to Parameter instance.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TransformlibDuplicateInputException: If duplicate :py:class:`transformlib.Input`.</span>
+<span class="sd">        TransformlibDuplicateOutputException: If duplicate :py:class:`transformlib.Output`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -203,7 +207,7 @@
 <div class="viewcode-block" id="Transform.run">
 <a class="viewcode-back" href="../../transformlib.html#transformlib.Transform.run">[docs]</a>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Runs the Transform.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads data from the :py:class:`transformlib.Input`\\ (s), transforms it and saves data to the :py:class:`transformlib.Output`\\ (s).&quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Beginning running of </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
         <span class="bp">self</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">output_kwargs</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">input_kwargs</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">parameter_kwargs</span><span class="p">)</span>
