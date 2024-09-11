@@ -96,7 +96,7 @@ the .py files.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="transformlib.Pipeline.from_paths">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Path</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/_transformlib.html#Pipeline.from_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Pipeline.from_paths" title="Link to this definition">¶</a></dt>
-<dd><p>Initialize a <a class="reference internal" href="#transformlib.Pipeline" title="transformlib.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Pipeline</span></code></a> from all :py:class:<a href="#id1"><span class="problematic" id="id2">`</span></a>transformlib.Transform`(s) found in a list of path(s) to .py files.</p>
+<dd><p>Initialize a <a class="reference internal" href="#transformlib.Pipeline" title="transformlib.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Pipeline</span></code></a> from all <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a>(s) found in a list of path(s) to .py files.</p>
 <p>As part of this initialization the parent folder to each path is appended to PYTHONPATH.</p>
 </dd></dl>
 
@@ -109,7 +109,7 @@ the .py files.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="transformlib.Pipeline.nodes">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Pipeline.nodes" title="Link to this definition">¶</a></dt>
-<dd><p>All :py:class:<a href="#id3"><span class="problematic" id="id4">`</span></a>transformlib.Output`(s) and :py:class:<a href="#id5"><span class="problematic" id="id6">`</span></a>transformlib.Input`(s).</p>
+<dd><p>All <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a>(s) and <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a>(s).</p>
 </dd></dl>
 
 <dl class="py property">
@@ -127,7 +127,7 @@ the .py files.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="transformlib.Pipeline.tasks">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tasks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Transform" title="transformlib._transformlib.Transform"><span class="pre">Transform</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Pipeline.tasks" title="Link to this definition">¶</a></dt>
-<dd><p>A topologically sorted list of :py:class:<a href="#id7"><span class="problematic" id="id8">`</span></a>transformlib.Transform`(s) in the Pipeline.</p>
+<dd><p>A topologically sorted list of <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a>(s) in the Pipeline.</p>
 </dd></dl>
 
 </dd></dl>
@@ -194,7 +194,7 @@ transform the <a class="reference internal" href="#transformlib.Input" title="tr
 <dl class="py property">
 <dt class="sig sig-object py" id="transformlib.Transform.nodes">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.nodes" title="Link to this definition">¶</a></dt>
-<dd><p>All :py:class:<a href="#id9"><span class="problematic" id="id10">`</span></a>transformlib.Output`(s) and :py:class:<a href="#id11"><span class="problematic" id="id12">`</span></a>transformlib.Input`(s).</p>
+<dd><p>All <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a>(s) and <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a>(s).</p>
 </dd></dl>
 
 <dl class="py property">

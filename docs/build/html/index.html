@@ -13,7 +13,8 @@
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="icon" href="_static/autobot.png"/>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage" href="usage.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -24,6 +25,9 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="usage.html" title="Usage"
+             accesskey="N">next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">transformlib 0.2.7 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">transformlib documentation</a></li> 
       </ul>
@@ -44,13 +48,50 @@
 <p>Often one ends up having a lot of main scripts that somehow loads, transforms and saves data.</p>
 <p>This package enables the user to organize these scripts in a way that makes them easy to run in
 the expected order of execution and easier to read.</p>
-</section>
-<section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#installation">Installation</a></li>
 </ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="transformlib.html">transformlib package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.Input"><code class="docutils literal notranslate"><span class="pre">Input</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Node.relative_path"><code class="docutils literal notranslate"><span class="pre">Node.relative_path</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Node.data_dir"><code class="docutils literal notranslate"><span class="pre">Node.data_dir</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Node.path"><code class="docutils literal notranslate"><span class="pre">Node.path</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.Output"><code class="docutils literal notranslate"><span class="pre">Output</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.Pipeline"><code class="docutils literal notranslate"><span class="pre">Pipeline</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Pipeline.from_paths"><code class="docutils literal notranslate"><span class="pre">Pipeline.from_paths()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Pipeline.inputs"><code class="docutils literal notranslate"><span class="pre">Pipeline.inputs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Pipeline.nodes"><code class="docutils literal notranslate"><span class="pre">Pipeline.nodes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Pipeline.outputs"><code class="docutils literal notranslate"><span class="pre">Pipeline.outputs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Pipeline.run"><code class="docutils literal notranslate"><span class="pre">Pipeline.run()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Pipeline.tasks"><code class="docutils literal notranslate"><span class="pre">Pipeline.tasks</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.Transform"><code class="docutils literal notranslate"><span class="pre">Transform</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.output_kwargs"><code class="docutils literal notranslate"><span class="pre">Transform.output_kwargs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.function"><code class="docutils literal notranslate"><span class="pre">Transform.function</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.input_kwargs"><code class="docutils literal notranslate"><span class="pre">Transform.input_kwargs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.parameter_kwargs"><code class="docutils literal notranslate"><span class="pre">Transform.parameter_kwargs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.inputs"><code class="docutils literal notranslate"><span class="pre">Transform.inputs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.nodes"><code class="docutils literal notranslate"><span class="pre">Transform.nodes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.outputs"><code class="docutils literal notranslate"><span class="pre">Transform.outputs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.run"><code class="docutils literal notranslate"><span class="pre">Transform.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.TransformlibCycleException"><code class="docutils literal notranslate"><span class="pre">TransformlibCycleException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.TransformlibDuplicateInputException"><code class="docutils literal notranslate"><span class="pre">TransformlibDuplicateInputException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.TransformlibDuplicateOutputException"><code class="docutils literal notranslate"><span class="pre">TransformlibDuplicateOutputException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.TransformlibDuplicateTransformException"><code class="docutils literal notranslate"><span class="pre">TransformlibDuplicateTransformException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.transform"><code class="docutils literal notranslate"><span class="pre">transform()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
 
 
@@ -86,6 +127,9 @@ the expected order of execution and easier to read.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="usage.html" title="Usage"
+             >next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">transformlib 0.2.7 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">transformlib documentation</a></li> 
       </ul>

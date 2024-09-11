@@ -22,9 +22,7 @@ Often one ends up having a lot of main scripts that somehow loads, transforms an
 This package enables the user to organize these scripts in a way that makes them easy to run in
 the expected order of execution and easier to read.
 
-Indices and tables
-==================
+.. toctree::
 
-* :ref:`genindex`
-* :ref:`modindex`
-
+   usage
+   transformlib
