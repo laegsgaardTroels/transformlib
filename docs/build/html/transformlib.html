@@ -48,13 +48,18 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/_transformlib.html#Node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Node" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The Node base class is a node in a directed asyclic graph of data transformations.</p>
-<dl class="simple">
-<dt>Attributes:</dt><dd><dl class="simple">
-<dt>relative_path (Path | str): The path relative to <code class="xref py py-const docutils literal notranslate"><span class="pre">config.DATA_DIR</span></code> where</dt><dd><p>data associated with the node is saved or loaded from.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="transformlib.Node.relative_path">
+<span class="sig-name descname"><span class="pre">relative_path</span></span><a class="headerlink" href="#transformlib.Node.relative_path" title="Link to this definition">¶</a></dt>
+<dd><p>The path relative to <code class="xref py py-const docutils literal notranslate"><span class="pre">config.DATA_DIR</span></code> where
+data associated with the node is saved or loaded from.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path | str</p>
 </dd>
 </dl>
-</dd>
-</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="transformlib.Node.data_dir">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><a class="headerlink" href="#transformlib.Node.data_dir" title="Link to this definition">¶</a></dt>
@@ -134,17 +139,52 @@ the .py files.</p>
 <p>Used to organize transformations of data.</p>
 <p>A <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> is a many to many mapping between
 <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a> and <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> nodes.</p>
-<dl>
-<dt>Attributes:</dt><dd><p>output_kwargs (dict[str, Output]): A mapping from Output name to Output instance.
-function (Function): A function that contains the data transformation logic used to load and</p>
-<blockquote>
-<div><p>transform the <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a> nodes and save the output to the
-<a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> nodes.</p>
-</div></blockquote>
-<p>input_kwargs (dict[str, Input]):  A mapping from Input name to Input instance.
-parameter_kwargs (dict[str, Parameter]): A mapping from Parameter name to Parameter instance.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="transformlib.Transform.output_kwargs">
+<span class="sig-name descname"><span class="pre">output_kwargs</span></span><a class="headerlink" href="#transformlib.Transform.output_kwargs" title="Link to this definition">¶</a></dt>
+<dd><p>A mapping from Output name to Output instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, <a class="reference internal" href="#transformlib.Output" title="transformlib.Output">Output</a>]</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="transformlib.Transform.function">
+<span class="sig-name descname"><span class="pre">function</span></span><a class="headerlink" href="#transformlib.Transform.function" title="Link to this definition">¶</a></dt>
+<dd><p>A function that contains the data transformation logic used to load and
+transform the <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a> nodes and save the output to the
+<a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="transformlib.Transform.input_kwargs">
+<span class="sig-name descname"><span class="pre">input_kwargs</span></span><a class="headerlink" href="#transformlib.Transform.input_kwargs" title="Link to this definition">¶</a></dt>
+<dd><p>A mapping from Input name to Input instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, <a class="reference internal" href="#transformlib.Input" title="transformlib.Input">Input</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="transformlib.Transform.parameter_kwargs">
+<span class="sig-name descname"><span class="pre">parameter_kwargs</span></span><a class="headerlink" href="#transformlib.Transform.parameter_kwargs" title="Link to this definition">¶</a></dt>
+<dd><p>A mapping from Parameter name to Parameter instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, Parameter]</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="transformlib.Transform.inputs">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.inputs" title="Link to this definition">¶</a></dt>
@@ -220,13 +260,16 @@ parameter_kwargs (dict[str, Parameter]): A mapping from Parameter name to Parame
 </div>
 <p>In above example the <cite>convert_to_json</cite> is a <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> object that
 can be part of a <a class="reference internal" href="#transformlib.Pipeline" title="transformlib.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Pipeline</span></code></a> of many transformations.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><dl class="simple">
-<dt><a href="#id13"><span class="problematic" id="id14">**</span></a>kwargs (dict[str, Node]): The <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a></dt><dd><p>and <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> nodes of the transform.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="#transformlib.Node" title="transformlib.Node"><em>Node</em></a><em>]</em>) – The <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a>
+and <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> nodes of the transform.</p>
 </dd>
-</dl>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A decorator that returns a Transform object.</p>
 </dd>
-<dt>Returns:</dt><dd><p>Callable[[Function], Transform]: A decorator that returns a Transform object.</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[Function], <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform">Transform</a>]</p>
 </dd>
 </dl>
 </dd></dl>

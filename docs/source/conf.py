@@ -48,6 +48,7 @@ extensions = [
     'sphinx.ext.githubpages',
     'sphinx.ext.mathjax',
     'sphinx.ext.autosummary',
+    "sphinx.ext.napoleon",
 ]
 
 # The name of an image file (relative to this directory) to place at the top
