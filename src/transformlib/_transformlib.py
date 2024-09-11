@@ -131,12 +131,12 @@ class Transform:
 
     @property
     def outputs(self) -> list[Output]:
-        """A tuple with all the :py:class:`transformlib.Output`(s) of the :py:class:`transformlib.Transform`."""
+        """A tuple with all the :py:class:`transformlib.Output`\\ (s) of the :py:class:`transformlib.Transform`."""
         return list(self.output_kwargs.values())
 
     @property
     def inputs(self) -> list[Input]:
-        """A tuple with all the :py:class:`transformlib.Input`(s) to the :py:class:`transformlib.Transform`."""
+        """A tuple with all the :py:class:`transformlib.Input`\\ (s) to the :py:class:`transformlib.Transform`."""
         return list(self.input_kwargs.values())
 
     @property
@@ -309,7 +309,7 @@ class Pipeline:
         ]
 
     def run(self) -> None:
-        """Used to run all the :py:class:`transformlib.Transform`(s) in the :py:class:`transformlib.Pipeline`."""
+        """Used to run all the :py:class:`transformlib.Transform`\\ (s) in the :py:class:`transformlib.Pipeline`."""
         logger.info(f"Beginning running of {self}")
         start = time.perf_counter()
         for transform in self.tasks:
