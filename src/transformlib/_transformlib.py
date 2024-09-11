@@ -33,7 +33,7 @@ class Node:
     """The Node base class is a node in a directed asyclic graph of data transformations.
 
     Attributes:
-        relative_path (Path | str): The path relative to :py:const:`config.DATA_DIR` where
+        relative_path (Path | str): The path relative to :py:data:`config['data_dir']` where
             data associated with the node is saved or loaded from.
     """
 
@@ -47,7 +47,7 @@ class Node:
 
     @property
     def path(self) -> Path:
-        """The path to the node in the directory :py:const:`config.DATA_DIR`."""
+        """The path to the node in the directory :py:data:`config['data_dir']`."""
         return self.data_dir / self.relative_path
 
     def __repr__(self) -> str:
@@ -92,18 +92,22 @@ Function = typing.Any
 
 
 class Transform:
-    """Used to organize transformations of data.
+    """A :py:class:`transformlib.Transform` loads, transforms and saves data.
 
-    A :py:class:`transformlib.Transform` is a many to many mapping between
-    :py:class:`transformlib.Input` and :py:class:`transformlib.Output` nodes.
+    A :py:class:`transformlib.Transform` is a lazily evaluated many to many transformation
+    between :py:class:`transformlib.Input` and :py:class:`transformlib.Output` nodes.
 
-    Attributes:
+    Args:
         output_kwargs (dict[str, Output]): A mapping from Output name to Output instance.
         function (Function): A function that contains the data transformation logic used to load and
             transform the :py:class:`transformlib.Input` nodes and save the output to the
             :py:class:`transformlib.Output` nodes.
         input_kwargs (dict[str, Input]):  A mapping from Input name to Input instance.
         parameter_kwargs (dict[str, Parameter]): A mapping from Parameter name to Parameter instance.
+
+    Raises:
+        TransformlibDuplicateInputException: If duplicate :py:class:`transformlib.Input`.
+        TransformlibDuplicateOutputException: If duplicate :py:class:`transformlib.Output`.
     """
 
     def __init__(
@@ -141,7 +145,7 @@ class Transform:
         return self.outputs + self.inputs
 
     def run(self) -> None:
-        """Runs the Transform."""
+        """Loads data from the :py:class:`transformlib.Input`\\ (s), transforms it and saves data to the :py:class:`transformlib.Output`\\ (s)."""
         logger.info(f"Beginning running of {self}")
         start = time.perf_counter()
         self(**self.output_kwargs, **self.input_kwargs, **self.parameter_kwargs)
