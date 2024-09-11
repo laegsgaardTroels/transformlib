@@ -77,3 +77,8 @@ docs:
 .PHONY: clean_docs
 clean_docs:
 	rm -rf docs/build
+
+## Serve http server with documentation locally.
+.PHONY: serve_docs
+serve_docs:
+	cd docs/build/html && python -m http.server --bind 127.0.0.1
