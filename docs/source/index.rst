@@ -17,9 +17,7 @@ transformlib documentation
 
 Enables the user to organize transformations of data as a regular Python package.
 
-Often one ends up having a lot of main scripts that somehow loads, transforms and saves data.
-
-This package enables the user to organize these scripts in a way that makes them easy to run in
+Often one ends up having a lot of complicated main scripts that somehow loads, transforms and saves data. This package enables the user to better organize these scripts in a way that makes them easy to run in
 the expected order of execution and easier to read.
 
 .. toctree::
