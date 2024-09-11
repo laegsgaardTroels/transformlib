@@ -210,7 +210,7 @@ def transform(
             mapping = dict(map(lambda line: line.split(','), text.splitlines()))
             json_output.path.write_text(json.dumps(mapping, indent=4))
 
-    In above example the `convert_to_json` is a :py:class:`transformlib.Transform` object that
+    In above example the ``convert_to_json`` is a :py:class:`transformlib.Transform` object that
     can be part of a :py:class:`transformlib.Pipeline` of many transformations.
 
     Args:
