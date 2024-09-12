@@ -134,23 +134,24 @@ class Transform:
             )
 
     @property
-    def outputs(self) -> list[Output]:
+    def outputs(self) -> tuple[Output, ...]:
         """A tuple with all the :py:class:`transformlib.Output`\\ (s) of the :py:class:`transformlib.Transform`."""
-        return list(self.output_kwargs.values())
+        return tuple(self.output_kwargs.values())
 
     @property
-    def inputs(self) -> list[Input]:
+    def inputs(self) -> tuple[Input, ...]:
         """A tuple with all the :py:class:`transformlib.Input`\\ (s) to the :py:class:`transformlib.Transform`."""
-        return list(self.input_kwargs.values())
+        return tuple(self.input_kwargs.values())
 
     @property
-    def nodes(self) -> list[Input | Output]:
+    def nodes(self) -> tuple[Input | Output, ...]:
         """All :py:class:`transformlib.Output`\\ (s) and :py:class:`transformlib.Input`\\ (s)."""
         return self.outputs + self.inputs
 
     @property
-    def parameters(self) -> list[Parameter]:
-        return list(self.parameter_kwargs.values())
+    def parameters(self) -> tuple[Parameter, ...]:
+        """All :py:class:`transformlib.Parameter`\\ (s)."""
+        return tuple(self.parameter_kwargs.values())
 
     def run(self) -> None:
         """Loads data from the :py:class:`transformlib.Input`\\ (s), transforms it and saves data to the :py:class:`transformlib.Output`\\ (s)."""
@@ -280,7 +281,7 @@ class Pipeline:
             raise NotImplementedError(f"Not supported {transforms=}")
 
     @property
-    def tasks(self) -> list[Transform]:
+    def tasks(self) -> tuple[Transform, ...]:
         """A topologically sorted list of :py:class:`transformlib.Transform`\\ (s) in the Pipeline."""
         tsort = graphlib.TopologicalSorter()
         for transform in self.transforms.values():
@@ -291,35 +292,35 @@ class Pipeline:
             ]
             tsort.add(transform, *predecessors)
         try:
-            return list(tsort.static_order())
+            return tuple(tsort.static_order())
         except graphlib.CycleError as exception:
             raise TransformlibCycleException("Cycle detected.") from exception
 
     @property
-    def outputs(self) -> list[Output]:
+    def outputs(self) -> tuple[Output, ...]:
         """A tuple with all the :py:class:`transformlib.Output` of the :py:class:`transformlib.Pipeline`."""
-        return [
+        return tuple([
             node for transform in self.transforms.values() for node in transform.outputs
-        ]
+        ])
 
     @property
-    def inputs(self) -> list[Input]:
+    def inputs(self) -> tuple[Input, ...]:
         """A tuple with all the :py:class:`transformlib.Input` of the :py:class:`transformlib.Pipeline`."""
-        return [
+        return tuple([
             node for transform in self.transforms.values() for node in transform.inputs
-        ]
+        ])
 
     @property
-    def nodes(self) -> list[Input | Output]:
+    def nodes(self) -> tuple[Input | Output, ...]:
         """All :py:class:`transformlib.Output`\\ (s) and :py:class:`transformlib.Input`\\ (s)."""
-        return [
+        return tuple([
             node for transform in self.transforms.values() for node in transform.nodes
-        ]
+        ])
 
     @property
-    def parameters(self) -> list[Parameter]:
+    def parameters(self) -> tuple[Parameter, ...]:
         """All :py:class:`transformlib.Parameter`\\ (s)."""
-        return [parameter for transform in self.transforms.values() for parameter in transform.parameters]
+        return tuple([parameter for transform in self.transforms.values() for parameter in transform.parameters])
 
     def run(self) -> None:
         """Used to run all the :py:class:`transformlib.Transform`\\ (s) in the :py:class:`transformlib.Pipeline`."""
