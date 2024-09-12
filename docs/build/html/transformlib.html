@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>transformlib package &#8212; transformlib 0.2.7 documentation</title>
+    <title>transformlib package &#8212; transformlib 0.3.7 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css?v=d59dc883" />
-    <script src="_static/documentation_options.js?v=58050c01"></script>
+    <script src="_static/documentation_options.js?v=29d04658"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="icon" href="_static/autobot.png"/>
@@ -28,7 +28,7 @@
         <li class="right" >
           <a href="usage/quickstart.html" title="Quickstart"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">transformlib 0.2.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">transformlib 0.3.7 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">transformlib package</a></li> 
       </ul>
     </div>  
@@ -118,25 +118,25 @@ the .py files.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="transformlib.Pipeline.inputs">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Pipeline.inputs" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Pipeline.inputs" title="Link to this definition">¶</a></dt>
 <dd><p>A tuple with all the <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a> of the <a class="reference internal" href="#transformlib.Pipeline" title="transformlib.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Pipeline</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="transformlib.Pipeline.nodes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Pipeline.nodes" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Pipeline.nodes" title="Link to this definition">¶</a></dt>
 <dd><p>All <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a>(s) and <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a>(s).</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="transformlib.Pipeline.outputs">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Pipeline.outputs" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Pipeline.outputs" title="Link to this definition">¶</a></dt>
 <dd><p>A tuple with all the <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> of the <a class="reference internal" href="#transformlib.Pipeline" title="transformlib.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Pipeline</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="transformlib.Pipeline.parameters">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameters</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Parameter" title="transformlib._transformlib.Parameter"><span class="pre">Parameter</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Pipeline.parameters" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameters</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Parameter" title="transformlib._transformlib.Parameter"><span class="pre">Parameter</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Pipeline.parameters" title="Link to this definition">¶</a></dt>
 <dd><p>All <a class="reference internal" href="#transformlib.Parameter" title="transformlib.Parameter"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Parameter</span></code></a>(s).</p>
 </dd></dl>
 
@@ -148,7 +148,7 @@ the .py files.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="transformlib.Pipeline.tasks">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tasks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Transform" title="transformlib._transformlib.Transform"><span class="pre">Transform</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Pipeline.tasks" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tasks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Transform" title="transformlib._transformlib.Transform"><span class="pre">Transform</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Pipeline.tasks" title="Link to this definition">¶</a></dt>
 <dd><p>A topologically sorted list of <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a>(s) in the Pipeline.</p>
 </dd></dl>
 
@@ -181,26 +181,27 @@ transform the <a class="reference internal" href="#transformlib.Input" title="tr
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="transformlib.Transform.inputs">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.inputs" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.inputs" title="Link to this definition">¶</a></dt>
 <dd><p>A tuple with all the <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a>(s) to the <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="transformlib.Transform.nodes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.nodes" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.nodes" title="Link to this definition">¶</a></dt>
 <dd><p>All <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a>(s) and <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a>(s).</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="transformlib.Transform.outputs">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.outputs" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.outputs" title="Link to this definition">¶</a></dt>
 <dd><p>A tuple with all the <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a>(s) of the <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="transformlib.Transform.parameters">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameters</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Parameter" title="transformlib._transformlib.Parameter"><span class="pre">Parameter</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.parameters" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameters</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Parameter" title="transformlib._transformlib.Parameter"><span class="pre">Parameter</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.parameters" title="Link to this definition">¶</a></dt>
+<dd><p>All <a class="reference internal" href="#transformlib.Parameter" title="transformlib.Parameter"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Parameter</span></code></a>(s).</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="transformlib.Transform.run">
@@ -311,7 +312,7 @@ and <a class="reference internal" href="#transformlib.Output" title="transformli
         <li class="right" >
           <a href="usage/quickstart.html" title="Quickstart"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">transformlib 0.2.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">transformlib 0.3.7 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">transformlib package</a></li> 
       </ul>
     </div>
