@@ -389,6 +389,7 @@ def transform_pandas(
         if pd is None:
             raise ModuleNotFoundError("Please install pandas")
 
+        # Read
         processed_kwargs = {}
         for key, value in transform.kwargs.items():
             if isinstance(value, Input):
@@ -399,10 +400,12 @@ def transform_pandas(
                     processed_kwargs[key] = value.reader(
                         value.path, **value.metadata)
 
+        # Transform
         output_objects = transform.function(**processed_kwargs)
+
+        # Save
         if not isinstance(output_objects, tuple):
             output_objects = (output_objects,)
-
         try:
             for object, output in zip(output_objects, transform.outputs, strict=True):
                 if output.writer is None:
