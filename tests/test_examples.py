@@ -1,4 +1,4 @@
-from transformlib import config
+from transformlib import configure
 from transformlib._transformlib import import_and_append_to_sys_path
 
 import pytest
@@ -18,5 +18,5 @@ def test_run_sh(example_dir: pathlib.Path, monkeypatch):
 @pytest.mark.parametrize("example_dir", EXAMPLE_DIRS)
 def test_run_py(example_dir: pathlib.Path, tmp_path):
     pipeline = import_and_append_to_sys_path(example_dir / "pipeline.py")
-    config["data_dir"] = tmp_path
+    configure(data_dir=tmp_path)
     pipeline.pipeline.run()

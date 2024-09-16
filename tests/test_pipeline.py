@@ -1,6 +1,6 @@
 import pytest
 from transformlib import (
-    Transform,
+    transform,
     Pipeline,
     Input,
     Output,
@@ -11,14 +11,27 @@ from transformlib import (
 
 def test_run_duplicate_transforms():
     """Should raise exception if duplicate Transform."""
-    transform = Transform(
-        output_kwargs={},
-        function=lambda: None,
-        input_kwargs={},
-    )
-    with pytest.raises(Exception):
-        pipeline = Pipeline([transform, transform])
-        pipeline.run()
+
+    @transform()
+    def empty():
+        return None
+
+    with pytest.raises(TransformlibDuplicateTransformException):
+        Pipeline([empty, empty])
+
+    @transform(a=Output("a"))
+    def out(a):
+        return None
+
+    with pytest.raises(TransformlibDuplicateTransformException):
+        Pipeline([out, out])
+
+    @transform(b=Output("b"))
+    def inp(b):
+        return None
+
+    with pytest.raises(TransformlibDuplicateTransformException):
+        Pipeline([inp, inp])
 
 
 def test_run_transform_exception_handling():
@@ -27,15 +40,11 @@ def test_run_transform_exception_handling():
     class TransformlibTestRunTasksException(Exception):
         """Raised in this test case."""
 
-    def raise_transform_exception():
+    @transform()
+    def raise_exception():
         raise TransformlibTestRunTasksException("Transform test.")
 
-    transform = Transform(
-        output_kwargs={},
-        function=raise_transform_exception,
-        input_kwargs={},
-    )
-    pipeline = Pipeline([transform])
+    pipeline = Pipeline([raise_exception])
     with pytest.raises(TransformlibTestRunTasksException):
         pipeline.run()
 
@@ -43,50 +52,20 @@ def test_run_transform_exception_handling():
 def test_run_cycle_exception():
     """Should raise an exception if a cycle in the DAG."""
 
-    def function1(foo_input, bar_input):
+    @transform(
+        a=Output("a"),
+        b=Input("b"),
+    )
+    def ab(a, b):
         return None
 
-    def function2(bar_input, foo_input):
+    @transform(
+        b=Output("b"),
+        a=Input("a"),
+    )
+    def ba(a, b):
         return None
 
-    transform1 = Transform(
-        output_kwargs={"foo_input": Output("foo")},
-        function=function1,
-        input_kwargs={"bar_input": Input("bar")},
-    )
-    transform2 = Transform(
-        output_kwargs={"bar_output": Output("bar")},
-        function=function2,
-        input_kwargs={"foo_input": Input("foo")},
-    )
-    pipeline = Pipeline([transform1, transform2])
+    pipeline = Pipeline([ab, ba])
     with pytest.raises(TransformlibCycleException):
         pipeline.run()
-
-
-def test_duplicate_transform_exception():
-    transform1 = Transform(
-        output_kwargs={"foo_output": Output("foo")},
-        function=lambda foo_output: None,
-        input_kwargs={},
-    )
-    transform2 = Transform(
-        output_kwargs={"foo_output": Output("foo")},
-        function=lambda foo_output: None,
-        input_kwargs={},
-    )
-    with pytest.raises(TransformlibDuplicateTransformException):
-        Pipeline([transform1, transform2])
-
-    transform1 = Transform(
-        output_kwargs={},
-        function=lambda foo_output: None,
-        input_kwargs={"foo_input": Input("foo")},
-    )
-    transform2 = Transform(
-        output_kwargs={},
-        function=lambda foo_output: None,
-        input_kwargs={"foo_input": Input("foo")},
-    )
-    with pytest.raises(TransformlibDuplicateTransformException):
-        Pipeline([transform1, transform2])
