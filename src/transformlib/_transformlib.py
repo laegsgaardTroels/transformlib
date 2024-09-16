@@ -19,6 +19,7 @@ _config = {"data_dir": "/tmp/"}
 
 
 def configure(**settings) -> None:
+    """Set global configurations."""
     _config.update(settings)
 
 
