@@ -52,7 +52,15 @@
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;data_dir&quot;</span><span class="p">:</span> <span class="s2">&quot;/tmp/&quot;</span><span class="p">}</span>
+<span class="n">_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;data_dir&quot;</span><span class="p">:</span> <span class="s2">&quot;/tmp/&quot;</span><span class="p">}</span>
+
+
+<div class="viewcode-block" id="configure">
+<a class="viewcode-back" href="../../transformlib.html#transformlib.configure">[docs]</a>
+<span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set global configurations.&quot;&quot;&quot;</span>
+    <span class="n">_config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span></div>
+
 
 
 <div class="viewcode-block" id="TransformlibCycleException">
@@ -122,7 +130,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">data_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The root directory where all data is saved and loaded relative to.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;data_dir&quot;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;data_dir&quot;</span><span class="p">])</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
@@ -457,6 +465,7 @@
         <span class="k">if</span> <span class="n">pd</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ModuleNotFoundError</span><span class="p">(</span><span class="s2">&quot;Please install pandas&quot;</span><span class="p">)</span>
 
+        <span class="c1"># Read</span>
         <span class="n">processed_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">transform</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Input</span><span class="p">):</span>
@@ -467,10 +476,12 @@
                     <span class="n">processed_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span>
                         <span class="n">value</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">value</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
 
+        <span class="c1"># Transform</span>
         <span class="n">output_objects</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="o">**</span><span class="n">processed_kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Save</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output_objects</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">output_objects</span> <span class="o">=</span> <span class="p">(</span><span class="n">output_objects</span><span class="p">,)</span>
-
         <span class="k">try</span><span class="p">:</span>
             <span class="k">for</span> <span class="nb">object</span><span class="p">,</span> <span class="n">output</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">output_objects</span><span class="p">,</span> <span class="n">transform</span><span class="o">.</span><span class="n">outputs</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">output</span><span class="o">.</span><span class="n">writer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
