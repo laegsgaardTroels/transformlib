@@ -1,20 +1,13 @@
-from transformlib import transform, Output, Input
+from transformlib import transform_pandas, Output, Input
 from sklearn.model_selection import GridSearchCV
 from sklearn.tree import DecisionTreeRegressor
 import pandas as pd
 
 
-@transform(
-    scores_output=Output("scores.csv"),
-    X_train_input=Input("X_train.csv"),
-    y_train_input=Input("y_train.csv"),
-)
-def tune(scores_output, X_train_input, y_train_input):
-    """Evaluate the model using different hyperparameters."""
-
-    # Loading the training data.
-    X_train = pd.read_csv(
-        X_train_input.path,
+@transform_pandas(
+    Output("scores.csv"),
+    X_train=Input(
+        "X_train.csv",
         dtype={
             "HouseAge": "float64",
             "AveRooms": "float64",
@@ -25,13 +18,16 @@ def tune(scores_output, X_train_input, y_train_input):
             "Longitude": "float64",
             "MedHouseVal": "float64",
         },
-    )
-    y_train = pd.read_csv(
-        y_train_input.path,
+    ),
+    y_train=Input(
+        "y_train.csv",
         dtype={
             "MedInc": "float64",
         },
-    )
+    ),
+)
+def tune(X_train: pd.DataFrame, y_train: pd.DataFrame) -> pd.DataFrame:
+    """Evaluate the model using different hyperparameters."""  # Loading the training data.
 
     # Conducting a grid search cross validation over the specified grid of parameters.
     model = DecisionTreeRegressor()
@@ -46,9 +42,8 @@ def tune(scores_output, X_train_input, y_train_input):
         cv=5,
     )
     gs.fit(X_train, y_train)
-    
-    # Saving the scores.
-    pd.DataFrame(
+
+    return pd.DataFrame(
         [
             {"mean_test_score": mean_test_score, "params": params}
             for mean_test_score, params in zip(
@@ -56,4 +51,4 @@ def tune(scores_output, X_train_input, y_train_input):
                 gs.cv_results_["params"],
             )
         ]
-    ).to_csv(scores_output.path, header=True, index=False)
+    )

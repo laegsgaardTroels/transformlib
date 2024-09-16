@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>transformlib documentation &#8212; transformlib 0.3.7 documentation</title>
+    <title>transformlib documentation &#8212; transformlib 0.4.7 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css?v=d59dc883" />
-    <script src="_static/documentation_options.js?v=29d04658"></script>
+    <script src="_static/documentation_options.js?v=a78bb796"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="icon" href="_static/autobot.png"/>
@@ -28,7 +28,7 @@
         <li class="right" >
           <a href="usage/installation.html" title="Installation"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">transformlib 0.3.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="#">transformlib 0.4.7 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">transformlib documentation</a></li> 
       </ul>
     </div>  
@@ -40,7 +40,7 @@
             
   <section id="transformlib-documentation">
 <h1>transformlib documentation<a class="headerlink" href="#transformlib-documentation" title="Link to this heading">¶</a></h1>
-<p><strong>Documentation Build Date</strong>: Sep 12, 2024 <strong>Version</strong>: 0.3.7</p>
+<p><strong>Documentation Build Date</strong>: Sep 16, 2024 <strong>Version</strong>: 0.4.7</p>
 <p><strong>Useful links</strong>:
 <a class="reference external" href="https://github.com/laegsgaardTroels/transformlib">Source Repository</a>
 <a class="reference external" href="https://github.com/laegsgaardTroels/transformlib/tree/master/examples">Examples</a></p>
@@ -55,6 +55,9 @@ the expected order of execution and easier to read.</p>
 <li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.Input"><code class="docutils literal notranslate"><span class="pre">Input</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Node.relative_path"><code class="docutils literal notranslate"><span class="pre">Node.relative_path</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Node.reader"><code class="docutils literal notranslate"><span class="pre">Node.reader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Node.writer"><code class="docutils literal notranslate"><span class="pre">Node.writer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Node.metadata"><code class="docutils literal notranslate"><span class="pre">Node.metadata</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Node.data_dir"><code class="docutils literal notranslate"><span class="pre">Node.data_dir</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Node.path"><code class="docutils literal notranslate"><span class="pre">Node.path</span></code></a></li>
 </ul>
@@ -72,9 +75,15 @@ the expected order of execution and easier to read.</p>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.Transform"><code class="docutils literal notranslate"><span class="pre">Transform</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.input_args"><code class="docutils literal notranslate"><span class="pre">Transform.input_args</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.input_kwargs"><code class="docutils literal notranslate"><span class="pre">Transform.input_kwargs</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.inputs"><code class="docutils literal notranslate"><span class="pre">Transform.inputs</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.nodes"><code class="docutils literal notranslate"><span class="pre">Transform.nodes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.output_args"><code class="docutils literal notranslate"><span class="pre">Transform.output_args</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.output_kwargs"><code class="docutils literal notranslate"><span class="pre">Transform.output_kwargs</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.outputs"><code class="docutils literal notranslate"><span class="pre">Transform.outputs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.parameter_args"><code class="docutils literal notranslate"><span class="pre">Transform.parameter_args</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.parameter_kwargs"><code class="docutils literal notranslate"><span class="pre">Transform.parameter_kwargs</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.parameters"><code class="docutils literal notranslate"><span class="pre">Transform.parameters</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="transformlib.html#transformlib.Transform.run"><code class="docutils literal notranslate"><span class="pre">Transform.run()</span></code></a></li>
 </ul>
@@ -84,6 +93,7 @@ the expected order of execution and easier to read.</p>
 <li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.TransformlibDuplicateOutputException"><code class="docutils literal notranslate"><span class="pre">TransformlibDuplicateOutputException</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.TransformlibDuplicateTransformException"><code class="docutils literal notranslate"><span class="pre">TransformlibDuplicateTransformException</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.transform"><code class="docutils literal notranslate"><span class="pre">transform()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="transformlib.html#transformlib.transform_pandas"><code class="docutils literal notranslate"><span class="pre">transform_pandas()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -126,7 +136,7 @@ the expected order of execution and easier to read.</p>
         <li class="right" >
           <a href="usage/installation.html" title="Installation"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">transformlib 0.3.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="#">transformlib 0.4.7 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">transformlib documentation</a></li> 
       </ul>
     </div>

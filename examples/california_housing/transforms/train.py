@@ -1,20 +1,13 @@
-from transformlib import transform, Output, Input
+from transformlib import transform_pandas, Output, Input
 from sklearn.tree import DecisionTreeRegressor
 import pandas as pd
 import joblib
 
 
-@transform(
-    model_output=Output("model.joblib"),
-    X_train_input=Input("X_train.csv"),
-    y_train_input=Input("y_train.csv"),
-)
-def train(model_output, X_train_input, y_train_input):
-    """Train a model and save the trained model."""
-
-    # Loading the training data.
-    X_train = pd.read_csv(
-        X_train_input.path,
+@transform_pandas(
+    Output("model.joblib", writer=joblib.dump),
+    X_train=Input(
+        "X_train.csv",
         dtype={
             "HouseAge": "float64",
             "AveRooms": "float64",
@@ -25,17 +18,19 @@ def train(model_output, X_train_input, y_train_input):
             "Longitude": "float64",
             "MedHouseVal": "float64",
         },
-    )
-    y_train = pd.read_csv(
-        y_train_input.path,
+    ),
+    y_train=Input(
+        "y_train.csv",
         dtype={
             "MedInc": "float64",
         },
-    )
+    ),
+)
+def train(X_train: pd.DataFrame, y_train: pd.DataFrame) -> DecisionTreeRegressor:
+    """Train a model and save the trained model."""
 
     # Fitting the model
     model = DecisionTreeRegressor()
     model.fit(X_train, y_train)
 
-    # Save a trained model.
-    joblib.dump(model, model_output.path)
+    return model

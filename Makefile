@@ -26,6 +26,7 @@ venv: .python-version
 .PHONY: clean
 clean:
 	rm -rf venv
+	rm -rf src/*.egg-info
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
@@ -44,6 +45,7 @@ tag:
 tests:
 	. venv/bin/activate; \
 		${PYTHON_INTERPRETER} -m pytest \
+			-vv \
 			--log-cli-level=INFO \
 			--cov-report term \
 			--cov=src \

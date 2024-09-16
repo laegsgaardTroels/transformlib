@@ -5,12 +5,21 @@ import sys
 import time
 import typing
 
+try:
+    import pandas as pd
+except ModuleNotFoundError:
+    pd = None
+
 import logging
 
 logger = logging.getLogger(__name__)
 
 
-config = {"data_dir": "/tmp/"}
+_config = {"data_dir": "/tmp/"}
+
+
+def configure(**settings) -> None:
+    _config.update(settings)
 
 
 class TransformlibCycleException(graphlib.CycleError):
@@ -32,18 +41,41 @@ class TransformlibDuplicateOutputException(Exception):
 class Node:
     """The Node base class is a node in a directed asyclic graph of data transformations.
 
+    Args:
+        relative_path (Path | str): The path relative to :py:data:`config['data_dir']` where
+            data associated with the node is saved or loaded from.
+        reader (Function): A function used to read from the node. If None then a default reader
+            is used.
+        writer (Function): A function used to write to the node. If None then a default writer
+            is used.
+        **metadata (dict[str, Any] | None): A dictionary with metadata associated with the node.
+
     Attributes:
         relative_path (Path | str): The path relative to :py:data:`config['data_dir']` where
             data associated with the node is saved or loaded from.
+        reader (Function): A function used to read from the node. If None then a default reader
+            is used.
+        writer (Function): A function used to write to the node. If None then a default writer
+            is used.
+        metadata (dict[str, Any] | None): A dictionary with metadata associated with the node.
     """
 
-    def __init__(self, relative_path: Path | str):
+    def __init__(
+        self,
+        relative_path: Path | str,
+        reader: typing.Any | None = None,
+        writer: typing.Any | None = None,
+        **metadata: typing.Any,
+    ):
         self.relative_path = relative_path
+        self.reader = reader
+        self.writer = writer
+        self.metadata = metadata
 
     @property
     def data_dir(self) -> Path:
         """The root directory where all data is saved and loaded relative to."""
-        return Path(config["data_dir"])
+        return Path(_config["data_dir"])
 
     @property
     def path(self) -> Path:
@@ -102,12 +134,13 @@ class Transform:
     between :py:class:`transformlib.Input` and :py:class:`transformlib.Output` nodes.
 
     Args:
-        output_kwargs (dict[str, Output]): A mapping from Output name to Output instance.
+        runner (Function): A function specifying how the transformation is being run.
         function (Function): A function that contains the data transformation logic used to load and
             transform the :py:class:`transformlib.Input` nodes and save the output to the
             :py:class:`transformlib.Output` nodes.
-        input_kwargs (dict[str, Input]):  A mapping from Input name to Input instance.
-        parameter_kwargs (dict[str, Parameter]): A mapping from Parameter name to Parameter instance.
+        args (tuple[Input | Output | Parameter, ...]):  All arguments to the transformation.
+        kwargs (dict[str, Input | Output | Parameter] | dict[str, Input | Parameter]): All
+            keyword arguments to the transformation.
 
     Raises:
         TransformlibDuplicateInputException: If duplicate :py:class:`transformlib.Input` exists.
@@ -116,32 +149,73 @@ class Transform:
 
     def __init__(
         self,
-        output_kwargs: dict[str, Output],
+        runner: Function,
         function: Function,
-        input_kwargs: dict[str, Input],
-        parameter_kwargs: dict[str, Parameter] | None = None,
+        args: tuple[Input | Output | Parameter, ...],
+        kwargs: dict[str, Input | Output | Parameter] | dict[str, Input | Parameter],
     ):
-        self.output_kwargs = output_kwargs
+        self.runner = runner
         self.function = function
-        self.input_kwargs = input_kwargs
-        self.parameter_kwargs = {} if parameter_kwargs is None else parameter_kwargs
+        self.args = args
+        self.kwargs = kwargs
 
         if len(set(self.inputs)) != len(self.inputs):
-            raise TransformlibDuplicateInputException(f"Duplicate inputs={self.inputs}")
+            raise TransformlibDuplicateInputException(
+                f"Duplicate inputs={self.inputs}")
         if len(set(self.outputs)) != len(self.outputs):
             raise TransformlibDuplicateOutputException(
                 f"Duplicate outputs={self.outputs}"
             )
 
     @property
+    def output_args(self) -> tuple[Output, ...]:
+        """A tuple with all the :py:class:`transformlib.Output`\\ arguments."""
+        return tuple([value for value in self.args if isinstance(value, Output)])
+
+    @property
+    def input_args(self) -> tuple[Input, ...]:
+        """A tuple with all the :py:class:`transformlib.Input`\\ arguments."""
+        return tuple([value for value in self.args if isinstance(value, Input)])
+
+    @property
+    def parameter_args(self) -> tuple[Parameter, ...]:
+        """A tuple with all the :py:class:`transformlib.Parameter`\\ arguments."""
+        return tuple([value for value in self.args if isinstance(value, Parameter)])
+
+    @property
+    def output_kwargs(self) -> dict[str, Output]:
+        """A dictionary with all the :py:class:`transformlib.Output`\\ keyword arguments."""
+        return {
+            key: value
+            for key, value in self.kwargs.items()
+            if isinstance(value, Output)
+        }
+
+    @property
+    def input_kwargs(self) -> dict[str, Input]:
+        """A dictionary with all the :py:class:`transformlib.Input`\\ keyword arguments."""
+        return {
+            key: value for key, value in self.kwargs.items() if isinstance(value, Input)
+        }
+
+    @property
+    def parameter_kwargs(self) -> dict[str, Parameter]:
+        """A dictionary with all the :py:class:`transformlib.Parameter`\\ keyword arguments."""
+        return {
+            key: value
+            for key, value in self.kwargs.items()
+            if isinstance(value, Parameter)
+        }
+
+    @property
     def outputs(self) -> tuple[Output, ...]:
         """A tuple with all the :py:class:`transformlib.Output`\\ (s) of the :py:class:`transformlib.Transform`."""
-        return tuple(self.output_kwargs.values())
+        return self.output_args + tuple(self.output_kwargs.values())
 
     @property
     def inputs(self) -> tuple[Input, ...]:
         """A tuple with all the :py:class:`transformlib.Input`\\ (s) to the :py:class:`transformlib.Transform`."""
-        return tuple(self.input_kwargs.values())
+        return self.input_args + tuple(self.input_kwargs.values())
 
     @property
     def nodes(self) -> tuple[Input | Output, ...]:
@@ -151,14 +225,15 @@ class Transform:
     @property
     def parameters(self) -> tuple[Parameter, ...]:
         """All :py:class:`transformlib.Parameter`\\ (s)."""
-        return tuple(self.parameter_kwargs.values())
+        return self.parameter_args + tuple(self.parameter_kwargs.values())
 
     def run(self) -> None:
         """Loads data from the :py:class:`transformlib.Input`\\ (s), transforms it and saves data to the :py:class:`transformlib.Output`\\ (s)."""
         logger.info(f"Beginning running of {self}")
         start = time.perf_counter()
-        self(**self.output_kwargs, **self.input_kwargs, **self.parameter_kwargs)
-        logger.info(f"Completed running of {self} took {time.perf_counter() - start}")
+        self.runner(self)
+        logger.info(
+            f"Completed running of {self} took {time.perf_counter() - start}")
 
     def __call__(self, *args, **kwargs):
         return self.function(*args, **kwargs)
@@ -166,14 +241,10 @@ class Transform:
     def __repr__(self) -> str:
         return (
             f"{self.__class__.__name__}("
-            + kwargs_repr(self.output_kwargs)
-            + kwargs_repr(self.input_kwargs)
-            + kwargs_repr(self.parameter_kwargs)
+            + _args_repr(self.args)
+            + _kwargs_repr(self.kwargs)
             + ")"
         )
-
-    def __str__(self) -> str:
-        return self.function.__name__
 
     def __eq__(self, other) -> bool:
         if set(self.nodes) == set(other.nodes):
@@ -187,7 +258,11 @@ class Transform:
         return self.function.__name__
 
 
-def kwargs_repr(kwargs: dict[str, typing.Any]) -> str:
+def _args_repr(args: tuple[typing.Any, ...]) -> str:
+    return ", ".join(map(str, args))
+
+
+def _kwargs_repr(kwargs: dict[str, typing.Any]) -> str:
     return ", ".join(
         map(
             lambda key: key + "=" + repr(kwargs[key]),
@@ -197,6 +272,7 @@ def kwargs_repr(kwargs: dict[str, typing.Any]) -> str:
 
 
 def transform(
+    *args: Input | Output | Parameter,
     **kwargs: Input | Output | Parameter,
 ) -> typing.Callable[[Function], Transform]:
     """Convert a function to a :py:class:`transformlib.Transform`.
@@ -230,21 +306,116 @@ def transform(
         Callable[[Function], Transform]: A decorator that returns a Transform object.
     """
 
+    def runner(transform: Transform):
+        transform.function(*transform.args, **transform.kwargs)
+
     def decorator(function: Function) -> Transform:
-        return Transform(
-            output_kwargs={
-                key: value for key, value in kwargs.items() if isinstance(value, Output)
-            },
-            function=function,
-            input_kwargs={
-                key: value for key, value in kwargs.items() if isinstance(value, Input)
-            },
-            parameter_kwargs={
-                key: value
-                for key, value in kwargs.items()
-                if isinstance(value, Parameter)
-            },
+        return Transform(runner=runner, function=function, args=args, kwargs=kwargs)
+
+    return decorator
+
+
+def transform_pandas(
+    *args: Output,
+    **kwargs: Input | Parameter,
+) -> typing.Callable[[Function], Transform]:
+    """Convert a pandas function to a :py:class:`transformlib.Transform`.
+
+    A Transform that operates on pandas DataFrames are often constructed using the :py:func:`transformlib.transform_pandas` decorator:
+
+    .. highlight:: python
+    .. code-block:: python
+
+        from transformlib import transform_pandas, Output, Input
+        from sklearn.tree import DecisionTreeRegressor
+        import pandas as pd
+        import joblib
+
+
+        @transform_pandas(
+            Output("model.joblib", writer=joblib.dump),
+            X_train=Input(
+                "X_train.csv",
+                dtype={
+                    "HouseAge": "float64",
+                    "AveRooms": "float64",
+                    "AveBedrms": "float64",
+                    "Population": "float64",
+                    "AveOccup": "float64",
+                    "Latitude": "float64",
+                    "Longitude": "float64",
+                    "MedHouseVal": "float64",
+                },
+            ),
+            y_train=Input(
+                "y_train.csv",
+                dtype={
+                    "MedInc": "float64",
+                },
+            ),
         )
+        def train(X_train: pd.DataFrame, y_train: pd.DataFrame) -> DecisionTreeRegressor:
+            \"""Train a model and save the trained model.\"""
+
+            # Fitting the model
+            model = DecisionTreeRegressor()
+            model.fit(X_train, y_train)
+
+            return model
+
+    In above example the ``train`` is a :py:class:`transformlib.Transform` object that
+    can be part of a :py:class:`transformlib.Pipeline` of many pandas DataFrame transformations.
+
+    For more see the `california housing example <https://github.com/laegsgaardTroels/transformlib/tree/master/examples/california_housing>`__.
+
+    Args:
+        *args (Output): One or more :py:class:`transformlib.Output`\\ (s). The return value of the
+            function is a single object or a tuple of objects expected to be written to args and
+            with the same order as args.
+        **kwargs (dict[str, Input | Parameter]): The :py:class:`transformlib.Input`
+            and :py:class:`transformlib.Parameter` of the transform.
+
+    Returns:
+        Callable[[Function], Transform]: A decorator that returns a Transform object.
+
+    Raises:
+        ModuleNotFoundError: If pandas is not installed.
+    """
+    if pd is None:
+        raise ModuleNotFoundError("Please install pandas")
+
+    def runner(transform: Transform):
+        assert isinstance(transform, Transform)
+        if pd is None:
+            raise ModuleNotFoundError("Please install pandas")
+
+        processed_kwargs = {}
+        for key, value in transform.kwargs.items():
+            if isinstance(value, Input):
+                if value.reader is None:
+                    processed_kwargs[key] = pd.read_csv(
+                        value.path, **value.metadata)
+                else:
+                    processed_kwargs[key] = value.reader(
+                        value.path, **value.metadata)
+
+        output_objects = transform.function(**processed_kwargs)
+        if not isinstance(output_objects, tuple):
+            output_objects = (output_objects,)
+
+        try:
+            for object, output in zip(output_objects, transform.outputs, strict=True):
+                if output.writer is None:
+                    object.to_csv(output.path, **output.metadata)
+                else:
+                    output.writer(object, output.path, **output.metadata)
+
+        except Exception as exception:
+            raise Exception(
+                f"Unable to save outputs from {transform}") from exception
+
+    def decorator(function: Function) -> Transform:
+        return Transform(runner=runner, function=function, args=args, kwargs=kwargs)
 
     return decorator
 
@@ -299,28 +470,43 @@ class Pipeline:
     @property
     def outputs(self) -> tuple[Output, ...]:
         """A tuple with all the :py:class:`transformlib.Output` of the :py:class:`transformlib.Pipeline`."""
-        return tuple([
-            node for transform in self.transforms.values() for node in transform.outputs
-        ])
+        return tuple(
+            [
+                node
+                for transform in self.transforms.values()
+                for node in transform.outputs
+            ]
+        )
 
     @property
     def inputs(self) -> tuple[Input, ...]:
         """A tuple with all the :py:class:`transformlib.Input` of the :py:class:`transformlib.Pipeline`."""
-        return tuple([
-            node for transform in self.transforms.values() for node in transform.inputs
-        ])
+        return tuple(
+            [
+                node
+                for transform in self.transforms.values()
+                for node in transform.inputs
+            ]
+        )
 
     @property
     def nodes(self) -> tuple[Input | Output, ...]:
         """All :py:class:`transformlib.Output`\\ (s) and :py:class:`transformlib.Input`\\ (s)."""
-        return tuple([
-            node for transform in self.transforms.values() for node in transform.nodes
-        ])
+        return tuple(
+            [node for transform in self.transforms.values()
+             for node in transform.nodes]
+        )
 
     @property
     def parameters(self) -> tuple[Parameter, ...]:
         """All :py:class:`transformlib.Parameter`\\ (s)."""
-        return tuple([parameter for transform in self.transforms.values() for parameter in transform.parameters])
+        return tuple(
+            [
+                parameter
+                for transform in self.transforms.values()
+                for parameter in transform.parameters
+            ]
+        )
 
     def run(self) -> None:
         """Used to run all the :py:class:`transformlib.Transform`\\ (s) in the :py:class:`transformlib.Pipeline`."""
@@ -328,7 +514,8 @@ class Pipeline:
         start = time.perf_counter()
         for transform in self.tasks:
             transform.run()
-        logger.info(f"Completed running of {self} took {time.perf_counter() - start}")
+        logger.info(
+            f"Completed running of {self} took {time.perf_counter() - start}")
 
     @classmethod
     def from_paths(cls, paths: list[str] | list[Path]):
@@ -347,6 +534,9 @@ class Pipeline:
                     logger.info(f"Discovered Transform: {attr} in {path}")
                     transforms[f"{path.resolve()}::{attr.__name__}"] = attr
         return cls(transforms)
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}(" + _args_repr(tuple(self.transforms)) + ")"
 
     def __len__(self) -> int:
         return len(self.transforms)

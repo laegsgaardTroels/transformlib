@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>transformlib package &#8212; transformlib 0.3.7 documentation</title>
+    <title>transformlib package &#8212; transformlib 0.4.7 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css?v=d59dc883" />
-    <script src="_static/documentation_options.js?v=29d04658"></script>
+    <script src="_static/documentation_options.js?v=a78bb796"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="icon" href="_static/autobot.png"/>
@@ -28,7 +28,7 @@
         <li class="right" >
           <a href="usage/quickstart.html" title="Quickstart"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">transformlib 0.3.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">transformlib 0.4.7 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">transformlib package</a></li> 
       </ul>
     </div>  
@@ -42,16 +42,29 @@
 <span id="transformlib-package"></span><h1>transformlib package<a class="headerlink" href="#module-transformlib" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="transformlib.Input">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">Input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/_transformlib.html#Input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Input" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">Input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reader</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/_transformlib.html#Input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Input" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#transformlib.Node" title="transformlib._transformlib.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a></p>
 <p>An Input is a source in a directed asyclic graph of data transformations.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="transformlib.Node">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/_transformlib.html#Node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Node" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reader</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/_transformlib.html#Node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Node" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The Node base class is a node in a directed asyclic graph of data transformations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_path</strong> (<em>Path</em><em> | </em><em>str</em>) – The path relative to <code class="xref py py-data docutils literal notranslate"><span class="pre">config['data_dir']</span></code> where
+data associated with the node is saved or loaded from.</p></li>
+<li><p><strong>reader</strong> (<em>Function</em>) – A function used to read from the node. If None then a default reader
+is used.</p></li>
+<li><p><strong>writer</strong> (<em>Function</em>) – A function used to write to the node. If None then a default writer
+is used.</p></li>
+<li><p><strong>**metadata</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em>) – A dictionary with metadata associated with the node.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="transformlib.Node.relative_path">
 <span class="sig-name descname"><span class="pre">relative_path</span></span><a class="headerlink" href="#transformlib.Node.relative_path" title="Link to this definition">¶</a></dt>
@@ -60,6 +73,41 @@ data associated with the node is saved or loaded from.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Path | str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="transformlib.Node.reader">
+<span class="sig-name descname"><span class="pre">reader</span></span><a class="headerlink" href="#transformlib.Node.reader" title="Link to this definition">¶</a></dt>
+<dd><p>A function used to read from the node. If None then a default reader
+is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="transformlib.Node.writer">
+<span class="sig-name descname"><span class="pre">writer</span></span><a class="headerlink" href="#transformlib.Node.writer" title="Link to this definition">¶</a></dt>
+<dd><p>A function used to write to the node. If None then a default writer
+is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="transformlib.Node.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><a class="headerlink" href="#transformlib.Node.metadata" title="Link to this definition">¶</a></dt>
+<dd><p>A dictionary with metadata associated with the node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, Any] | None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -80,7 +128,7 @@ data associated with the node is saved or loaded from.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="transformlib.Output">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">Output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/_transformlib.html#Output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Output" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">Output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reader</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/_transformlib.html#Output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Output" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#transformlib.Node" title="transformlib._transformlib.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a></p>
 <p>An Output is a sink in a directed asyclic graph of data transformations.</p>
 </dd></dl>
@@ -156,7 +204,7 @@ the .py files.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="transformlib.Transform">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">Transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Parameter" title="transformlib._transformlib.Parameter"><span class="pre">Parameter</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/_transformlib.html#Transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Transform" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">Transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">runner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Parameter" title="transformlib._transformlib.Parameter"><span class="pre">Parameter</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Parameter" title="transformlib._transformlib.Parameter"><span class="pre">Parameter</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Parameter" title="transformlib._transformlib.Parameter"><span class="pre">Parameter</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformlib/_transformlib.html#Transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.Transform" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> loads, transforms and saves data.</p>
 <p>A <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> is a lazily evaluated many to many transformation
@@ -164,12 +212,13 @@ between <a class="reference internal" href="#transformlib.Input" title="transfor
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>output_kwargs</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><em>Output</em></a><em>]</em>) – A mapping from Output name to Output instance.</p></li>
+<li><p><strong>runner</strong> (<em>Function</em>) – A function specifying how the transformation is being run.</p></li>
 <li><p><strong>function</strong> (<em>Function</em>) – A function that contains the data transformation logic used to load and
 transform the <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a> nodes and save the output to the
 <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a> nodes.</p></li>
-<li><p><strong>input_kwargs</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><em>Input</em></a><em>]</em>) – A mapping from Input name to Input instance.</p></li>
-<li><p><strong>parameter_kwargs</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="#transformlib.Parameter" title="transformlib.Parameter"><em>Parameter</em></a><em>]</em>) – A mapping from Parameter name to Parameter instance.</p></li>
+<li><p><strong>args</strong> (<em>tuple</em><em>[</em><a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><em>Input</em></a><em> | </em><a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><em>Output</em></a><em> | </em><a class="reference internal" href="#transformlib.Parameter" title="transformlib.Parameter"><em>Parameter</em></a><em>, </em><em>...</em><em>]</em>) – All arguments to the transformation.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><em>Input</em></a><em> | </em><a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><em>Output</em></a><em> | </em><a class="reference internal" href="#transformlib.Parameter" title="transformlib.Parameter"><em>Parameter</em></a><em>] </em><em>| </em><em>dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><em>Input</em></a><em> | </em><a class="reference internal" href="#transformlib.Parameter" title="transformlib.Parameter"><em>Parameter</em></a><em>]</em>) – All
+keyword arguments to the transformation.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -179,6 +228,18 @@ transform the <a class="reference internal" href="#transformlib.Input" title="tr
 </ul>
 </dd>
 </dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="transformlib.Transform.input_args">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">input_args</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.input_args" title="Link to this definition">¶</a></dt>
+<dd><p>A tuple with all the <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a>arguments.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="transformlib.Transform.input_kwargs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">input_kwargs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.input_kwargs" title="Link to this definition">¶</a></dt>
+<dd><p>A dictionary with all the <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a>keyword arguments.</p>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="transformlib.Transform.inputs">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.inputs" title="Link to this definition">¶</a></dt>
@@ -192,9 +253,33 @@ transform the <a class="reference internal" href="#transformlib.Input" title="tr
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="transformlib.Transform.output_args">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_args</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.output_args" title="Link to this definition">¶</a></dt>
+<dd><p>A tuple with all the <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a>arguments.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="transformlib.Transform.output_kwargs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_kwargs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.output_kwargs" title="Link to this definition">¶</a></dt>
+<dd><p>A dictionary with all the <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a>keyword arguments.</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="transformlib.Transform.outputs">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.outputs" title="Link to this definition">¶</a></dt>
 <dd><p>A tuple with all the <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a>(s) of the <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="transformlib.Transform.parameter_args">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameter_args</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#transformlib.Parameter" title="transformlib._transformlib.Parameter"><span class="pre">Parameter</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.parameter_args" title="Link to this definition">¶</a></dt>
+<dd><p>A tuple with all the <a class="reference internal" href="#transformlib.Parameter" title="transformlib.Parameter"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Parameter</span></code></a>arguments.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="transformlib.Transform.parameter_kwargs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameter_kwargs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Parameter" title="transformlib._transformlib.Parameter"><span class="pre">Parameter</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#transformlib.Transform.parameter_kwargs" title="Link to this definition">¶</a></dt>
+<dd><p>A dictionary with all the <a class="reference internal" href="#transformlib.Parameter" title="transformlib.Parameter"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Parameter</span></code></a>keyword arguments.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -241,7 +326,7 @@ transform the <a class="reference internal" href="#transformlib.Input" title="tr
 
 <dl class="py function">
 <dt class="sig sig-object py" id="transformlib.transform">
-<span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Parameter" title="transformlib._transformlib.Parameter"><span class="pre">Parameter</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Transform" title="transformlib._transformlib.Transform"><span class="pre">Transform</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/transformlib/_transformlib.html#transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.transform" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Parameter" title="transformlib._transformlib.Parameter"><span class="pre">Parameter</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Parameter" title="transformlib._transformlib.Parameter"><span class="pre">Parameter</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Transform" title="transformlib._transformlib.Transform"><span class="pre">Transform</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/transformlib/_transformlib.html#transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.transform" title="Link to this definition">¶</a></dt>
 <dd><p>Convert a function to a <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a>.</p>
 <p>A Transform is often constructed using the <a class="reference internal" href="#transformlib.transform" title="transformlib.transform"><code class="xref py py-func docutils literal notranslate"><span class="pre">transformlib.transform()</span></code></a> decorator:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
@@ -270,6 +355,74 @@ and <a class="reference internal" href="#transformlib.Output" title="transformli
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Callable[[Function], <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform">Transform</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="transformlib.transform_pandas">
+<span class="sig-prename descclassname"><span class="pre">transformlib.</span></span><span class="sig-name descname"><span class="pre">transform_pandas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#transformlib.Output" title="transformlib._transformlib.Output"><span class="pre">Output</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#transformlib.Input" title="transformlib._transformlib.Input"><span class="pre">Input</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Parameter" title="transformlib._transformlib.Parameter"><span class="pre">Parameter</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#transformlib.Transform" title="transformlib._transformlib.Transform"><span class="pre">Transform</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/transformlib/_transformlib.html#transform_pandas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transformlib.transform_pandas" title="Link to this definition">¶</a></dt>
+<dd><p>Convert a pandas function to a <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a>.</p>
+<p>A Transform that operates on pandas DataFrames are often constructed using the <a class="reference internal" href="#transformlib.transform_pandas" title="transformlib.transform_pandas"><code class="xref py py-func docutils literal notranslate"><span class="pre">transformlib.transform_pandas()</span></code></a> decorator:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformlib</span> <span class="kn">import</span> <span class="n">transform_pandas</span><span class="p">,</span> <span class="n">Output</span><span class="p">,</span> <span class="n">Input</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">joblib</span>
+
+
+<span class="nd">@transform_pandas</span><span class="p">(</span>
+    <span class="n">Output</span><span class="p">(</span><span class="s2">&quot;model.joblib&quot;</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">),</span>
+    <span class="n">X_train</span><span class="o">=</span><span class="n">Input</span><span class="p">(</span>
+        <span class="s2">&quot;X_train.csv&quot;</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;HouseAge&quot;</span><span class="p">:</span> <span class="s2">&quot;float64&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;AveRooms&quot;</span><span class="p">:</span> <span class="s2">&quot;float64&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;AveBedrms&quot;</span><span class="p">:</span> <span class="s2">&quot;float64&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Population&quot;</span><span class="p">:</span> <span class="s2">&quot;float64&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;AveOccup&quot;</span><span class="p">:</span> <span class="s2">&quot;float64&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Latitude&quot;</span><span class="p">:</span> <span class="s2">&quot;float64&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Longitude&quot;</span><span class="p">:</span> <span class="s2">&quot;float64&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;MedHouseVal&quot;</span><span class="p">:</span> <span class="s2">&quot;float64&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">),</span>
+    <span class="n">y_train</span><span class="o">=</span><span class="n">Input</span><span class="p">(</span>
+        <span class="s2">&quot;y_train.csv&quot;</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;MedInc&quot;</span><span class="p">:</span> <span class="s2">&quot;float64&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">X_train</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DecisionTreeRegressor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Train a model and save the trained model.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Fitting the model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+<p>In above example the <code class="docutils literal notranslate"><span class="pre">train</span></code> is a <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Transform</span></code></a> object that
+can be part of a <a class="reference internal" href="#transformlib.Pipeline" title="transformlib.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Pipeline</span></code></a> of many pandas DataFrame transformations.</p>
+<p>For more see the <a class="reference external" href="https://github.com/laegsgaardTroels/transformlib/tree/master/examples/california_housing">california housing example</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*args</strong> (<a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><em>Output</em></a>) – One or more <a class="reference internal" href="#transformlib.Output" title="transformlib.Output"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Output</span></code></a>(s). The return value of the
+function is a single object or a tuple of objects expected to be written to args and
+with the same order as args.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><em>Input</em></a><em> | </em><a class="reference internal" href="#transformlib.Parameter" title="transformlib.Parameter"><em>Parameter</em></a><em>]</em>) – The <a class="reference internal" href="#transformlib.Input" title="transformlib.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Input</span></code></a>
+and <a class="reference internal" href="#transformlib.Parameter" title="transformlib.Parameter"><code class="xref py py-class docutils literal notranslate"><span class="pre">transformlib.Parameter</span></code></a> of the transform.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A decorator that returns a Transform object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[Function], <a class="reference internal" href="#transformlib.Transform" title="transformlib.Transform">Transform</a>]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ModuleNotFoundError</strong> – If pandas is not installed.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -312,7 +465,7 @@ and <a class="reference internal" href="#transformlib.Output" title="transformli
         <li class="right" >
           <a href="usage/quickstart.html" title="Quickstart"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">transformlib 0.3.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">transformlib 0.4.7 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">transformlib package</a></li> 
       </ul>
     </div>

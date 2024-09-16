@@ -2,7 +2,7 @@ import argparse
 import logging
 from pathlib import Path
 
-from transformlib import config, Pipeline
+from transformlib import configure, Pipeline
 
 
 def main() -> None:
@@ -22,7 +22,8 @@ def main() -> None:
         path: (List[Path]): One or more Paths to Transforms one wish to run in a Pipeline.
         verbose (bool): Should the Transform be run with logging set to INFO.
     """
-    parser = argparse.ArgumentParser(description="Run transforms found on paths.")
+    parser = argparse.ArgumentParser(
+        description="Run transforms found on paths.")
     parser.add_argument(
         "path",
         type=Path,
@@ -43,7 +44,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    config["data_dir"] = args.data_dir
+    configure(data_dir=args.data_dir)
     if args.verbose:
         logging.basicConfig(level=logging.INFO)
     pipeline = Pipeline.from_paths(paths=list(map(Path, args.path)))

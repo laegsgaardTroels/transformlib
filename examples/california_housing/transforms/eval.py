@@ -1,77 +1,63 @@
-from transformlib import transform, Output, Input
+from transformlib import transform_pandas, Output, Input
 import pandas as pd
 from sklearn import metrics
 
 import joblib
 
 
-@transform(
-    eval_output=Output("eval.csv"),
-    model_input=Input("model.joblib"),
-    X_test_input=Input("X_test.csv"),
-    y_test_input=Input("y_test.csv"),
-    X_train_input=Input("X_train.csv"),
-    y_train_input=Input("y_train.csv"),
+@transform_pandas(
+    Output("eval.csv"),
+    model=Input("model.joblib", reader=joblib.load),
+    X_test=Input(
+        "X_test.csv",
+        dtype={
+            "HouseAge": "float64",
+            "AveRooms": "float64",
+            "AveBedrms": "float64",
+            "Population": "float64",
+            "AveOccup": "float64",
+            "Latitude": "float64",
+            "Longitude": "float64",
+            "MedHouseVal": "float64",
+        },
+    ),
+    y_test=Input(
+        "y_test.csv",
+        dtype={
+            "MedInc": "float64",
+        },
+    ),
+    X_train=Input(
+        "X_train.csv",
+        dtype={
+            "HouseAge": "float64",
+            "AveRooms": "float64",
+            "AveBedrms": "float64",
+            "Population": "float64",
+            "AveOccup": "float64",
+            "Latitude": "float64",
+            "Longitude": "float64",
+            "MedHouseVal": "float64",
+        },
+    ),
+    y_train=Input(
+        "y_train.csv",
+        dtype={
+            "MedInc": "float64",
+        },
+    ),
 )
-def eval(
-    eval_output, model_input, X_test_input, y_test_input, X_train_input, y_train_input
-):
+def eval(model, X_test, y_test, X_train, y_train):
     """Evaluate a saved model on the testing data."""
-
-    # Load a trained model.
-    model = joblib.load(model_input.path)
-
-    # Loading the training data.
-    X_train = pd.read_csv(
-        X_train_input.path,
-        dtype={
-            "HouseAge": "float64",
-            "AveRooms": "float64",
-            "AveBedrms": "float64",
-            "Population": "float64",
-            "AveOccup": "float64",
-            "Latitude": "float64",
-            "Longitude": "float64",
-            "MedHouseVal": "float64",
-        },
-    )
-    y_train = pd.read_csv(
-        y_train_input.path,
-        dtype={
-            "MedInc": "float64",
-        },
-    )
-
-    # Loading the testing data.
-    X_test = pd.read_csv(
-        X_test_input.path,
-        dtype={
-            "HouseAge": "float64",
-            "AveRooms": "float64",
-            "AveBedrms": "float64",
-            "Population": "float64",
-            "AveOccup": "float64",
-            "Latitude": "float64",
-            "Longitude": "float64",
-            "MedHouseVal": "float64",
-        },
-    )
-    y_test = pd.read_csv(
-        y_test_input.path,
-        dtype={
-            "MedInc": "float64",
-        },
-    )
 
     y_pred_train = model.predict(X_train)
     y_pred_test = model.predict(X_test)
 
-    # Save evaluation.
-    pd.DataFrame(
+    return pd.DataFrame(
         [
             {
                 "mae_train": metrics.mean_absolute_error(y_train, y_pred_train),
                 "mae_test": metrics.mean_absolute_error(y_test, y_pred_test),
             }
         ]
-    ).to_csv(eval_output.path, header=True, index=False)
+    )
