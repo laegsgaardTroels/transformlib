@@ -35,7 +35,7 @@ The documentation is hosted using [Github Pages](https://www.machine-learning-no
 
 ## License
 
-[BSD 3](LICENSE)
+[MIT](LICENSE)
 
 ## Contributing
 
