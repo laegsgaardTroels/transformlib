@@ -87,6 +87,8 @@ class Node:
         return f"{self.__class__.__name__}({self.relative_path})"
 
     def __eq__(self, other) -> bool:
+        if not isinstance(other, Node):
+            return False
         return self.path == other.path
 
     def __hash__(self) -> int:
@@ -243,11 +245,14 @@ class Transform:
         return (
             f"{self.__class__.__name__}("
             + _args_repr(self.args)
+            + ", "
             + _kwargs_repr(self.kwargs)
             + ")"
         )
 
     def __eq__(self, other) -> bool:
+        if not isinstance(other, Transform):
+            return False
         if set(self.nodes) == set(other.nodes):
             return True
         return False
