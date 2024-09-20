@@ -11,13 +11,13 @@ the expected order of execution and easier to read.
 ## Installation
 
 
-To install transformlib from PyPI:
+To install `transformlib` from PyPI:
 
 ```sh
 pip install transformlib
 ```
 
-To install with ``pandas`` support:
+To install with `pandas` support:
 
 ```sh
 pip install transformlib[pandas]
