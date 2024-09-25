@@ -12,6 +12,7 @@ from transformlib._transformlib import (
     TransformlibDuplicateTransformException,
     TransformlibDuplicateInputException,
     TransformlibDuplicateOutputException,
+    TransformlibSettings,
 )
 
 __version__ = "0.4.8"
@@ -29,5 +30,6 @@ __all__ = [
     "TransformlibDuplicateTransformException",
     "TransformlibDuplicateInputException",
     "TransformlibDuplicateOutputException",
+    "TransformlibSettings",
     "__version__",
 ]

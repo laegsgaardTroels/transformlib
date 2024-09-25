@@ -15,14 +15,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-_config = {"data_dir": "/tmp/"}
-
-
-def configure(**settings) -> None:
-    """Set global configurations."""
-    _config.update(settings)
-
-
 class TransformlibCycleException(graphlib.CycleError):
     """Raised when there is a cycle in the :py:class:`transformlib.Pipeline`."""
 
@@ -39,11 +31,46 @@ class TransformlibDuplicateOutputException(Exception):
     """Raised when there is duplicate Output in the :py:class:`transformlib.Pipeline`."""
 
 
+class TransformlibSettings:
+    """Settings used by transformlib."""
+
+    _config = {"data_dir": "/tmp/"}
+
+    def configure(self, data_dir: str) -> None:
+        self.data_dir = data_dir
+
+    @property
+    def data_dir(self) -> Path:
+        """The root directory where all data is saved and loaded relative to."""
+        return Path(self._config["data_dir"])
+
+    @data_dir.setter
+    def data_dir(self, value: str) -> None:
+        self._config["data_dir"] = value
+
+
+def configure(data_dir: str) -> None:
+    TransformlibSettings().configure(data_dir=data_dir)
+
+
+# Automate creation and re-use of docstring for TransformlibSettings.configure() and configure()
+TransformlibSettings.configure.__doc__ = """Configure settings.
+
+Args:
+""" + "\n".join(
+    [
+        f"   {name}: {getattr(TransformlibSettings, name).__doc__}"
+        for name in TransformlibSettings._config
+    ]
+)
+configure.__doc__ = TransformlibSettings.configure.__doc__
+
+
 class Node:
     """The Node base class is a node in a directed asyclic graph of data transformations.
 
     Args:
-        relative_path (Path | str): The path relative to :py:data:`config['data_dir']` where
+        relative_path (Path | str): The path relative to :py:class:`~transformlib.TransformlibSettings.data_dir` where
             data associated with the node is saved or loaded from.
         reader (Function): A function used to read from the node. If None then a default reader
             is used.
@@ -52,7 +79,7 @@ class Node:
         **metadata (dict[str, Any] | None): A dictionary with metadata associated with the node.
 
     Attributes:
-        relative_path (Path | str): The path relative to :py:data:`config['data_dir']` where
+        relative_path (Path | str): The path relative to :py:class:`~transformlib.TransformlibSettings.data_dir` where
             data associated with the node is saved or loaded from.
         reader (Function): A function used to read from the node. If None then a default reader
             is used.
@@ -74,14 +101,9 @@ class Node:
         self.metadata = metadata
 
     @property
-    def data_dir(self) -> Path:
-        """The root directory where all data is saved and loaded relative to."""
-        return Path(_config["data_dir"])
-
-    @property
     def path(self) -> Path:
-        """The path to the node in the directory :py:data:`config['data_dir']`."""
-        return self.data_dir / self.relative_path
+        """The path to the node in the directory :py:class:`transformlib.TransformlibSettings.data_dir`."""
+        return TransformlibSettings().data_dir / self.relative_path
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.relative_path})"
