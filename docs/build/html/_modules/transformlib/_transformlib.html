@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>transformlib._transformlib &#8212; transformlib 0.4.7 documentation</title>
+    <title>transformlib._transformlib &#8212; transformlib 0.4.8 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css?v=d59dc883" />
-    <script src="../../_static/documentation_options.js?v=a78bb796"></script>
+    <script src="../../_static/documentation_options.js?v=4f911454"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="icon" href="../../_static/autobot.png"/>
@@ -23,7 +23,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">transformlib 0.4.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">transformlib 0.4.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">transformlib._transformlib</a></li> 
       </ul>
@@ -50,17 +50,6 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-
-
-<span class="n">_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;data_dir&quot;</span><span class="p">:</span> <span class="s2">&quot;/tmp/&quot;</span><span class="p">}</span>
-
-
-<div class="viewcode-block" id="configure">
-<a class="viewcode-back" href="../../transformlib.html#transformlib.configure">[docs]</a>
-<span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set global configurations.&quot;&quot;&quot;</span>
-    <span class="n">_config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span></div>
-
 
 
 <div class="viewcode-block" id="TransformlibCycleException">
@@ -91,13 +80,57 @@
 
 
 
+<div class="viewcode-block" id="TransformlibSettings">
+<a class="viewcode-back" href="../../transformlib.html#transformlib.TransformlibSettings">[docs]</a>
+<span class="k">class</span> <span class="nc">TransformlibSettings</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Settings used by transformlib.&quot;&quot;&quot;</span>
+
+    <span class="n">_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;data_dir&quot;</span><span class="p">:</span> <span class="s2">&quot;/tmp/&quot;</span><span class="p">}</span>
+
+<div class="viewcode-block" id="TransformlibSettings.configure">
+<a class="viewcode-back" href="../../transformlib.html#transformlib.TransformlibSettings.configure">[docs]</a>
+    <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">=</span> <span class="n">data_dir</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">data_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The root directory where all data is saved and loaded relative to.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;data_dir&quot;</span><span class="p">])</span>
+
+    <span class="nd">@data_dir</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">data_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;data_dir&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
+
+
+
+<div class="viewcode-block" id="configure">
+<a class="viewcode-back" href="../../transformlib.html#transformlib.configure">[docs]</a>
+<span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="n">data_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">TransformlibSettings</span><span class="p">()</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Automate creation and re-use of docstring for TransformlibSettings.configure() and configure()</span>
+<span class="n">TransformlibSettings</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Configure settings.</span>
+
+<span class="s2">Args:</span>
+<span class="s2">&quot;&quot;&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="sa">f</span><span class="s2">&quot;   </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">getattr</span><span class="p">(</span><span class="n">TransformlibSettings</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="vm">__doc__</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">TransformlibSettings</span><span class="o">.</span><span class="n">_config</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="n">configure</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">TransformlibSettings</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="vm">__doc__</span>
+
+
 <div class="viewcode-block" id="Node">
 <a class="viewcode-back" href="../../transformlib.html#transformlib.Node">[docs]</a>
 <span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The Node base class is a node in a directed asyclic graph of data transformations.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        relative_path (Path | str): The path relative to :py:data:`config[&#39;data_dir&#39;]` where</span>
+<span class="sd">        relative_path (Path | str): The path relative to :py:class:`~transformlib.TransformlibSettings.data_dir` where</span>
 <span class="sd">            data associated with the node is saved or loaded from.</span>
 <span class="sd">        reader (Function): A function used to read from the node. If None then a default reader</span>
 <span class="sd">            is used.</span>
@@ -106,7 +139,7 @@
 <span class="sd">        **metadata (dict[str, Any] | None): A dictionary with metadata associated with the node.</span>
 
 <span class="sd">    Attributes:</span>
-<span class="sd">        relative_path (Path | str): The path relative to :py:data:`config[&#39;data_dir&#39;]` where</span>
+<span class="sd">        relative_path (Path | str): The path relative to :py:class:`~transformlib.TransformlibSettings.data_dir` where</span>
 <span class="sd">            data associated with the node is saved or loaded from.</span>
 <span class="sd">        reader (Function): A function used to read from the node. If None then a default reader</span>
 <span class="sd">            is used.</span>
@@ -128,19 +161,16 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">data_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The root directory where all data is saved and loaded relative to.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="n">_config</span><span class="p">[</span><span class="s2">&quot;data_dir&quot;</span><span class="p">])</span>
-
-    <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The path to the node in the directory :py:data:`config[&#39;data_dir&#39;]`.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">relative_path</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The path to the node in the directory :py:class:`transformlib.TransformlibSettings.data_dir`.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">TransformlibSettings</span><span class="p">()</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">relative_path</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">relative_path</span><span class="si">}</span><span class="s2">)&quot;</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Node</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">path</span>
 
     <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -312,11 +342,14 @@
         <span class="k">return</span> <span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(&quot;</span>
             <span class="o">+</span> <span class="n">_args_repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot;, &quot;</span>
             <span class="o">+</span> <span class="n">_kwargs_repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
             <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Transform</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">nodes</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span>
@@ -672,7 +705,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">transformlib 0.4.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">transformlib 0.4.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">transformlib._transformlib</a></li> 
       </ul>
