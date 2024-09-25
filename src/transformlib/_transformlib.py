@@ -16,19 +16,19 @@ logger = logging.getLogger(__name__)
 
 
 class TransformlibCycleException(graphlib.CycleError):
-    """Raised when there is a cycle in the :py:class:`transformlib.Pipeline`."""
+    """Raised when there is a cycle in the :py:class:`~transformlib.Pipeline`."""
 
 
 class TransformlibDuplicateTransformException(Exception):
-    """Raised when there is duplicate Transform in the :py:class:`transformlib.Pipeline`."""
+    """Raised when there is duplicate Transform in the :py:class:`~transformlib.Pipeline`."""
 
 
 class TransformlibDuplicateInputException(Exception):
-    """Raised when there is duplicate Input in the :py:class:`transformlib.Pipeline`."""
+    """Raised when there is duplicate Input in the :py:class:`~transformlib.Pipeline`."""
 
 
 class TransformlibDuplicateOutputException(Exception):
-    """Raised when there is duplicate Output in the :py:class:`transformlib.Pipeline`."""
+    """Raised when there is duplicate Output in the :py:class:`~transformlib.Pipeline`."""
 
 
 class TransformlibSettings:
@@ -102,7 +102,7 @@ class Node:
 
     @property
     def path(self) -> Path:
-        """The path to the node in the directory :py:class:`transformlib.TransformlibSettings.data_dir`."""
+        """The path to the node in the directory :py:class:`~transformlib.TransformlibSettings.data_dir`."""
         return TransformlibSettings().data_dir / self.relative_path
 
     def __repr__(self) -> str:
@@ -153,23 +153,23 @@ Function = typing.Any
 
 
 class Transform:
-    """A :py:class:`transformlib.Transform` loads, transforms and saves data.
+    """A :py:class:`~transformlib.Transform` loads, transforms and saves data.
 
-    A :py:class:`transformlib.Transform` is a lazily evaluated many to many transformation
-    between :py:class:`transformlib.Input` and :py:class:`transformlib.Output` nodes.
+    A :py:class:`~transformlib.Transform` is a lazily evaluated many to many transformation
+    between :py:class:`~transformlib.Input` and :py:class:`~transformlib.Output` nodes.
 
     Args:
         runner (Function): A function specifying how the transformation is being run.
         function (Function): A function that contains the data transformation logic used to load and
-            transform the :py:class:`transformlib.Input` nodes and save the output to the
-            :py:class:`transformlib.Output` nodes.
+            transform the :py:class:`~transformlib.Input` nodes and save the output to the
+            :py:class:`~transformlib.Output` nodes.
         args (tuple[Input | Output | Parameter, ...]):  All arguments to the transformation.
         kwargs (dict[str, Input | Output | Parameter] | dict[str, Input | Parameter]): All
             keyword arguments to the transformation.
 
     Raises:
-        TransformlibDuplicateInputException: If duplicate :py:class:`transformlib.Input` exists.
-        TransformlibDuplicateOutputException: If duplicate :py:class:`transformlib.Output` exists.
+        TransformlibDuplicateInputException: If duplicate :py:class:`~transformlib.Input` exists.
+        TransformlibDuplicateOutputException: If duplicate :py:class:`~transformlib.Output` exists.
     """
 
     def __init__(
@@ -194,22 +194,22 @@ class Transform:
 
     @property
     def output_args(self) -> tuple[Output, ...]:
-        """A tuple with all the :py:class:`transformlib.Output`\\ arguments."""
+        """A tuple with all the :py:class:`~transformlib.Output` arguments."""
         return tuple([value for value in self.args if isinstance(value, Output)])
 
     @property
     def input_args(self) -> tuple[Input, ...]:
-        """A tuple with all the :py:class:`transformlib.Input`\\ arguments."""
+        """A tuple with all the :py:class:`~transformlib.Input` arguments."""
         return tuple([value for value in self.args if isinstance(value, Input)])
 
     @property
     def parameter_args(self) -> tuple[Parameter, ...]:
-        """A tuple with all the :py:class:`transformlib.Parameter`\\ arguments."""
+        """A tuple with all the :py:class:`~transformlib.Parameter` arguments."""
         return tuple([value for value in self.args if isinstance(value, Parameter)])
 
     @property
     def output_kwargs(self) -> dict[str, Output]:
-        """A dictionary with all the :py:class:`transformlib.Output`\\ keyword arguments."""
+        """A dictionary with all the :py:class:`~transformlib.Output` keyword arguments."""
         return {
             key: value
             for key, value in self.kwargs.items()
@@ -218,14 +218,14 @@ class Transform:
 
     @property
     def input_kwargs(self) -> dict[str, Input]:
-        """A dictionary with all the :py:class:`transformlib.Input`\\ keyword arguments."""
+        """A dictionary with all the :py:class:`~transformlib.Input` keyword arguments."""
         return {
             key: value for key, value in self.kwargs.items() if isinstance(value, Input)
         }
 
     @property
     def parameter_kwargs(self) -> dict[str, Parameter]:
-        """A dictionary with all the :py:class:`transformlib.Parameter`\\ keyword arguments."""
+        """A dictionary with all the :py:class:`~transformlib.Parameter` keyword arguments."""
         return {
             key: value
             for key, value in self.kwargs.items()
@@ -234,26 +234,26 @@ class Transform:
 
     @property
     def outputs(self) -> tuple[Output, ...]:
-        """A tuple with all the :py:class:`transformlib.Output`\\ (s) of the :py:class:`transformlib.Transform`."""
+        """A tuple with all the :py:class:`~transformlib.Output`\\ (s) of the :py:class:`~transformlib.Transform`."""
         return self.output_args + tuple(self.output_kwargs.values())
 
     @property
     def inputs(self) -> tuple[Input, ...]:
-        """A tuple with all the :py:class:`transformlib.Input`\\ (s) to the :py:class:`transformlib.Transform`."""
+        """A tuple with all the :py:class:`~transformlib.Input`\\ (s) to the :py:class:`~transformlib.Transform`."""
         return self.input_args + tuple(self.input_kwargs.values())
 
     @property
     def nodes(self) -> tuple[Input | Output, ...]:
-        """All :py:class:`transformlib.Output`\\ (s) and :py:class:`transformlib.Input`\\ (s)."""
+        """All :py:class:`~transformlib.Output`\\ (s) and :py:class:`~transformlib.Input`\\ (s)."""
         return self.outputs + self.inputs
 
     @property
     def parameters(self) -> tuple[Parameter, ...]:
-        """All :py:class:`transformlib.Parameter`\\ (s)."""
+        """All :py:class:`~transformlib.Parameter`\\ (s)."""
         return self.parameter_args + tuple(self.parameter_kwargs.values())
 
     def run(self) -> None:
-        """Loads data from the :py:class:`transformlib.Input`\\ (s), transforms it and saves data to the :py:class:`transformlib.Output`\\ (s)."""
+        """Loads data from the :py:class:`~transformlib.Input`\\ (s), transforms it and saves data to the :py:class:`~transformlib.Output`\\ (s)."""
         logger.info(f"Beginning running of {self}")
         start = time.perf_counter()
         self.runner(self)
@@ -303,9 +303,9 @@ def transform(
     *args: Input | Output | Parameter,
     **kwargs: Input | Output | Parameter,
 ) -> typing.Callable[[Function], Transform]:
-    """Convert a function to a :py:class:`transformlib.Transform`.
+    """Convert a function to a :py:class:`~transformlib.Transform`.
 
-    A Transform is often constructed using the :py:func:`transformlib.transform` decorator:
+    A Transform is often constructed using the :py:func:`~transformlib.transform` decorator:
 
     .. highlight:: python
     .. code-block:: python
@@ -323,12 +323,12 @@ def transform(
             mapping = dict(map(lambda line: line.split(','), text.splitlines()))
             json_output.path.write_text(json.dumps(mapping, indent=4))
 
-    In above example the ``convert_to_json`` is a :py:class:`transformlib.Transform` object that
-    can be part of a :py:class:`transformlib.Pipeline` of many transformations.
+    In above example the ``convert_to_json`` is a :py:class:`~transformlib.Transform` object that
+    can be part of a :py:class:`~transformlib.Pipeline` of many transformations.
 
     Args:
-        **kwargs (dict[str, Node]): The :py:class:`transformlib.Input`
-            and :py:class:`transformlib.Output` nodes of the transform.
+        **kwargs (dict[str, Node]): The :py:class:`~transformlib.Input`
+            and :py:class:`~transformlib.Output` nodes of the transform.
 
     Returns:
         Callable[[Function], Transform]: A decorator that returns a Transform object.
@@ -347,9 +347,9 @@ def transform_pandas(
     *args: Output,
     **kwargs: Input | Parameter,
 ) -> typing.Callable[[Function], Transform]:
-    """Convert a pandas function to a :py:class:`transformlib.Transform`.
+    """Convert a pandas function to a :py:class:`~transformlib.Transform`.
 
-    A Transform that operates on pandas DataFrames are often constructed using the :py:func:`transformlib.transform_pandas` decorator:
+    A Transform that operates on pandas DataFrames are often constructed using the :py:func:`~transformlib.transform_pandas` decorator:
 
     .. highlight:: python
     .. code-block:: python
@@ -391,17 +391,17 @@ def transform_pandas(
 
             return model
 
-    In above example the ``train`` is a :py:class:`transformlib.Transform` object that
-    can be part of a :py:class:`transformlib.Pipeline` of many pandas DataFrame transformations.
+    In above example the ``train`` is a :py:class:`~transformlib.Transform` object that
+    can be part of a :py:class:`~transformlib.Pipeline` of many pandas DataFrame transformations.
 
     For more see the `california housing example <https://github.com/laegsgaardTroels/transformlib/tree/master/examples/california_housing>`__.
 
     Args:
-        *args (Output): One or more :py:class:`transformlib.Output`\\ (s). The return value of the
+        *args (Output): One or more :py:class:`~transformlib.Output`\\ (s). The return value of the
             function is a single object or a tuple of objects expected to be written to args and
             with the same order as args.
-        **kwargs (dict[str, Input | Parameter]): The :py:class:`transformlib.Input`
-            and :py:class:`transformlib.Parameter` of the transform.
+        **kwargs (dict[str, Input | Parameter]): The :py:class:`~transformlib.Input`
+            and :py:class:`~transformlib.Parameter` of the transform.
 
     Returns:
         Callable[[Function], Transform]: A decorator that returns a Transform object.
@@ -452,9 +452,9 @@ def transform_pandas(
 
 
 class Pipeline:
-    """A Pipeline is a topologically ordered list of :py:class:`transformlib.Transform` objects.
+    """A Pipeline is a topologically ordered list of :py:class:`~transformlib.Transform` objects.
 
-    A :py:class:`transformlib.Pipeline` can be run from the command line:
+    A :py:class:`~transformlib.Pipeline` can be run from the command line:
 
     .. highlight:: bash
     .. code-block:: bash
@@ -462,7 +462,7 @@ class Pipeline:
         transform path/to/transforms/*.py
         transform -v path/to/transforms/*.py
 
-    This will topologically sort and run all :py:class:`transformlib.Transform` objects found in
+    This will topologically sort and run all :py:class:`~transformlib.Transform` objects found in
     the .py files.
     """
 
@@ -484,7 +484,7 @@ class Pipeline:
 
     @property
     def tasks(self) -> tuple[Transform, ...]:
-        """A topologically sorted list of :py:class:`transformlib.Transform`\\ (s) in the Pipeline."""
+        """A topologically sorted list of :py:class:`~transformlib.Transform`\\ (s) in the Pipeline."""
         tsort = graphlib.TopologicalSorter()
         for transform in self.transforms.values():
             predecessors = [
@@ -500,7 +500,7 @@ class Pipeline:
 
     @property
     def outputs(self) -> tuple[Output, ...]:
-        """A tuple with all the :py:class:`transformlib.Output` of the :py:class:`transformlib.Pipeline`."""
+        """A tuple with all the :py:class:`~transformlib.Output` of the :py:class:`~transformlib.Pipeline`."""
         return tuple(
             [
                 node
@@ -511,7 +511,7 @@ class Pipeline:
 
     @property
     def inputs(self) -> tuple[Input, ...]:
-        """A tuple with all the :py:class:`transformlib.Input` of the :py:class:`transformlib.Pipeline`."""
+        """A tuple with all the :py:class:`~transformlib.Input` of the :py:class:`~transformlib.Pipeline`."""
         return tuple(
             [
                 node
@@ -522,7 +522,7 @@ class Pipeline:
 
     @property
     def nodes(self) -> tuple[Input | Output, ...]:
-        """All :py:class:`transformlib.Output`\\ (s) and :py:class:`transformlib.Input`\\ (s)."""
+        """All :py:class:`~transformlib.Output`\\ (s) and :py:class:`~transformlib.Input`\\ (s)."""
         return tuple(
             [node for transform in self.transforms.values()
              for node in transform.nodes]
@@ -530,7 +530,7 @@ class Pipeline:
 
     @property
     def parameters(self) -> tuple[Parameter, ...]:
-        """All :py:class:`transformlib.Parameter`\\ (s)."""
+        """All :py:class:`~transformlib.Parameter`\\ (s)."""
         return tuple(
             [
                 parameter
@@ -540,7 +540,7 @@ class Pipeline:
         )
 
     def run(self) -> None:
-        """Used to run all the :py:class:`transformlib.Transform`\\ (s) in the :py:class:`transformlib.Pipeline`."""
+        """Used to run all the :py:class:`~transformlib.Transform`\\ (s) in the :py:class:`~transformlib.Pipeline`."""
         logger.info(f"Beginning running of {self}")
         start = time.perf_counter()
         for transform in self.tasks:
@@ -550,7 +550,7 @@ class Pipeline:
 
     @classmethod
     def from_paths(cls, paths: list[str] | list[Path]):
-        """Initialize a :py:class:`transformlib.Pipeline` from all :py:class:`transformlib.Transform`\\ (s) found in a list of path(s) to .py files.
+        """Initialize a :py:class:`~transformlib.Pipeline` from all :py:class:`~transformlib.Transform`\\ (s) found in a list of path(s) to .py files.
 
         As part of this initialization the parent folder to each path is appended to PYTHONPATH.
         """
