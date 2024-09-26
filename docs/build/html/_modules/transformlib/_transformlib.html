@@ -36,6 +36,7 @@
             
   <h1>Source code for transformlib._transformlib</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">functools</span>
 <span class="kn">import</span> <span class="nn">graphlib</span>
 <span class="kn">import</span> <span class="nn">importlib</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -124,6 +125,22 @@
 <span class="n">configure</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">TransformlibSettings</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="vm">__doc__</span>
 
 
+<span class="k">class</span> <span class="nc">Reader</span><span class="p">(</span><span class="n">typing</span><span class="o">.</span><span class="n">Protocol</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Used to read data from disk.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="o">**</span><span class="n">metadata</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
+        <span class="o">...</span>
+
+
+<span class="k">class</span> <span class="nc">Writer</span><span class="p">(</span><span class="n">typing</span><span class="o">.</span><span class="n">Protocol</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Used to write data to disk.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="o">**</span><span class="n">metadata</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="o">...</span>
+
+
 <div class="viewcode-block" id="Node">
 <a class="viewcode-back" href="../../transformlib.html#transformlib.Node">[docs]</a>
 <span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
@@ -132,27 +149,23 @@
 <span class="sd">    Args:</span>
 <span class="sd">        relative_path (Path | str): The path relative to :py:class:`~transformlib.TransformlibSettings.data_dir` where</span>
 <span class="sd">            data associated with the node is saved or loaded from.</span>
-<span class="sd">        reader (Function): A function used to read from the node. If None then a default reader</span>
-<span class="sd">            is used.</span>
-<span class="sd">        writer (Function): A function used to write to the node. If None then a default writer</span>
-<span class="sd">            is used.</span>
-<span class="sd">        **metadata (dict[str, Any] | None): A dictionary with metadata associated with the node.</span>
+<span class="sd">        reader (Reader | None): An optional reader used to read data from the node.</span>
+<span class="sd">        writer (Writer | None): An optional writer used to write data to the node.</span>
+<span class="sd">        **metadata (dict[str, Any]): A dictionary with metadata associated with the node.</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        relative_path (Path | str): The path relative to :py:class:`~transformlib.TransformlibSettings.data_dir` where</span>
 <span class="sd">            data associated with the node is saved or loaded from.</span>
-<span class="sd">        reader (Function): A function used to read from the node. If None then a default reader</span>
-<span class="sd">            is used.</span>
-<span class="sd">        writer (Function): A function used to write to the node. If None then a default writer</span>
-<span class="sd">            is used.</span>
-<span class="sd">        metadata (dict[str, Any] | None): A dictionary with metadata associated with the node.</span>
+<span class="sd">        reader (Reader | None): An optional reader used to read data from the node.</span>
+<span class="sd">        writer (Writer | None): An optional writer used to write data to the node.</span>
+<span class="sd">        metadata (dict[str, Any]): A dictionary with metadata associated with the node.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">relative_path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">reader</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">writer</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">reader</span><span class="p">:</span> <span class="n">Reader</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">writer</span><span class="p">:</span> <span class="n">Writer</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">metadata</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relative_path</span> <span class="o">=</span> <span class="n">relative_path</span>
@@ -181,18 +194,14 @@
 <div class="viewcode-block" id="Output">
 <a class="viewcode-back" href="../../transformlib.html#transformlib.Output">[docs]</a>
 <span class="k">class</span> <span class="nc">Output</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;An Output is a sink in a directed asyclic graph of data transformations.&quot;&quot;&quot;</span>
-
-    <span class="k">pass</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An Output is a sink in a directed asyclic graph of data transformations.&quot;&quot;&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="Input">
 <a class="viewcode-back" href="../../transformlib.html#transformlib.Input">[docs]</a>
 <span class="k">class</span> <span class="nc">Input</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;An Input is a source in a directed asyclic graph of data transformations.&quot;&quot;&quot;</span>
-
-    <span class="k">pass</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An Input is a source in a directed asyclic graph of data transformations.&quot;&quot;&quot;</span></div>
 
 
 
@@ -219,7 +228,13 @@
 
 
 
-<span class="n">Function</span> <span class="o">=</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span>
+<span class="k">class</span> <span class="nc">Function</span><span class="p">(</span><span class="n">typing</span><span class="o">.</span><span class="n">Protocol</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A function that contains the data transformation logic used to load and</span>
+<span class="sd">    transform the :py:class:`~transformlib.Input` nodes and save the output to the</span>
+<span class="sd">    :py:class:`~transformlib.Output` nodes.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="o">...</span>
 
 
 <div class="viewcode-block" id="Transform">
@@ -231,7 +246,6 @@
 <span class="sd">    between :py:class:`~transformlib.Input` and :py:class:`~transformlib.Output` nodes.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        runner (Function): A function specifying how the transformation is being run.</span>
 <span class="sd">        function (Function): A function that contains the data transformation logic used to load and</span>
 <span class="sd">            transform the :py:class:`~transformlib.Input` nodes and save the output to the</span>
 <span class="sd">            :py:class:`~transformlib.Output` nodes.</span>
@@ -246,12 +260,10 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">runner</span><span class="p">:</span> <span class="n">Function</span><span class="p">,</span>
         <span class="n">function</span><span class="p">:</span> <span class="n">Function</span><span class="p">,</span>
         <span class="n">args</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Input</span> <span class="o">|</span> <span class="n">Output</span> <span class="o">|</span> <span class="n">Parameter</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
         <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Input</span> <span class="o">|</span> <span class="n">Output</span> <span class="o">|</span> <span class="n">Parameter</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Input</span> <span class="o">|</span> <span class="n">Parameter</span><span class="p">],</span>
     <span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">runner</span> <span class="o">=</span> <span class="n">runner</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">function</span> <span class="o">=</span> <span class="n">function</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
@@ -330,7 +342,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads data from the :py:class:`~transformlib.Input`\\ (s), transforms it and saves data to the :py:class:`~transformlib.Output`\\ (s).&quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Beginning running of </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">runner</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;Completed running of </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2"> took </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
@@ -412,11 +424,8 @@
 <span class="sd">        Callable[[Function], Transform]: A decorator that returns a Transform object.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">runner</span><span class="p">(</span><span class="n">transform</span><span class="p">:</span> <span class="n">Transform</span><span class="p">):</span>
-        <span class="n">transform</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">transform</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">transform</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">function</span><span class="p">:</span> <span class="n">Function</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Transform</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Transform</span><span class="p">(</span><span class="n">runner</span><span class="o">=</span><span class="n">runner</span><span class="p">,</span> <span class="n">function</span><span class="o">=</span><span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Transform</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">decorator</span></div>
 
@@ -493,44 +502,49 @@
     <span class="k">if</span> <span class="n">pd</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ModuleNotFoundError</span><span class="p">(</span><span class="s2">&quot;Please install pandas&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">runner</span><span class="p">(</span><span class="n">transform</span><span class="p">:</span> <span class="n">Transform</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">Transform</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">pd</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ModuleNotFoundError</span><span class="p">(</span><span class="s2">&quot;Please install pandas&quot;</span><span class="p">)</span>
-
-        <span class="c1"># Read</span>
-        <span class="n">processed_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">transform</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Input</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">reader</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">processed_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
-                        <span class="n">value</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">value</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">processed_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span>
-                        <span class="n">value</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">value</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
-
-        <span class="c1"># Transform</span>
-        <span class="n">output_objects</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="o">**</span><span class="n">processed_kwargs</span><span class="p">)</span>
-
-        <span class="c1"># Save</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output_objects</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="n">output_objects</span> <span class="o">=</span> <span class="p">(</span><span class="n">output_objects</span><span class="p">,)</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">for</span> <span class="nb">object</span><span class="p">,</span> <span class="n">output</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">output_objects</span><span class="p">,</span> <span class="n">transform</span><span class="o">.</span><span class="n">outputs</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">output</span><span class="o">.</span><span class="n">writer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="nb">object</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">output</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">output</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">output</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
-
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exception</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Unable to save outputs from </span><span class="si">{</span><span class="n">transform</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">exception</span>
+    <span class="n">_default_to_pandas_to_csv_writer</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">_default_to_pandas_read_csv_reader</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">function</span><span class="p">:</span> <span class="n">Function</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Transform</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Transform</span><span class="p">(</span><span class="n">runner</span><span class="o">=</span><span class="n">runner</span><span class="p">,</span> <span class="n">function</span><span class="o">=</span><span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="c1"># Read Input(s)</span>
+            <span class="n">processed_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Input</span><span class="p">)</span> <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">reader</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">processed_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span>
+                        <span class="n">value</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">value</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
+            <span class="c1"># Transform</span>
+            <span class="n">output_objects</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="o">**</span><span class="n">processed_kwargs</span><span class="p">)</span>
+
+            <span class="c1"># Save Output(s)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output_objects</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+                <span class="n">output_objects</span> <span class="o">=</span> <span class="p">(</span><span class="n">output_objects</span><span class="p">,)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">obj</span><span class="p">,</span> <span class="n">output</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">output_objects</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                    <span class="n">output</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">output</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exception</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unable to save outputs&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">exception</span>
+
+        <span class="k">return</span> <span class="n">Transform</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">wrapper</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">decorator</span></div>
 
+
+
+<span class="k">def</span> <span class="nf">_default_to_pandas_to_csv_writer</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Output</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">arg</span><span class="o">.</span><span class="n">writer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">arg</span><span class="o">.</span><span class="n">writer</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">obj</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">metadata</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+                <span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">metadata</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_default_to_pandas_read_csv_reader</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Input</span> <span class="o">|</span> <span class="n">Parameter</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Input</span><span class="p">)</span> <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">reader</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">value</span><span class="o">.</span><span class="n">reader</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">metadata</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+                <span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">metadata</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Pipeline">
@@ -641,7 +655,7 @@
     <span class="k">def</span> <span class="nf">from_paths</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">paths</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a :py:class:`~transformlib.Pipeline` from all :py:class:`~transformlib.Transform`\\ (s) found in a list of path(s) to .py files.</span>
 
-<span class="sd">        As part of this initialization the parent folder to each path is appended to PYTHONPATH.</span>
+<span class="sd">        As part of this initialization the parent folder to each path is appended to ``PYTHONPATH``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">transforms</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">Path</span><span class="p">,</span> <span class="n">paths</span><span class="p">)):</span>
