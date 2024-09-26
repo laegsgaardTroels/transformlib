@@ -1,4 +1,5 @@
 from pathlib import Path
+import functools
 import graphlib
 import importlib
 import sys
@@ -66,33 +67,45 @@ Args:
 configure.__doc__ = TransformlibSettings.configure.__doc__
 
 
+class Reader(typing.Protocol):
+    """Used to read data from disk."""
+
+    def __call__(self, path: str | Path, **metadata: typing.Any) -> typing.Any:
+        ...
+
+
+class Writer(typing.Protocol):
+    """Used to write data to disk."""
+
+    def __call__(
+        self, obj: typing.Any, path: str | Path, **metadata: typing.Any
+    ) -> None:
+        ...
+
+
 class Node:
     """The Node base class is a node in a directed asyclic graph of data transformations.
 
     Args:
         relative_path (Path | str): The path relative to :py:class:`~transformlib.TransformlibSettings.data_dir` where
             data associated with the node is saved or loaded from.
-        reader (Function): A function used to read from the node. If None then a default reader
-            is used.
-        writer (Function): A function used to write to the node. If None then a default writer
-            is used.
-        **metadata (dict[str, Any] | None): A dictionary with metadata associated with the node.
+        reader (Reader | None): An optional reader used to read data from the node.
+        writer (Writer | None): An optional writer used to write data to the node.
+        **metadata (dict[str, Any]): A dictionary with metadata associated with the node.
 
     Attributes:
         relative_path (Path | str): The path relative to :py:class:`~transformlib.TransformlibSettings.data_dir` where
             data associated with the node is saved or loaded from.
-        reader (Function): A function used to read from the node. If None then a default reader
-            is used.
-        writer (Function): A function used to write to the node. If None then a default writer
-            is used.
-        metadata (dict[str, Any] | None): A dictionary with metadata associated with the node.
+        reader (Reader | None): An optional reader used to read data from the node.
+        writer (Writer | None): An optional writer used to write data to the node.
+        metadata (dict[str, Any]): A dictionary with metadata associated with the node.
     """
 
     def __init__(
         self,
         relative_path: Path | str,
-        reader: typing.Any | None = None,
-        writer: typing.Any | None = None,
+        reader: Reader | None = None,
+        writer: Writer | None = None,
         **metadata: typing.Any,
     ):
         self.relative_path = relative_path
@@ -145,7 +158,13 @@ class Parameter:
         return hash(self.value)
 
 
-Function = typing.Any
+class Function(typing.Protocol):
+    """A function that contains the data transformation logic used to load and
+    transform the :py:class:`~transformlib.Input` nodes and save the output to the
+    :py:class:`~transformlib.Output` nodes."""
+
+    def __call__(self, *args, **kwargs):
+        ...
 
 
 class Transform:
@@ -155,7 +174,6 @@ class Transform:
     between :py:class:`~transformlib.Input` and :py:class:`~transformlib.Output` nodes.
 
     Args:
-        runner (Function): A function specifying how the transformation is being run.
         function (Function): A function that contains the data transformation logic used to load and
             transform the :py:class:`~transformlib.Input` nodes and save the output to the
             :py:class:`~transformlib.Output` nodes.
@@ -170,12 +188,10 @@ class Transform:
 
     def __init__(
         self,
-        runner: Function,
         function: Function,
         args: tuple[Input | Output | Parameter, ...],
         kwargs: dict[str, Input | Output | Parameter] | dict[str, Input | Parameter],
     ):
-        self.runner = runner
         self.function = function
         self.args = args
         self.kwargs = kwargs
@@ -252,7 +268,7 @@ class Transform:
         """Loads data from the :py:class:`~transformlib.Input`\\ (s), transforms it and saves data to the :py:class:`~transformlib.Output`\\ (s)."""
         logger.info(f"Beginning running of {self}")
         start = time.perf_counter()
-        self.runner(self)
+        self.function(*self.args, **self.kwargs)
         logger.info(
             f"Completed running of {self} took {time.perf_counter() - start}")
 
@@ -330,11 +346,8 @@ def transform(
         Callable[[Function], Transform]: A decorator that returns a Transform object.
     """
 
-    def runner(transform: Transform):
-        transform.function(*transform.args, **transform.kwargs)
-
     def decorator(function: Function) -> Transform:
-        return Transform(runner=runner, function=function, args=args, kwargs=kwargs)
+        return Transform(function=function, args=args, kwargs=kwargs)
 
     return decorator
 
@@ -408,43 +421,48 @@ def transform_pandas(
     if pd is None:
         raise ModuleNotFoundError("Please install pandas")
 
-    def runner(transform: Transform):
-        assert isinstance(transform, Transform)
-        if pd is None:
-            raise ModuleNotFoundError("Please install pandas")
-
-        # Read
-        processed_kwargs = {}
-        for key, value in transform.kwargs.items():
-            if isinstance(value, Input):
-                if value.reader is None:
-                    processed_kwargs[key] = pd.read_csv(
-                        value.path, **value.metadata)
-                else:
-                    processed_kwargs[key] = value.reader(
-                        value.path, **value.metadata)
-
-        # Transform
-        output_objects = transform.function(**processed_kwargs)
-
-        # Save
-        if not isinstance(output_objects, tuple):
-            output_objects = (output_objects,)
-        try:
-            for object, output in zip(output_objects, transform.outputs, strict=True):
-                if output.writer is None:
-                    object.to_csv(output.path, **output.metadata)
-                else:
-                    output.writer(object, output.path, **output.metadata)
-
-        except Exception as exception:
-            raise Exception(
-                f"Unable to save outputs from {transform}") from exception
+    _default_to_pandas_to_csv_writer(*args)
+    _default_to_pandas_read_csv_reader(**kwargs)
 
     def decorator(function: Function) -> Transform:
-        return Transform(runner=runner, function=function, args=args, kwargs=kwargs)
+        @functools.wraps(function)
+        def wrapper(*args, **kwargs):
+            # Read Input(s)
+            processed_kwargs = {}
+            for key, value in kwargs.items():
+                if isinstance(value, Input) and value.reader is not None:
+                    processed_kwargs[key] = value.reader(
+                        value.path, **value.metadata)
+            # Transform
+            output_objects = function(**processed_kwargs)
+
+            # Save Output(s)
+            if not isinstance(output_objects, tuple):
+                output_objects = (output_objects,)
+            try:
+                for obj, output in zip(output_objects, args, strict=True):
+                    output.writer(obj, output.path, **output.metadata)
+
+            except Exception as exception:
+                raise Exception("Unable to save outputs") from exception
+
+        return Transform(function=wrapper, args=args, kwargs=kwargs)
 
     return decorator
+
+
+def _default_to_pandas_to_csv_writer(*args: Output):
+    for arg in args:
+        if arg.writer is None:
+            arg.writer = lambda obj, path, **metadata: obj.to_csv(
+                path, **metadata)
+
+
+def _default_to_pandas_read_csv_reader(**kwargs: Input | Parameter):
+    for value in kwargs.values():
+        if isinstance(value, Input) and value.reader is None:
+            value.reader = lambda path, **metadata: pd.read_csv(
+                path, **metadata)
 
 
 class Pipeline:
@@ -548,7 +566,7 @@ class Pipeline:
     def from_paths(cls, paths: list[str] | list[Path]):
         """Initialize a :py:class:`~transformlib.Pipeline` from all :py:class:`~transformlib.Transform`\\ (s) found in a list of path(s) to .py files.
 
-        As part of this initialization the parent folder to each path is appended to PYTHONPATH.
+        As part of this initialization the parent folder to each path is appended to ``PYTHONPATH``.
         """
         transforms = {}
         for path in list(map(Path, paths)):
