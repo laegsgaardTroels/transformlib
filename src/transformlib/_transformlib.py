@@ -468,13 +468,13 @@ def _default_to_pandas_read_csv_reader(**kwargs: Input | Parameter):
 class Pipeline:
     """A Pipeline is a topologically ordered list of :py:class:`~transformlib.Transform` objects.
 
-    A :py:class:`~transformlib.Pipeline` can be run from the command line:
+    A :py:class:`~transformlib.Pipeline` can be run from the command line with the installed cli:
 
     .. highlight:: bash
     .. code-block:: bash
 
-        transform path/to/transforms/*.py
-        transform -v path/to/transforms/*.py
+        ~$ transform path/to/transforms/*.py
+        ~$ transform -v path/to/transforms/*.py
 
     This will topologically sort and run all :py:class:`~transformlib.Transform` objects found in
     the .py files.

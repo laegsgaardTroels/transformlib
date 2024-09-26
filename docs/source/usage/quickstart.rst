@@ -20,13 +20,13 @@ The ``transforms/`` folder contains all the transformation applied to the data. 
 .. highlight:: bash
 .. code-block:: bash
 
-    transform transforms/*.py -d data -v
+    ~$ transform transforms/*.py -d data -v
 
 This will topologically sort and run all :py:class:`transformlib.Transform` objects found in the .py files found at ``transforms/*.py`` and load/save the results to the data directory ``data/``. For all the options see:
 
 .. highlight:: bash
 .. code-block:: bash
 
-    transform -h
+    ~$ transform -h
 
 For more see the `california housing example <https://github.com/laegsgaardTroels/transformlib/tree/master/examples/california_housing>`__.
