@@ -120,13 +120,9 @@ class Node:
 class Output(Node):
     """An Output is a sink in a directed asyclic graph of data transformations."""
 
-    pass
-
 
 class Input(Node):
     """An Input is a source in a directed asyclic graph of data transformations."""
-
-    pass
 
 
 class Parameter:
