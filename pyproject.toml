@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools"]  # Minimum requirements for the build system to execute.
+
+[project]
+name = "transformlib"
+dependencies = []
+requires-python = ">=3.10"
+authors = [
+  {name = "Troels Lægsgaard", email = "laegsgaardtroels@gmail.com"},
+]
+maintainers = [
+  {name = "Troels Lægsgaard", email = "laegsgaardtroels@gmail.com"},
+]
+description = "Enables the user to organize transformations of data as a regular Python package."
+license = {file = "LICENSE"}
+keywords = ["pipeline", "etl"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python"
+]
+dynamic = ["version", "readme"]
+
+[tool.setuptools.dynamic]
+version = {attr = "transformlib.__version__"}  # any module attribute compatible with ast.literal_eval
+readme = {file = "README.md", content-type = "text/markdown"}
+
+[project.optional-dependencies]
+all = ["pandas>=2.2.1"]
+pandas = ["pandas>=2.2.1"]
+dev = [
+  "flake8==3.8.3",
+  "jinja2==3.0.0",
+  "pytest-cov",
+  "pytest-pep8",
+  "pytest==8.0.2",
+  "sphinx==7.2.6",
+  "scikit-learn==1.4.1.post1",
+  "pandas==2.2.1",
+]
+
+[project.scripts]
+transform = "transformlib.__main__:main"
+
+[project.urls]
+Repository = "https://github.com/laegsgaardTroels/transformlib"
+Documentation = "https://www.machine-learning-notes.com/transformlib/build/html/index.html"
