@@ -44,3 +44,8 @@ transform = "transformlib.__main__:main"
 [project.urls]
 Repository = "https://github.com/laegsgaardTroels/transformlib"
 Documentation = "https://www.machine-learning-notes.com/transformlib"
+
+[tool.pytest.ini_options]
+markers = [
+  "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
