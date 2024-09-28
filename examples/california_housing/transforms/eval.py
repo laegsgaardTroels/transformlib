@@ -7,7 +7,7 @@ import joblib
 
 @transform_pandas(
     Output("eval.csv"),
-    model=Input("model.joblib", reader=joblib.load),
+    model=Input("model.joblib", reader=lambda path, **_: joblib.load(path)),
     X_test=Input(
         "X_test.csv",
         dtype={

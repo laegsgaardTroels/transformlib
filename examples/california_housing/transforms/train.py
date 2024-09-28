@@ -5,7 +5,8 @@ import joblib
 
 
 @transform_pandas(
-    Output("model.joblib", writer=joblib.dump),
+    Output("model.joblib", writer=lambda obj,
+           path, **_: joblib.dump(obj, path)),
     X_train=Input(
         "X_train.csv",
         dtype={
