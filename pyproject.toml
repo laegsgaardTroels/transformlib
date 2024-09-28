@@ -43,4 +43,4 @@ transform = "transformlib.__main__:main"
 
 [project.urls]
 Repository = "https://github.com/laegsgaardTroels/transformlib"
-Documentation = "https://www.machine-learning-notes.com/transformlib/build/html/index.html"
+Documentation = "https://www.machine-learning-notes.com/transformlib"
