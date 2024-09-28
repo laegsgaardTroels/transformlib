@@ -5,7 +5,6 @@ from transformlib._transformlib import (
     Parameter,
     Transform,
     transform,
-    transform_pandas,
     Pipeline,
     configure,
     TransformlibCycleException,
@@ -14,9 +13,10 @@ from transformlib._transformlib import (
     TransformlibDuplicateOutputException,
     TransformlibSettings,
 )
+from transformlib._pandas import transform_pandas
 
 __version__ = "0.4.8"
-__all__ = [
+__all__ = [  # public api
     "Node",
     "Output",
     "Input",

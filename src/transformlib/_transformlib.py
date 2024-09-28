@@ -1,16 +1,10 @@
 from pathlib import Path
-import functools
 import graphlib
 import importlib
 import sys
 import time
 import typing
-
-try:
-    import pandas as pd
-except ModuleNotFoundError:
-    pd = None
-
+import functools
 import logging
 
 logger = logging.getLogger(__name__)
@@ -70,16 +64,14 @@ configure.__doc__ = TransformlibSettings.configure.__doc__
 class Reader(typing.Protocol):
     """Used to read data from disk."""
 
-    def __call__(self, path: str | Path, **metadata: typing.Any) -> typing.Any:
+    def __call__(self, path: Path, **metadata: typing.Any) -> typing.Any:
         ...
 
 
 class Writer(typing.Protocol):
     """Used to write data to disk."""
 
-    def __call__(
-        self, obj: typing.Any, path: str | Path, **metadata: typing.Any
-    ) -> None:
+    def __call__(self, obj: typing.Any, path: Path, **metadata: typing.Any) -> None:
         ...
 
 
@@ -162,9 +154,6 @@ class Function(typing.Protocol):
     """A function that contains the data transformation logic used to load and
     transform the :py:class:`~transformlib.Input` nodes and save the output to the
     :py:class:`~transformlib.Output` nodes."""
-
-    def __call__(self, *args, **kwargs):
-        ...
 
 
 class Transform:
@@ -352,78 +341,10 @@ def transform(
     return decorator
 
 
-def transform_pandas(
+def transform_read_write(
     *args: Output,
     **kwargs: Input | Parameter,
 ) -> typing.Callable[[Function], Transform]:
-    """Convert a pandas function to a :py:class:`~transformlib.Transform`.
-
-    A Transform that operates on pandas DataFrames are often constructed using the :py:func:`~transformlib.transform_pandas` decorator:
-
-    .. highlight:: python
-    .. code-block:: python
-
-        from transformlib import transform_pandas, Output, Input
-        from sklearn.tree import DecisionTreeRegressor
-        import pandas as pd
-        import joblib
-
-
-        @transform_pandas(
-            Output("model.joblib", writer=joblib.dump),
-            X_train=Input(
-                "X_train.csv",
-                dtype={
-                    "HouseAge": "float64",
-                    "AveRooms": "float64",
-                    "AveBedrms": "float64",
-                    "Population": "float64",
-                    "AveOccup": "float64",
-                    "Latitude": "float64",
-                    "Longitude": "float64",
-                    "MedHouseVal": "float64",
-                },
-            ),
-            y_train=Input(
-                "y_train.csv",
-                dtype={
-                    "MedInc": "float64",
-                },
-            ),
-        )
-        def train(X_train: pd.DataFrame, y_train: pd.DataFrame) -> DecisionTreeRegressor:
-            \"""Train a model and save the trained model.\"""
-
-            # Fitting the model
-            model = DecisionTreeRegressor()
-            model.fit(X_train, y_train)
-
-            return model
-
-    In above example the ``train`` is a :py:class:`~transformlib.Transform` object that
-    can be part of a :py:class:`~transformlib.Pipeline` of many pandas DataFrame transformations.
-
-    For more see the `california housing example <https://github.com/laegsgaardTroels/transformlib/tree/master/examples/california_housing>`__.
-
-    Args:
-        *args (Output): One or more :py:class:`~transformlib.Output`\\ (s). The return value of the
-            function is a single object or a tuple of objects expected to be written to args and
-            with the same order as args.
-        **kwargs (dict[str, Input | Parameter]): The :py:class:`~transformlib.Input`
-            and :py:class:`~transformlib.Parameter` of the transform.
-
-    Returns:
-        Callable[[Function], Transform]: A decorator that returns a Transform object.
-
-    Raises:
-        ModuleNotFoundError: If pandas is not installed.
-    """
-    if pd is None:
-        raise ModuleNotFoundError("Please install pandas")
-
-    _default_to_pandas_to_csv_writer(*args)
-    _default_to_pandas_read_csv_reader(**kwargs)
-
     def decorator(function: Function) -> Transform:
         @functools.wraps(function)
         def wrapper(*args, **kwargs):
@@ -449,20 +370,6 @@ def transform_pandas(
         return Transform(function=wrapper, args=args, kwargs=kwargs)
 
     return decorator
-
-
-def _default_to_pandas_to_csv_writer(*args: Output):
-    for arg in args:
-        if arg.writer is None:
-            arg.writer = lambda obj, path, **metadata: obj.to_csv(
-                path, **metadata)
-
-
-def _default_to_pandas_read_csv_reader(**kwargs: Input | Parameter):
-    for value in kwargs.values():
-        if isinstance(value, Input) and value.reader is None:
-            value.reader = lambda path, **metadata: pd.read_csv(
-                path, **metadata)
 
 
 class Pipeline:
