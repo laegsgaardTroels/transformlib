@@ -15,6 +15,13 @@ To install with ``pandas`` support:
    pip install transformlib[pandas]
 
 
+To install with ``pyspark`` support:
+
+.. code-block:: console
+
+   pip install transformlib[pyspark]
+
+
 To install with all features run:
 
 .. code-block:: console

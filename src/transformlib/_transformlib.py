@@ -150,10 +150,10 @@ class Parameter:
         return hash(self.value)
 
 
-class Function(typing.Protocol):
-    """A function that contains the data transformation logic used to load and
-    transform the :py:class:`~transformlib.Input` nodes and save the output to the
-    :py:class:`~transformlib.Output` nodes."""
+Function = typing.Callable
+"""A function that contains the data transformation logic used to load and
+transform the :py:class:`~transformlib.Input` nodes and save the output to the
+:py:class:`~transformlib.Output` nodes."""
 
 
 class Transform:
@@ -328,8 +328,8 @@ def transform(
     can be part of a :py:class:`~transformlib.Pipeline` of many transformations.
 
     Args:
-        **kwargs (dict[str, Node]): The :py:class:`~transformlib.Input`
-            and :py:class:`~transformlib.Output` nodes of the transform.
+        *args (Input | Output | Parameter):  All arguments to the transformation.
+        **kwargs (Input | Output | Parameter): All keyword arguments to the transformation.
 
     Returns:
         Callable[[Function], Transform]: A decorator that returns a Transform object.
@@ -345,6 +345,20 @@ def transform_read_write(
     *args: Output,
     **kwargs: Input | Parameter,
 ) -> typing.Callable[[Function], Transform]:
+    """Convert a function to a :py:class:`~transformlib.Transform`.
+
+    Adds logic logic to run all reader(s) and forwarding read objects to the function
+    and run all writer(s) and write the output of the function using these.
+
+    Args:
+        *args (Output): The :py:class:`~transformlib.Output`\\ (s) of the transform.
+        **kwargs (Input | Parameter): The :py:class:`~transformlib.Input`\\ (s)
+            and :py:class:`~transformlib.Parameter`\\ (s) of the transform.
+
+    Returns:
+        Callable[[Function], Transform]: A decorator that returns a Transform object.
+    """
+
     def decorator(function: Function) -> Transform:
         @functools.wraps(function)
         def wrapper(*args, **kwargs):

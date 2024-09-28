@@ -34,7 +34,8 @@ def transform_pandas(
 
 
         @transform_pandas(
-            Output("model.joblib", writer=joblib.dump),
+            Output("model.joblib", writer=lambda obj,
+                   path, **_: joblib.dump(obj, path)),
             X_train=Input(
                 "X_train.csv",
                 dtype={
@@ -73,7 +74,7 @@ def transform_pandas(
         *args (Output): One or more :py:class:`~transformlib.Output`\\ (s). The return value of the
             function is a single object or a tuple of objects expected to be written to args and
             with the same order as args.
-        **kwargs (dict[str, Input | Parameter]): The :py:class:`~transformlib.Input`
+        **kwargs (Input | Parameter): The :py:class:`~transformlib.Input`
             and :py:class:`~transformlib.Parameter` of the transform.
 
     Returns:
@@ -105,7 +106,7 @@ def _default_to_pandas_csv_writer(*args: Output):
 
 
 def _pandas_reader(path: Path, **metadata: typing.Any) -> typing.Any:
-    return pd.read_csv(path, **metadata)
+    return pd.read_csv(path, **metadata)  # pyright: ignore
 
 
 def _pandas_writer(obj: typing.Any, path: Path, **metadata: typing.Any) -> None:
